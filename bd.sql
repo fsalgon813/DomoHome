@@ -20,7 +20,7 @@ CREATE TABLE usuarios(
 );
 CREATE TABLE sensores(
     id_sensor INT PRIMARY KEY AUTO_INCREMENT,
-    pin INT,
+    pin INT NOT NULL,
     tipo VARCHAR(30) NOT NULL,
     id_usuario INT NOT NULL,
     CONSTRAINT FK_sensores_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
@@ -28,8 +28,8 @@ CREATE TABLE sensores(
 );
 CREATE TABLE medidas_temperatura_humedad(
     id_medida INT PRIMARY KEY AUTO_INCREMENT,
-    temperatura DOUBLE,
-    humedad DOUBLE,
+    temperatura DOUBLE NOT NULL,
+    humedad DOUBLE NOT NULL,
     fecha_hora TIMESTAMP,
     id_sensor INT NOT NULL,
     CONSTRAINT FK_medidas_sensor FOREIGN KEY (id_sensor) REFERENCES sensores(id_sensor)
@@ -54,3 +54,5 @@ CREATE TABLE rutinas(
     id_dispositivo INT NOT NULL,
     CONSTRAINT FK_rutinas_dispositivo FOREIGN KEY (id_dispositivo) REFERENCES dispositivos_inteligentes(id_dispositivo)
 );
+
+/* Añadir trigger si no se ha medido la temperatura o la  humedad, ponga 0 */
