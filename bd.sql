@@ -1,20 +1,28 @@
+DROP TABLE IF EXISTS rutinas;
+DROP TABLE IF EXISTS dispositivos_inteligentes;
+DROP TABLE IF EXISTS casa_realiza_medida;
+DROP TABLE IF EXISTS medidas_temperatura_humedad;
+DROP TABLE IF EXISTS sensores;
+DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS casas;
+
 CREATE TABLE casas(
     id_casa INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR NOT NULL,
+    nombre VARCHAR(80) NOT NULL
 );
 CREATE TABLE usuarios(
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
-    username NOT NULL UNIQUE,
-    passwd NOT NULL,
-    nombre VARCHAR NOT NULL,
+    username VARCHAR(30) NOT NULL UNIQUE,
+    passwd VARCHAR(80) NOT NULL,
+    nombre VARCHAR(80) NOT NULL,
     id_casa INT NOT NULL,
     CONSTRAINT FK_usuarios_casa FOREIGN KEY (id_casa) REFERENCES casas(id_casa)
 );
 CREATE TABLE sensores(
     id_sensor INT PRIMARY KEY AUTO_INCREMENT,
     pin INT,
-    tipo VARCHAR,
-    id_usuario NOT NULL,
+    tipo VARCHAR(30) NOT NULL,
+    id_usuario INT NOT NULL,
     CONSTRAINT FK_sensores_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     CONSTRAINT CHK_sensores_tipo CHECK (tipo LIKE 'temperatura_humedad')
 );
@@ -34,9 +42,9 @@ CREATE TABLE casa_realiza_medida(
 );
 CREATE TABLE dispositivos_inteligentes(
     id_dispositivo INT PRIMARY KEY AUTO_INCREMENT,
-    ip VARCHAR NOT NULL,
+    ip VARCHAR(15) NOT NULL,
     puerto INT NOT NULL,
-    tipo VARCHAR NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
     id_usuario INT NOT NULL,
     CONSTRAINT FK_dispositivos_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
