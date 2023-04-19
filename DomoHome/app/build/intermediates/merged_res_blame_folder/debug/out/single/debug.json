@@ -1,0 +1,106 @@
+[
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/layout_login.xml.flat",
+        "source": "com.iesmm.domohome.app-main-31:/layout/login.xml"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/drawable_password.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/drawable/password.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/drawable_logo.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/drawable/logo.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/xml_backup_rules.xml.flat",
+        "source": "com.iesmm.domohome.app-main-31:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/drawable_usuario.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/drawable/usuario.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/xml_data_extraction_rules.xml.flat",
+        "source": "com.iesmm.domohome.app-main-31:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.iesmm.domohome.app-main-31:/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/drawable_et_redondeado.xml.flat",
+        "source": "com.iesmm.domohome.app-main-31:/drawable/et_redondeado.xml"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "com.iesmm.domohome.app-main-31:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.iesmm.domohome.app-main-31:/drawable/ic_launcher_background.xml"
+    }
+]

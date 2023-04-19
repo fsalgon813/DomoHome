@@ -5,12 +5,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".Login"
+    android:orientation="vertical"
+    android:background="#001219">
 
-    <TextView
-        android:id="@+id/tvLogin"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo"
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/usuario"
+        android:drawablePadding="30dp"
+        android:textColor="#000000"
+        android:hint="@string/username"
+        android:textSize="18sp"
+        android:background="@drawable/et_redondeado"
+        android:paddingHorizontal="6dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="100dp"/>
+
+    <EditText
+        android:id="@+id/etPasswd"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/password"
+        android:drawablePadding="30dp"
+        android:textColor="#000000"
+        android:hint="@string/password"
+        android:textSize="18sp"
+        android:background="@drawable/et_redondeado"
+        android:paddingHorizontal="6dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="60dp"/>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login"/>
+        android:background="@drawable/btn_redondeado"/>
 
   </LinearLayout>
