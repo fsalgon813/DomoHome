@@ -94,7 +94,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\fr
 	android:allowBackup
 		ADDED from E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:6:9-35
 	android:theme
-		ADDED from E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:12:9-46
+		ADDED from E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:12:9-59
 	android:dataExtractionRules
 		ADDED from E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:7:9-65
 activity#com.iesmm.domohome.Login

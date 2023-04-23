@@ -8,12 +8,14 @@ color purple_700
 color teal_200
 color teal_700
 color white
+drawable btn_redondeado
 drawable et_redondeado
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable logo
 drawable password
 drawable usuario
+id btnLogin
 id etPasswd
 id etUsername
 id logo
@@ -22,7 +24,9 @@ mipmap ic_launcher
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 string app_name
+string login
 string password
+string register
 string username
 style Theme.DomoHome
 xml backup_rules

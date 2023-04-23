@@ -9,7 +9,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">DomoHome</string>
+    <string name="login">Login</string>
     <string name="password">Password</string>
+    <string name="register">Register</string>
     <string name="username">Username</string>
     <style name="Theme.DomoHome" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         

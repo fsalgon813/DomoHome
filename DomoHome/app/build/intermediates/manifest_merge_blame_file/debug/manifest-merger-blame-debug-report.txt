@@ -40,8 +40,8 @@
 26        android:supportsRtl="true"
 26-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:11:9-35
 27        android:testOnly="true"
-28        android:theme="@style/Theme.DomoHome" >
-28-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:12:9-46
+28        android:theme="@style/Theme.AppCompat.NoActionBar" >
+28-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:12:9-59
 29        <activity
 29-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:14:9-22:20
 30            android:name="com.iesmm.domohome.Login"

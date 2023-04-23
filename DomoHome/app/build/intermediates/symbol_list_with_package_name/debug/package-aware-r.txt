@@ -2711,6 +2711,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable btn_redondeado
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -2906,6 +2907,7 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btnLogin
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3539,6 +3541,7 @@ string fab_transformation_sheet_behavior
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
+string login
 string m3_sys_motion_easing_emphasized
 string m3_sys_motion_easing_emphasized_accelerate
 string m3_sys_motion_easing_emphasized_decelerate
@@ -3640,6 +3643,7 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string register
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description

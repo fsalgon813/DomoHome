@@ -22,8 +22,8 @@ CREATE TABLE sensores(
     id_sensor INT PRIMARY KEY AUTO_INCREMENT,
     pin INT NOT NULL,
     tipo VARCHAR(30) NOT NULL,
-    id_usuario INT NOT NULL,
-    CONSTRAINT FK_sensores_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
+    id_casa INT NOT NULL,
+    CONSTRAINT FK_sensores_casa FOREIGN KEY (id_casa) REFERENCES casa(id_casa),
     CONSTRAINT CHK_sensores_tipo CHECK (tipo LIKE 'temperatura_humedad')
 );
 CREATE TABLE medidas_temperatura_humedad(
@@ -33,12 +33,6 @@ CREATE TABLE medidas_temperatura_humedad(
     fecha_hora TIMESTAMP,
     id_sensor INT NOT NULL,
     CONSTRAINT FK_medidas_sensor FOREIGN KEY (id_sensor) REFERENCES sensores(id_sensor)
-);
-CREATE TABLE casa_realiza_medida(
-    id_medida INT NOT NULL,
-    id_casa INT NOT NULL,
-    CONSTRAINT FK_medida_realiza FOREIGN KEY (id_medida) REFERENCES medidas_temperatura_humedad(id_medida),
-    CONSTRAINT FK_casa_realiza FOREIGN KEY (id_casa) REFERENCES casas(id_casa)
 );
 CREATE TABLE dispositivos_inteligentes(
     id_dispositivo INT PRIMARY KEY AUTO_INCREMENT,
