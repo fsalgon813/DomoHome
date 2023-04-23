@@ -23,7 +23,7 @@ CREATE TABLE sensores(
     pin INT NOT NULL,
     tipo VARCHAR(30) NOT NULL,
     id_casa INT NOT NULL,
-    CONSTRAINT FK_sensores_casa FOREIGN KEY (id_casa) REFERENCES casa(id_casa),
+    CONSTRAINT FK_sensores_casa FOREIGN KEY (id_casa) REFERENCES casas(id_casa),
     CONSTRAINT CHK_sensores_tipo CHECK (tipo LIKE 'temperatura_humedad')
 );
 CREATE TABLE medidas_temperatura_humedad(
