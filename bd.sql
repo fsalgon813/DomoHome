@@ -8,7 +8,8 @@ DROP TABLE IF EXISTS casas;
 
 CREATE TABLE casas(
     id_casa INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(80) NOT NULL
+    nombre VARCHAR(80) NOT NULL,
+    cod_invitacion VARCHAR(10) NOT NULL UNIQUE
 );
 CREATE TABLE usuarios(
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
