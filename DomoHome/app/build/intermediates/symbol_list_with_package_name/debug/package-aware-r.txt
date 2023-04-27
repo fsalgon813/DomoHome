@@ -2908,6 +2908,7 @@ id bounceBoth
 id bounceEnd
 id bounceStart
 id btnLogin
+id btnRegister
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -2987,6 +2988,7 @@ id end
 id endToStart
 id enterAlways
 id enterAlwaysCollapsed
+id etName
 id etPasswd
 id etUsername
 id exitUntilCollapsed
@@ -3049,8 +3051,10 @@ id line3
 id linear
 id listMode
 id list_item
+id login
 id logo
 id m3_side_sheet
+id main
 id marquee
 id masked
 id match_constraint
@@ -3154,6 +3158,7 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
+id register
 id reverseSawtooth
 id right
 id rightToLeft
@@ -3282,6 +3287,8 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tvLogin
+id tvRegister
 id unchecked
 id uniform
 id unlabeled
@@ -3433,6 +3440,7 @@ layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
 layout m3_auto_complete_simple_item
 layout m3_side_sheet_dialog
+layout main
 layout material_chip_input_combo
 layout material_clock_display
 layout material_clock_display_divider
@@ -3485,6 +3493,7 @@ layout notification_template_custom_big
 layout notification_template_icon_group
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout register
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
@@ -3637,6 +3646,7 @@ string mtrl_switch_track_decoration_path
 string mtrl_switch_track_path
 string mtrl_timepicker_cancel
 string mtrl_timepicker_confirm
+string name
 string password
 string password_toggle_content_description
 string path_password_eye

@@ -1,61 +1,45 @@
 package com.iesmm.DomoHomeAPI.Controller;
 
+import com.iesmm.DomoHomeAPI.Model.TempHumedadModel;
+import com.iesmm.DomoHomeAPI.Utils.ThreadTempHumedad;
+import jakarta.annotation.PostConstruct;
 import org.springframework.http.MediaType;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/temp_humedad")
 public class TempHumedadController {
 
-    private Double temp = 0.0;
-    private Double humedad = 0.0;
-    Logger logger = Logger.getLogger("temp_humedad");
+    private TempHumedadModel thModel = new TempHumedadModel();
+
+    private Logger logger = Logger.getLogger("temp_humedad_controller");
+
+    // Cuando se incia el servicio, se inicia un hilo que se encarga de leer la temperatura y la humedad
+    @PostConstruct
+    public void init() {
+        Thread th = new Thread(new ThreadTempHumedad(thModel));
+        th.start();
+        logger.info("Iniciando el hilo de lectura de temperatura y humedad");
+    }
+
 
     // Devuelve un json con el valor de la temperatura
-    @GetMapping(value = "/temp", produces= MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/temp", produces= MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getTemp() {
-        return String.valueOf(temp);
+        return String.valueOf(thModel.getTemp());
     }
 
     // Devuelve un json con el valor de la humedad
-    @GetMapping(value = "/humedad", produces = "application/json")
+    @PostMapping(value = "/humedad", produces = "application/json")
     @ResponseBody
     public String getHumedad() {
-        return String.valueOf(humedad);
-    }
-
-    @Scheduled(fixedRate = 5000)
-    public void readValues() {
-        try{
-            // Ejecutamos el script de Python que nos devuelve la temperatura y humedad en el mismo formato que un csv
-            // (temperatura;humedad)
-            Process p = Runtime.getRuntime().exec("python3 ./scripts/temp_humedad.py");
-            // Leemos la salida del script
-            BufferedReader br = new BufferedReader(new java.io.InputStreamReader(p.getInputStream()));
-            // Guardamos la salida en un String
-            String salida = br.readLine();
-
-            // Asignamos los valores que nos ha devuelto el script a sus respectivas variables
-            temp = Double.parseDouble(salida.split(";")[0]);
-            humedad = Double.parseDouble(salida.split(";")[1]);
-        }
-        catch(IOException e){
-            logger.severe("Error en la E/S al ejecutar el script de lectura de temperatura y humedad");
-        }
-        catch(Exception e){
-            logger.severe("Error: " + e.getMessage());
-        }
+        return String.valueOf(thModel.getHumedad());
     }
 
 }

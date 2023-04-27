@@ -80,6 +80,10 @@
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\mipmap-xxhdpi\\ic_launcher_foreground.png"
     },
     {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\layout_main.xml.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\layout\\main.xml"
+    },
+    {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\mipmap-xhdpi_ic_launcher_foreground.png.flat",
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\mipmap-xhdpi\\ic_launcher_foreground.png"
     },
@@ -102,6 +106,10 @@
     {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\layout_register.xml.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\layout\\register.xml"
     },
     {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\mipmap-anydpi-v26_ic_launcher.xml.flat",

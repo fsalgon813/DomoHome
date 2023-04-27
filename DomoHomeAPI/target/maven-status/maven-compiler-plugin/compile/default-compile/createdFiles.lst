@@ -1,2 +1,9 @@
+com\iesmm\DomoHomeAPI\Model\UsuarioModel.class
+com\iesmm\DomoHomeAPI\Model\TempHumedadModel.class
+com\iesmm\DomoHomeAPI\Utils\Conexion.class
+com\iesmm\DomoHomeAPI\DAO\DAO.class
+com\iesmm\DomoHomeAPI\DAO\DAOImpl.class
+com\iesmm\DomoHomeAPI\Utils\ThreadTempHumedad.class
 com\iesmm\DomoHomeAPI\Controller\TempHumedadController.class
+com\iesmm\DomoHomeAPI\Controller\UsuariosController.class
 com\iesmm\DomoHomeAPI\DomoHomeApiApplication.class

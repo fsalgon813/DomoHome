@@ -5,9 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
+    tools:context=".Vista.Login"
     android:orientation="vertical"
-    android:background="#001219">
+    android:background="#001219"
+    android:id="@+id/login">
 
     <ImageView
         android:id="@+id/logo"
@@ -39,6 +40,7 @@
         android:drawableLeft="@drawable/password"
         android:drawablePadding="30dp"
         android:textColor="#000000"
+        android:inputType="textPassword"
         android:hint="@string/password"
         android:textColorHint="#7C7C7C"
         android:textSize="18sp"
@@ -58,6 +60,7 @@
         android:textColor="@color/black"/>
     
     <TextView
+        android:id="@+id/tvRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/register"
