@@ -5,4 +5,11 @@
     <string name="name">Name</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="house">House</string>
+    <string name="devices">Smart Devices</string>
+    <string name="logout">Logout</string>
+    <string name="open_nav">Open menu</string>
+    <string name="close_nav">Close menu</string>
+    <string name="hello_blank_fragment">asd</string>
+    <string name="starting_measurement">Starting Measurement</string>
 </resources>

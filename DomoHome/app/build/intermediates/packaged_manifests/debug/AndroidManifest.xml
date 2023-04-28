@@ -30,6 +30,9 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.iesmm.domohome.Vista.MainActivity"
+            android:exported="false" />
+        <activity
             android:name="com.iesmm.domohome.Vista.Login"
             android:exported="true" >
             <intent-filter>
@@ -42,8 +45,14 @@
             android:name="com.iesmm.domohome.Vista.Register"
             android:exported="true" />
         <activity
-            android:name="com.iesmm.domohome.Vista.Main"
-            android:exported="true" />
+            android:name="com.iesmm.domohome.Vista.Configuracion"
+            android:exported="false" />
+        <activity
+            android:name="com.iesmm.domohome.Vista.Home"
+            android:exported="false" />
+        <activity
+            android:name="com.iesmm.domohome.Vista.DispositivosInteligentes"
+            android:exported="false" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

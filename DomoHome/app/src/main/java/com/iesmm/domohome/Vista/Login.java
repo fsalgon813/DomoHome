@@ -100,10 +100,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 }
             } catch (IOException e) {
                 logger.severe("Error en la E/S al hacer la peticion HTTP");
-                e.printStackTrace();
             }
             catch (Exception e) {
-                e.printStackTrace();
+                logger.severe("Error: " + e.getMessage());
             }
             publishProgress(correcto);
             return null;
@@ -112,7 +111,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         @Override
         protected void onProgressUpdate(Boolean... values) {
             if (values[0] == true){
-                Intent i = new Intent(getApplicationContext(), Main.class);
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
             }
         }

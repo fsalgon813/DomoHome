@@ -26,7 +26,7 @@
 17-->[androidx.core:core:1.9.0] C:\Users\franl\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 18
 19    <application
-19-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:7:5-30:19
+19-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:7:5-41:19
 20        android:allowBackup="true"
 20-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:8:9-35
 21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -49,56 +49,74 @@
 31        android:usesCleartextTraffic="true" >
 31-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:15:9-44
 32        <activity
-32-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:17:9-25:20
-33            android:name="com.iesmm.domohome.Vista.Login"
-33-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:18:13-40
-34            android:exported="true" >
-34-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:19:13-36
-35            <intent-filter>
-35-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:20:13-24:29
-36                <action android:name="android.intent.action.MAIN" />
-36-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:21:17-69
-36-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:21:25-66
-37
-38                <category android:name="android.intent.category.LAUNCHER" />
-38-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:23:17-77
-38-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:23:27-74
-39            </intent-filter>
-40        </activity>
-41        <activity
-41-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:26:9-27:38
-42            android:name="com.iesmm.domohome.Vista.Register"
-42-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:26:19-49
-43            android:exported="true" />
-43-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:27:13-36
+32-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:17:9-19:40
+33            android:name="com.iesmm.domohome.Vista.MainActivity"
+33-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:18:13-47
+34            android:exported="false" />
+34-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:19:13-37
+35        <activity
+35-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:20:9-28:20
+36            android:name="com.iesmm.domohome.Vista.Login"
+36-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:21:13-40
+37            android:exported="true" >
+37-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:22:13-36
+38            <intent-filter>
+38-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:23:13-27:29
+39                <action android:name="android.intent.action.MAIN" />
+39-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:24:17-69
+39-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:24:25-66
+40
+41                <category android:name="android.intent.category.LAUNCHER" />
+41-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:26:17-77
+41-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:26:27-74
+42            </intent-filter>
+43        </activity>
 44        <activity
-44-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:28:9-29:38
-45            android:name="com.iesmm.domohome.Vista.Main"
-45-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:28:19-45
+44-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:29:9-31:39
+45            android:name="com.iesmm.domohome.Vista.Register"
+45-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:30:13-43
 46            android:exported="true" />
-46-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:29:13-36
-47
-48        <provider
-48-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
-49            android:name="androidx.startup.InitializationProvider"
-49-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
-50            android:authorities="com.iesmm.domohome.androidx-startup"
-50-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
-51            android:exported="false" >
-51-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
-52            <meta-data
-52-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
-53                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-53-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
-54                android:value="androidx.startup" />
-54-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
-55            <meta-data
-55-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\franl\.gradle\caches\transforms-3\86041ab2b0d2128b301212662b855cec\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
-56                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-56-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\franl\.gradle\caches\transforms-3\86041ab2b0d2128b301212662b855cec\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
-57                android:value="androidx.startup" />
-57-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\franl\.gradle\caches\transforms-3\86041ab2b0d2128b301212662b855cec\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
-58        </provider>
-59    </application>
-60
-61</manifest>
+46-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:31:13-36
+47        <activity
+47-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:32:9-34:40
+48            android:name="com.iesmm.domohome.Vista.Configuracion"
+48-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:33:13-48
+49            android:exported="false" />
+49-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:34:13-37
+50        <activity
+50-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:35:9-37:40
+51            android:name="com.iesmm.domohome.Vista.Home"
+51-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:36:13-39
+52            android:exported="false" />
+52-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:37:13-37
+53        <activity
+53-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:38:9-40:40
+54            android:name="com.iesmm.domohome.Vista.DispositivosInteligentes"
+54-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:39:13-59
+55            android:exported="false" />
+55-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:40:13-37
+56
+57        <provider
+57-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+58            android:name="androidx.startup.InitializationProvider"
+58-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+59            android:authorities="com.iesmm.domohome.androidx-startup"
+59-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+60            android:exported="false" >
+60-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+61            <meta-data
+61-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+62                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+62-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+63                android:value="androidx.startup" />
+63-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+64            <meta-data
+64-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\franl\.gradle\caches\transforms-3\86041ab2b0d2128b301212662b855cec\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+65                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+65-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\franl\.gradle\caches\transforms-3\86041ab2b0d2128b301212662b855cec\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+66                android:value="androidx.startup" />
+66-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\franl\.gradle\caches\transforms-3\86041ab2b0d2128b301212662b855cec\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+67        </provider>
+68    </application>
+69
+70</manifest>

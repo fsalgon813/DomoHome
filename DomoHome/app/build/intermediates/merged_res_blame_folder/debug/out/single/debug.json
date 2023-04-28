@@ -4,6 +4,10 @@
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\drawable\\ic_launcher_background.xml"
     },
     {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\drawable_termometro.png.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\drawable\\termometro.png"
+    },
+    {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\mipmap-hdpi_ic_launcher_foreground.png.flat",
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\mipmap-hdpi\\ic_launcher_foreground.png"
     },
@@ -12,12 +16,28 @@
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\mipmap-mdpi\\ic_launcher_foreground.png"
     },
     {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\drawable_nav_header.png.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\drawable\\nav_header.png"
+    },
+    {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\drawable_password.png.flat",
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\drawable\\password.png"
     },
     {
+        "merged": "com.iesmm.domohome.app-merged_res-29:/layout_fragment_home.xml.flat",
+        "source": "com.iesmm.domohome.app-main-31:/layout/fragment_home.xml"
+    },
+    {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\mipmap-hdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\drawable_casa.png.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\drawable\\casa.png"
+    },
+    {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\layout\\activity_main.xml"
     },
     {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\xml_data_extraction_rules.xml.flat",
@@ -28,16 +48,16 @@
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\layout_fragment_dispositivos_inteligentes.xml.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\layout\\fragment_dispositivos_inteligentes.xml"
+    },
+    {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\drawable_btn_redondeado.xml.flat",
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\drawable\\btn_redondeado.xml"
-    },
-    {
-        "merged": "com.iesmm.domohome.app-merged_res-29:/layout_login.xml.flat",
-        "source": "com.iesmm.domohome.app-main-31:/layout/login.xml"
     },
     {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
@@ -56,6 +76,10 @@
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\xml\\backup_rules.xml"
     },
     {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\drawable_humedad.png.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\drawable\\humedad.png"
+    },
+    {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\drawable_usuario.png.flat",
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\drawable\\usuario.png"
     },
@@ -72,12 +96,24 @@
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\layout_fragment_configuracion.xml.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\layout\\fragment_configuracion.xml"
+    },
+    {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\drawable_logo.png.flat",
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\drawable\\logo.png"
     },
     {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\layout_fragment_home.xml.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\layout\\fragment_home.xml"
+    },
+    {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\mipmap-xxhdpi_ic_launcher_foreground.png.flat",
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\mipmap-xxhdpi\\ic_launcher_foreground.png"
+    },
+    {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\drawable_menu.png.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\drawable\\menu.png"
     },
     {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\layout_main.xml.flat",
@@ -108,12 +144,28 @@
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\layout_nav_header.xml.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\layout\\nav_header.xml"
+    },
+    {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\drawable_cerrar_sesion.png.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\drawable\\cerrar_sesion.png"
+    },
+    {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\layout_register.xml.flat",
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\layout\\register.xml"
     },
     {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\menu_nav_menu.xml.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\menu\\nav_menu.xml"
+    },
+    {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\drawable_dispositivos.png.flat",
+        "source": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-main-31:\\drawable\\dispositivos.png"
     },
     {
         "merged": "C:\\Users\\franl\\.gradle\\daemon\\7.5\\com.iesmm.domohome.app-merged_res-29:\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
