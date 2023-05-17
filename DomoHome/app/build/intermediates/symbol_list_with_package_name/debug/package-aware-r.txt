@@ -2914,6 +2914,7 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btnAnyadeDispositivo
 id btnLogin
 id btnRegister
 id buttonPanel
@@ -2975,6 +2976,7 @@ id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
 id disjoint
+id dispositivosInteligentes
 id dragAnticlockwise
 id dragClockwise
 id dragDown
@@ -3179,6 +3181,7 @@ id right_icon
 id right_side
 id rounded
 id row_index_key
+id rvDispositivos
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3302,7 +3305,9 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tvCasa
+id tvDispositivosInteligentes
 id tvHumedad
+id tvInvitacion
 id tvLogin
 id tvRegister
 id tvTemperatura
@@ -3551,6 +3556,8 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string accept
+string add_device
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
@@ -3565,16 +3572,21 @@ string character_counter_overflowed_content_description
 string character_counter_pattern
 string clear_text_end_icon_content_description
 string close_nav
+string code
+string code_house
 string devices
 string error_a11y_label
 string error_icon_content_description
+string error_login
+string error_register
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
-string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
-string house
+string home
 string icon_content_description
+string input_code
+string input_name
 string item_view_role_description
 string login
 string logout
@@ -3674,6 +3686,7 @@ string mtrl_switch_track_path
 string mtrl_timepicker_cancel
 string mtrl_timepicker_confirm
 string name
+string new_house
 string open_nav
 string password
 string password_toggle_content_description
@@ -3686,6 +3699,7 @@ string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
 string searchview_navigation_content_description
+string select_option
 string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string starting_measurement

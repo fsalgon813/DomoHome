@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="CASA CASA"
+            android:text="@string/home"
             android:textColor="#00D0FF"
             android:textSize="40sp"
             android:layout_marginTop="20dp"/>
@@ -78,6 +78,17 @@
             </TableRow>
 
         </TableLayout>
+
+        <TextView
+            android:id="@+id/tvInvitacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/code"
+            android:textColor="@color/white"
+            android:gravity="bottom|end"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:layout_margin="15dp"/>
 
     </LinearLayout>
 

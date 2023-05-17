@@ -44,8 +44,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         btnLogin = findViewById(R.id.btnLogin);
 
         // Asigno el listener a los elementos del layout
-        etUsername.setOnClickListener(this);
-        etPasswd.setOnClickListener(this);
         tvRegister.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
 
@@ -87,15 +85,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 // Si la respuesta es correcta, comprobamos la contraseña
                 if (response.isSuccessful()){
                     String respuestaJson = response.body().string();
-                    JSONObject usuario = new JSONObject(respuestaJson);
-                    String username = usuario.getString("username");
-                    String passwd = usuario.getString("password");
+                    if (respuestaJson != null && respuestaJson != "" ){
+                        JSONObject usuario = new JSONObject(respuestaJson);
+                        String username = usuario.getString("username");
+                        String passwd = usuario.getString("password");
 
-                    if (username.equals(strings[0]) && passwd.equals(strings[1])){
-                        correcto = true;
+                        if (username.equals(strings[0]) && passwd.equals(strings[1])){
+                            correcto = true;
+                        }
+                        else {
+                            Snackbar.make(findViewById(R.id.login), getString(R.string.error_login), Snackbar.LENGTH_LONG).show();
+                        }
                     }
                     else {
-                        Snackbar.make(findViewById(R.id.login), "Usuario o contraseña incorrectos", Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(findViewById(R.id.login), getString(R.string.error_login), Snackbar.LENGTH_LONG).show();
                     }
                 }
             } catch (IOException e) {
@@ -103,6 +106,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             }
             catch (Exception e) {
                 logger.severe("Error: " + e.getMessage());
+                e.printStackTrace();
             }
             publishProgress(correcto);
             return null;
@@ -111,7 +115,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         @Override
         protected void onProgressUpdate(Boolean... values) {
             if (values[0] == true){
+                Bundle b = new Bundle();
+                b.putString("username", etUsername.getText().toString());
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.putExtras(b);
                 startActivity(i);
             }
         }

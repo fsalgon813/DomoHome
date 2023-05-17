@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.iesmm.domohome.Modelo.CasaModel;
 import com.iesmm.domohome.R;
 
 import org.json.JSONObject;
@@ -28,10 +28,12 @@ import okhttp3.Response;
 
 public class Home extends Fragment {
 
-    private TextView temp, humedad;
+    private TextView temp, humedad, nombreCasa, codInvitacion;
     private Logger logger;
-
     private OkHttpClient client;
+    private String username = "";
+    AsyncTempHumedad asyncTempHumedad;
+    AsyncCargaCasa asyncCargaCasa;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,16 @@ public class Home extends Fragment {
         // Inicializamos el cliente HTTP que nos permitira hacer peticiones a la API
         client = new OkHttpClient();
 
-        AsyncTempHumedad asyncTempHumedad = new AsyncTempHumedad();
-        asyncTempHumedad.execute();
+        // Cargamos el usuario que se ha logueado
+        username = cargaUsuario();
+        logger.info("Usuario logueado: " + username);
+
+        // Se inicializan las AsyncTask
+        asyncCargaCasa = new AsyncCargaCasa();
+        asyncTempHumedad = new AsyncTempHumedad();
+
+        // Se ejecutan las tareas asincronas
+        cargaAsyncTasks();
     }
 
     @Override
@@ -61,16 +71,110 @@ public class Home extends Fragment {
         // Inicializamos los TextView(se ponen en el onviewcreated porque en el oncreate todavia no se ha inicializado la vista y el metodo getview devuelve null
         temp = (TextView) view.findViewById(R.id.tvTemperatura);
         humedad = (TextView) view.findViewById(R.id.tvHumedad);
+        nombreCasa = (TextView) view.findViewById(R.id.tvCasa);
+        codInvitacion = (TextView) view.findViewById(R.id.tvInvitacion);
+
+
+    }
+
+    @Override
+    public void onResume() {
+        cargaAsyncTasks();
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        paraAsyncTasks();
+        super.onPause();
+    }
+
+
+
+    public String cargaUsuario() {
+        String username = "";
+        Bundle b = this.getActivity().getIntent().getExtras();
+        if (b != null){
+            username = b.getString("username");
+        }
+        return username;
+    }
+
+    private void cargaAsyncTasks() {
+        // Ejecutamos la tarea asincrona para obtener el nombre de la casa
+        // Primero se ejecuta esta tarea asincrona debido a que la otra se ejecuta siempre
+        if (asyncCargaCasa == null || asyncCargaCasa.getStatus() == AsyncTask.Status.FINISHED || asyncCargaCasa.getStatus() == AsyncTask.Status.PENDING){
+            asyncCargaCasa = new AsyncCargaCasa();
+            asyncCargaCasa.execute();
+        }
+
+        // Ejecutamos la tarea asincrona para obtener la temperatura y la humedad
+        if (asyncTempHumedad == null || asyncTempHumedad.getStatus() == AsyncTask.Status.FINISHED || asyncTempHumedad.getStatus() == AsyncTask.Status.PENDING) {
+            asyncTempHumedad = new AsyncTempHumedad();
+            asyncTempHumedad.execute();
+        }
+    }
+
+    private void paraAsyncTasks() {
+        if (asyncCargaCasa != null || asyncCargaCasa.getStatus() == AsyncTask.Status.RUNNING){
+            asyncCargaCasa.cancel(true);
+        }
+        if (asyncTempHumedad != null || asyncTempHumedad.getStatus() == AsyncTask.Status.RUNNING){
+            asyncTempHumedad.cancel(true);
+        }
+    }
+
+    private class AsyncCargaCasa extends AsyncTask<Void, CasaModel, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                // Preparamos la peticion para obtener el nombre de la casa a partir del username
+                String urlTemp = "http://192.168.0.89:8081/casa/casaUsername";
+                MediaType tipo = MediaType.parse("text/plain; charset=utf-8");
+                RequestBody requestBody = RequestBody.create(username, tipo);
+                Request request = new Request.Builder().url(urlTemp).post(requestBody).build();
+                // Ejecutamos la peticion y obtenemos la respuesta
+                Response response = client.newCall(request).execute();
+                if (response.isSuccessful()){
+                    String respuesta = response.body().string();
+                    JSONObject jsonObject = new JSONObject(respuesta);
+                    int idCasa = jsonObject.getInt("idCasa");
+                    String nombre = jsonObject.getString("nombre");
+                    String cod = jsonObject.getString("codInvitacion");
+                    CasaModel casa = new CasaModel(idCasa, nombre, cod);
+                    publishProgress(casa);
+                }
+            }
+            catch (IOException e) {
+                logger.severe("Error en la E/S al hacer la peticion HTTP");
+            }
+            catch (Exception e) {
+                logger.severe("Error: " + e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(CasaModel... values) {
+            if (values[0] != null){
+                nombreCasa.setText(values[0].getNombre());
+                String codeString = getString(R.string.code);
+                codInvitacion.setText(codeString + ": " + values[0].getCodInvitacion());
+            }
+        }
     }
 
     private class AsyncTempHumedad extends AsyncTask<Void, String, Void> {
 
+        private final int DELAY = 5000;
+
         @Override
         protected Void doInBackground(Void... voids) {
-            while (true){
+            // Mientras no se cancele la tarea asincrona, coge la temperatura y la humedad
+            while (!isCancelled()) {
                 try {
-                    Thread.sleep(5000);
-
                     RequestBody requestBody = RequestBody.create("", null);
 
                     // Preparamos la peticion de la temperatura
@@ -91,8 +195,10 @@ public class Home extends Fragment {
                         publishProgress(respuestaTemp, respuestaHumedad);
                     }
 
-
-                } catch (InterruptedException e) {
+                    // Esperamos el tiempo especificado antes de volver a hacer la peticion
+                    Thread.sleep(DELAY);
+                }
+                catch (InterruptedException e) {
                     logger.severe("Se ha interrumpido la lectura de temperatura y humedad");
                 }
                 catch (IOException e) {
@@ -103,11 +209,11 @@ public class Home extends Fragment {
                     e.printStackTrace();
                 }
             }
+            return null;
         }
 
         @Override
         protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
             if (values[0] != null && values[1] != null && Double.valueOf(values[0]) > 0 && Double.valueOf(values[1]) > 0){
                 temp.setText(values[0] + "ºC");
                 humedad.setText(values[1] + "%");

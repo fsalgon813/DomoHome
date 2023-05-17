@@ -2,6 +2,7 @@ package com.iesmm.DomoHomeAPI.Controller;
 
 import com.iesmm.DomoHomeAPI.DAO.DAO;
 import com.iesmm.DomoHomeAPI.DAO.DAOImpl;
+import com.iesmm.DomoHomeAPI.Model.RegisterParams;
 import com.iesmm.DomoHomeAPI.Model.UsuarioModel;
 import jakarta.annotation.PostConstruct;
 import org.springframework.http.MediaType;
@@ -23,5 +24,12 @@ public class UsuariosController {
     public UsuarioModel filtrarUsername(@RequestBody String username) {
         UsuarioModel usuario = dao.filtrarPorUsername(username);
         return usuario;
+    }
+
+    @PostMapping(value="/registrarUsuario", produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Boolean registrarUsuario(@RequestBody RegisterParams params) {
+        Boolean registrado = dao.registrarUsuario(params);
+        return registrado;
     }
 }

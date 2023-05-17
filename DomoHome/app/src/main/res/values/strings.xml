@@ -5,11 +5,20 @@
     <string name="name">Name</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="house">House</string>
+    <string name="home">Home</string>
     <string name="devices">Smart Devices</string>
     <string name="logout">Logout</string>
     <string name="open_nav">Open menu</string>
     <string name="close_nav">Close menu</string>
-    <string name="hello_blank_fragment">asd</string>
     <string name="starting_measurement">Starting Measurement</string>
+    <string name="select_option">Select an option</string>
+    <string name="code_house">Do you have an invitation code or do you want to create a new home?</string>
+    <string name="code">Invite code</string>
+    <string name="new_house">New House</string>
+    <string name="input_code">Enter the invitation code</string>
+    <string name="input_name">Enter the house name</string>
+    <string name="accept">Accept</string>
+    <string name="error_login">Incorrect username or password</string>
+    <string name="error_register">The username is used</string>
+    <string name="add_device">Add Device</string>
 </resources>
