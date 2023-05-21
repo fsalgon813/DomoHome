@@ -4,6 +4,7 @@ import com.iesmm.DomoHomeAPI.Model.TempHumedadModel;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
 public class ThreadTempHumedad implements Runnable{
@@ -23,10 +24,9 @@ public class ThreadTempHumedad implements Runnable{
                 // (temperatura;humedad)
                 Process p = Runtime.getRuntime().exec("python3 ./scripts/temp_humedad.py");
                 // Leemos la salida del script
-                BufferedReader br = new BufferedReader(new java.io.InputStreamReader(p.getInputStream()));
+                BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 // Guardamos la salida en un String
                 String salida = br.readLine();
-                System.out.println(salida);
 
                 // Asignamos los valores que nos ha devuelto el script a sus respectivas variables
                 thModel.setTemp(Double.parseDouble(salida.split(";")[0]));

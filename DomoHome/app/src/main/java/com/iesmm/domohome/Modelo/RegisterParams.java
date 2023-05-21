@@ -1,6 +1,8 @@
 package com.iesmm.domohome.Modelo;
 
-public class RegisterParams {
+import java.io.Serializable;
+
+public class RegisterParams implements Serializable {
     private String username;
     private String passwd;
     private String nombre;

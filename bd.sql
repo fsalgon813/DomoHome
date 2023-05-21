@@ -38,16 +38,16 @@ CREATE TABLE medidas_temperatura_humedad(
 );
 CREATE TABLE dispositivos_inteligentes(
     id_dispositivo INT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
     ip VARCHAR(15) NOT NULL,
-    puerto INT NOT NULL,
     tipo VARCHAR(50) NOT NULL,
     marca VARCHAR(50) NOT NULL,
-    usuario_servicio(50),
-    passwd_servicio(50),
+    usuario_servicio VARCHAR(50),
+    passwd_servicio VARCHAR(50),
     id_usuario INT NOT NULL,
     CONSTRAINT FK_dispositivos_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     CONSTRAINT CHK_tipo CHECK (tipo LIKE 'Bombilla' OR tipo LIKE 'tv'),
-    CONSTRAINT CHK_marca CHECK (marca LIKE 'tp_link' OR tipo LIKE 'samsung')
+    CONSTRAINT CHK_marca CHECK (marca LIKE 'tp_link' OR marca LIKE 'samsung')
 );
 CREATE TABLE rutinas(
     id_rutina INT PRIMARY KEY,

@@ -8,6 +8,8 @@ color purple_700
 color teal_200
 color teal_700
 color white
+drawable bombilla_apagada
+drawable bombilla_encendida
 drawable btn_redondeado
 drawable casa
 drawable cerrar_sesion
@@ -21,6 +23,7 @@ drawable menu
 drawable nav_header
 drawable password
 drawable termometro
+drawable tv
 drawable usuario
 id btnAnyadeDispositivo
 id btnLogin
@@ -32,6 +35,7 @@ id etPasswd
 id etUsername
 id fragment_container
 id home
+id imgDispositivo
 id ivCasa
 id login
 id logo
@@ -49,10 +53,12 @@ id tvInvitacion
 id tvLogin
 id tvRegister
 id tvTemperatura
+id txtNombreDispositivo
 layout activity_main
 layout fragment_configuracion
 layout fragment_dispositivos_inteligentes
 layout fragment_home
+layout item_dispositivo
 layout login
 layout nav_header
 layout register

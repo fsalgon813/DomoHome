@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.iesmm.domohome.Controlador.Controlador;
 import com.iesmm.domohome.Modelo.CasaModel;
 import com.iesmm.domohome.R;
 
@@ -30,21 +31,20 @@ public class Home extends Fragment {
 
     private TextView temp, humedad, nombreCasa, codInvitacion;
     private Logger logger;
-    private OkHttpClient client;
     private String username = "";
     AsyncTempHumedad asyncTempHumedad;
     AsyncCargaCasa asyncCargaCasa;
 
+    private Controlador controlador;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         // Inicializamos el logger
-        logger = Logger.getLogger("Home");
+        logger = Logger.getLogger("Home");;
 
-        // Inicializamos el cliente HTTP que nos permitira hacer peticiones a la API
-        client = new OkHttpClient();
+        // Inicializamos el controlador
+        controlador = new Controlador();
 
         // Cargamos el usuario que se ha logueado
         username = cargaUsuario();
@@ -128,31 +128,7 @@ public class Home extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            try {
-                // Preparamos la peticion para obtener el nombre de la casa a partir del username
-                String urlTemp = "http://192.168.0.89:8081/casa/casaUsername";
-                MediaType tipo = MediaType.parse("text/plain; charset=utf-8");
-                RequestBody requestBody = RequestBody.create(username, tipo);
-                Request request = new Request.Builder().url(urlTemp).post(requestBody).build();
-                // Ejecutamos la peticion y obtenemos la respuesta
-                Response response = client.newCall(request).execute();
-                if (response.isSuccessful()){
-                    String respuesta = response.body().string();
-                    JSONObject jsonObject = new JSONObject(respuesta);
-                    int idCasa = jsonObject.getInt("idCasa");
-                    String nombre = jsonObject.getString("nombre");
-                    String cod = jsonObject.getString("codInvitacion");
-                    CasaModel casa = new CasaModel(idCasa, nombre, cod);
-                    publishProgress(casa);
-                }
-            }
-            catch (IOException e) {
-                logger.severe("Error en la E/S al hacer la peticion HTTP");
-            }
-            catch (Exception e) {
-                logger.severe("Error: " + e.getMessage());
-                e.printStackTrace();
-            }
+            publishProgress(controlador.getCasa(username));
             return null;
         }
 
@@ -174,39 +150,11 @@ public class Home extends Fragment {
         protected Void doInBackground(Void... voids) {
             // Mientras no se cancele la tarea asincrona, coge la temperatura y la humedad
             while (!isCancelled()) {
+                publishProgress( controlador.getTemp(), controlador.getHumedad());
                 try {
-                    RequestBody requestBody = RequestBody.create("", null);
-
-                    // Preparamos la peticion de la temperatura
-                    String urlTemp = "http://192.168.0.89:8081/temp_humedad/temp";
-                    Request requestTemp = new Request.Builder().url(urlTemp).post(requestBody).build();
-
-                    // Preparamos la peticion de la humedad
-                    String urlHumedad = "http://192.168.0.89:8081/temp_humedad/humedad";
-                    Request requestHumedad = new Request.Builder().url(urlHumedad).post(requestBody).build();
-
-                    // Ejecutamos las peticiones y obtenemos la respuesta
-                    Response responseTemp = client.newCall(requestTemp).execute();
-                    Response responseHumedad = client.newCall(requestHumedad).execute();
-
-                    if (responseTemp.isSuccessful() && responseHumedad.isSuccessful()){
-                        String respuestaTemp = responseTemp.body().string();
-                        String respuestaHumedad = responseHumedad.body().string();
-                        publishProgress(respuestaTemp, respuestaHumedad);
-                    }
-
-                    // Esperamos el tiempo especificado antes de volver a hacer la peticion
                     Thread.sleep(DELAY);
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     logger.severe("Se ha interrumpido la lectura de temperatura y humedad");
-                }
-                catch (IOException e) {
-                    logger.severe("Error en la E/S al hacer la peticion HTTP");
-                }
-                catch (Exception e) {
-                    logger.severe("Error: " + e.getMessage());
-                    e.printStackTrace();
                 }
             }
             return null;

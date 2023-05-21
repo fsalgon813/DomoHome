@@ -2703,6 +2703,8 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable bombilla_apagada
+drawable bombilla_encendida
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -2815,6 +2817,7 @@ drawable termometro
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable tv
 drawable usuario
 id ALT
 id BOTTOM_END
@@ -3042,6 +3045,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imgDispositivo
 id immediateStop
 id included
 id indeterminate
@@ -3311,6 +3315,7 @@ id tvInvitacion
 id tvLogin
 id tvRegister
 id tvTemperatura
+id txtNombreDispositivo
 id unchecked
 id uniform
 id unlabeled
@@ -3460,6 +3465,7 @@ layout design_text_input_start_icon
 layout fragment_configuracion
 layout fragment_dispositivos_inteligentes
 layout fragment_home
+layout item_dispositivo
 layout login
 layout m3_alert_dialog
 layout m3_alert_dialog_actions

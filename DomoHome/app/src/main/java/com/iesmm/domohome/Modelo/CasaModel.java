@@ -1,6 +1,8 @@
 package com.iesmm.domohome.Modelo;
 
-public class CasaModel {
+import java.io.Serializable;
+
+public class CasaModel implements Serializable {
     private int idCasa;
     private String nombre;
     private String codInvitacion;

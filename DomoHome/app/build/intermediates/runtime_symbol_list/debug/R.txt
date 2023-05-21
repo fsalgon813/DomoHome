@@ -2702,6 +2702,8 @@ int drawable abc_textfield_search_material 0x7f070076
 int drawable abc_vector_test 0x7f070077
 int drawable avd_hide_password 0x7f070078
 int drawable avd_show_password 0x7f070079
+int drawable bombilla_apagada 0x7f0700eb
+int drawable bombilla_encendida 0x7f0700ec
 int drawable btn_checkbox_checked_mtrl 0x7f07007a
 int drawable btn_checkbox_checked_to_unchecked_mtrl_animation 0x7f07007b
 int drawable btn_checkbox_unchecked_mtrl 0x7f07007c
@@ -2814,6 +2816,7 @@ int drawable termometro 0x7f0700e6
 int drawable test_level_drawable 0x7f0700e7
 int drawable tooltip_frame_dark 0x7f0700e8
 int drawable tooltip_frame_light 0x7f0700e9
+int drawable tv 0x7f0700ed
 int drawable usuario 0x7f0700ea
 int id ALT 0x7f080000
 int id BOTTOM_END 0x7f080001
@@ -3041,6 +3044,7 @@ int id ifRoom 0x7f0800de
 int id ignore 0x7f0800df
 int id ignoreRequest 0x7f0800e0
 int id image 0x7f0800e1
+int id imgDispositivo 0x7f080206
 int id immediateStop 0x7f0800e2
 int id included 0x7f0800e3
 int id indeterminate 0x7f0800e4
@@ -3310,6 +3314,7 @@ int id tvInvitacion 0x7f0801eb
 int id tvLogin 0x7f0801ec
 int id tvRegister 0x7f0801ed
 int id tvTemperatura 0x7f0801ee
+int id txtNombreDispositivo 0x7f080207
 int id unchecked 0x7f0801ef
 int id uniform 0x7f0801f0
 int id unlabeled 0x7f0801f1
@@ -3459,6 +3464,7 @@ int layout design_text_input_start_icon 0x7f0b002c
 int layout fragment_configuracion 0x7f0b002d
 int layout fragment_dispositivos_inteligentes 0x7f0b002e
 int layout fragment_home 0x7f0b002f
+int layout item_dispositivo 0x7f0b0070
 int layout login 0x7f0b0030
 int layout m3_alert_dialog 0x7f0b0031
 int layout m3_alert_dialog_actions 0x7f0b0032

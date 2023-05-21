@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.iesmm.domohome.Controlador.Controlador;
 import com.iesmm.domohome.Modelo.RegisterParams;
 import com.iesmm.domohome.R;
 
@@ -37,7 +38,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
     private TextView tvLogin;
     private Button btnRegister;
     private Logger logger;
-    private OkHttpClient client;
+    private Controlador controlador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +59,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
         // Inicializamos el logger
         logger = Logger.getLogger("Register");
 
-        // Inicializamos el cliente HTTP que nos permitira hacer peticiones a la API
-        client = new OkHttpClient();
-
-
+        // Inicializamos el controlador
+        controlador = new Controlador();
     }
 
 
@@ -133,9 +132,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
 
         @Override
         protected Void doInBackground(Void... voids) {
-            // Si el usuario ha introducido todos los datos, se envian los datos a la API para hacer el registro
-            String url = "http://192.168.0.89:8081/usuario/registrarUsuario";
-            MediaType tipo = MediaType.parse("application/json; charset=utf-8");
             RegisterParams registerParams = null;
             if (codInvitacion != null && !codInvitacion.isEmpty() && !etUsername.getText().toString().isEmpty() && !etPasswd.getText().toString().isEmpty() && !etNombre.getText().toString().isEmpty()){
                 registerParams = new RegisterParams(etUsername.getText().toString(), etPasswd.getText().toString(), etNombre.getText().toString(), null, codInvitacion);
@@ -144,29 +140,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener,
                 registerParams = new RegisterParams(etUsername.getText().toString(), etPasswd.getText().toString(), etNombre.getText().toString(), nombreCasa, null);
             }
 
-            // Convertimos el objeto RegisterParams a JSON usando GSON
-            Gson gson = new GsonBuilder().create();
-            String registerParamsJSON = gson.toJson(registerParams);
-            RequestBody cuerpo = RequestBody.create(registerParamsJSON, tipo);
-            Request request = new Request.Builder().url(url).post(cuerpo).build();
+            if (controlador.registraUsuario(registerParams)){
+                publishProgress(true);
+            }
 
-            try {
-                // Ejecutamos la peticion y obtenemos la respuesta
-                Response response = client.newCall(request).execute();
-                if (response.isSuccessful()){
-                    Boolean correcto = false;
-                    if (response.body().string().equals("true")){
-                        correcto = true;
-                    }
-                    publishProgress(correcto);
-                }
-            }
-            catch (IOException e) {
-                logger.severe("Error en la E/S al hacer la peticion HTTP");
-            }
-            catch (Exception e) {
-                logger.severe("Error: " + e.getMessage());
-            }
+            publishProgress(false);
             return null;
         }
 

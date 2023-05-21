@@ -1,14 +1,12 @@
 package com.iesmm.DomoHomeAPI.DAO;
 
-import com.iesmm.DomoHomeAPI.Model.CasaModel;
-import com.iesmm.DomoHomeAPI.Model.RegisterParams;
-import com.iesmm.DomoHomeAPI.Model.SensorModel;
-import com.iesmm.DomoHomeAPI.Model.UsuarioModel;
+import com.iesmm.DomoHomeAPI.Model.*;
 import com.iesmm.DomoHomeAPI.Utils.Conexion;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -211,6 +209,61 @@ public class DAOImpl implements DAO {
             }
         }
         return correcto;
+    }
+
+    /**
+     * Saca una lista de todos los dispositivos inteligentes de la base de datos
+     * @return lista Lista de dispositivos inteligentes
+     */
+    public List<DispositivosModel> listaDispositivos(){
+        Connection conexion = null;
+        List<DispositivosModel> lista = new ArrayList<>();
+        try {
+            // Generamos la conexion
+            conexion = Conexion.getConnection();
+
+            // Generamos la consulta de los dispositivos inteligentes
+            String sql = "SELECT * FROM dispositivos_inteligentes";
+            PreparedStatement statement = conexion.prepareStatement(sql);
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()){
+                DispositivosModel dispositivo = new DispositivosModel();
+                dispositivo.setIdDispositivo(rs.getInt("id_dispositivo"));
+                dispositivo.setNombre(rs.getString("nombre"));
+                dispositivo.setIp(rs.getString("ip"));
+                dispositivo.setTipo(rs.getString("tipo"));
+                dispositivo.setMarca(rs.getString("marca"));
+                String usuarioServicio = rs.getString("usuario_servicio");
+                String passwdServicio = rs.getString("passwd_servicio");
+                if (usuarioServicio != null && passwdServicio != null){
+                    dispositivo.setUsuarioServicio(usuarioServicio);
+                    dispositivo.setPasswdServicio(passwdServicio);
+                }
+                dispositivo.setIdUsuario(rs.getInt("id_usuario"));
+                lista.add(dispositivo);
+            }
+
+        }
+        catch(IOException e) {
+            logger.severe("Error en la E/S al filtrar un usuario por username. Mensaje: " + e.getMessage());
+        }
+        catch (SQLException e){
+            logger.severe("SQLState: " + e.getSQLState() + " | Error Code: " + e.getErrorCode() + " | Message: " + e.getMessage());
+        }
+        catch (Exception e){
+            logger.severe("Error: " + e.getMessage());
+        }
+        finally {
+            try {
+                conexion.close();
+            }
+            catch (SQLException e){
+                logger.severe("SQLState: " + e.getSQLState() + " | Error Code: " + e.getErrorCode() + " | Message: " + e.getMessage());
+            }
+        }
+        return lista;
     }
 
     /**

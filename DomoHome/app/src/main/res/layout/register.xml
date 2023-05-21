@@ -31,7 +31,8 @@
         android:background="@drawable/et_redondeado"
         android:paddingHorizontal="6dp"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:singleLine="true"/>
 
     <EditText
         android:id="@+id/etPasswd"
@@ -47,7 +48,8 @@
         android:background="@drawable/et_redondeado"
         android:paddingHorizontal="6dp"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:singleLine="true"/>
 
     <EditText
         android:id="@+id/etName"
@@ -61,7 +63,8 @@
         android:background="@drawable/et_redondeado"
         android:paddingHorizontal="6dp"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:singleLine="true"/>
 
     <Button
         android:id="@+id/btnRegister"

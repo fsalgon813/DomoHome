@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.iesmm.domohome.Controlador.Controlador;
 import com.iesmm.domohome.R;
 
 import org.json.JSONObject;
@@ -30,7 +31,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private TextView tvRegister;
     private Button btnLogin;
     private Logger logger;
-    private OkHttpClient client;
+    private Controlador controlador;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         // Inicializamos el logger
         logger = Logger.getLogger("Login");
 
-        // Inicializamos el cliente HTTP que nos permitira hacer peticiones a la API
-        client = new OkHttpClient();
+        // Inicializamos el controlador
+        controlador = new Controlador();
     }
 
     @Override
@@ -73,40 +75,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         @Override
         protected Void doInBackground(String... strings) {
             Boolean correcto = false;
-            // Preparamos la peticion
-            String url = "http://192.168.0.89:8081/usuario/filtrarUsername";
-            MediaType tipo = MediaType.parse("text/plain; charset=utf-8");
-            RequestBody cuerpo = RequestBody.create(strings[0], tipo);
-            Request request = new Request.Builder().url(url).post(cuerpo).build();
-
-            // Ejecutamos la peticion y obtenemos la respuesta
-            try {
-                Response response = client.newCall(request).execute();
-                // Si la respuesta es correcta, comprobamos la contraseña
-                if (response.isSuccessful()){
-                    String respuestaJson = response.body().string();
-                    if (respuestaJson != null && respuestaJson != "" ){
-                        JSONObject usuario = new JSONObject(respuestaJson);
-                        String username = usuario.getString("username");
-                        String passwd = usuario.getString("password");
-
-                        if (username.equals(strings[0]) && passwd.equals(strings[1])){
-                            correcto = true;
-                        }
-                        else {
-                            Snackbar.make(findViewById(R.id.login), getString(R.string.error_login), Snackbar.LENGTH_LONG).show();
-                        }
-                    }
-                    else {
-                        Snackbar.make(findViewById(R.id.login), getString(R.string.error_login), Snackbar.LENGTH_LONG).show();
-                    }
-                }
-            } catch (IOException e) {
-                logger.severe("Error en la E/S al hacer la peticion HTTP");
-            }
-            catch (Exception e) {
-                logger.severe("Error: " + e.getMessage());
-                e.printStackTrace();
+            if (controlador.verificaUsuario(strings[0], strings[1])){
+                correcto = true;
+            } else {
+                Snackbar.make(findViewById(R.id.login), getString(R.string.error_login), Snackbar.LENGTH_LONG).show();
             }
             publishProgress(correcto);
             return null;
