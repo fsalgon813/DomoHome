@@ -3237,6 +3237,8 @@ int id snackbar_text 0x7f08019e
 int id snap 0x7f08019f
 int id snapMargins 0x7f0801a0
 int id south 0x7f0801a1
+int id spMarca 0x7f08020b
+int id spType 0x7f08020c
 int id spacer 0x7f0801a2
 int id special_effects_controller_view_tag 0x7f0801a3
 int id spline 0x7f0801a4
@@ -3312,6 +3314,7 @@ int id tvDispositivosInteligentes 0x7f0801e9
 int id tvHumedad 0x7f0801ea
 int id tvInvitacion 0x7f0801eb
 int id tvLogin 0x7f0801ec
+int id tvNuevoDispositivo 0x7f08020a
 int id tvRegister 0x7f0801ed
 int id tvTemperatura 0x7f0801ee
 int id txtNombreDispositivo 0x7f080207
@@ -3461,6 +3464,7 @@ int layout design_navigation_menu 0x7f0b0029
 int layout design_navigation_menu_item 0x7f0b002a
 int layout design_text_input_end_icon 0x7f0b002b
 int layout design_text_input_start_icon 0x7f0b002c
+int layout fragment_anyadir_dispositivo 0x7f0b0071
 int layout fragment_configuracion 0x7f0b002d
 int layout fragment_dispositivos_inteligentes 0x7f0b002e
 int layout fragment_home 0x7f0b002f
@@ -3572,6 +3576,9 @@ int string bottomsheet_action_expand 0x7f100022
 int string bottomsheet_action_expand_halfway 0x7f100023
 int string bottomsheet_drag_handle_clicked 0x7f100024
 int string bottomsheet_drag_handle_content_description 0x7f100025
+int string brand 0x7f1000b5
+int string bulb_off 0x7f1000b0
+int string bulb_on 0x7f1000b1
 int string character_counter_content_description 0x7f100026
 int string character_counter_overflowed_content_description 0x7f100027
 int string character_counter_pattern 0x7f100028
@@ -3691,6 +3698,7 @@ int string mtrl_switch_track_path 0x7f100099
 int string mtrl_timepicker_cancel 0x7f10009a
 int string mtrl_timepicker_confirm 0x7f10009b
 int string name 0x7f10009c
+int string new_device 0x7f1000b3
 int string new_house 0x7f10009d
 int string open_nav 0x7f10009e
 int string password 0x7f10009f
@@ -3709,6 +3717,7 @@ int string side_sheet_accessibility_pane_title 0x7f1000ab
 int string side_sheet_behavior 0x7f1000ac
 int string starting_measurement 0x7f1000ad
 int string status_bar_notification_info_overflow 0x7f1000ae
+int string type 0x7f1000b4
 int string username 0x7f1000af
 int style AlertDialog_AppCompat 0x7f110000
 int style AlertDialog_AppCompat_Light 0x7f110001

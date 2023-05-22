@@ -3,6 +3,7 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="name">Name</string>
+    <string name="type">Type</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="home">Home</string>
@@ -21,4 +22,8 @@
     <string name="error_login">Incorrect username or password</string>
     <string name="error_register">The username is used</string>
     <string name="add_device">Add Device</string>
+    <string name="bulb_on">Light bulb turned on correctly</string>
+    <string name="bulb_off">Light bulb turned off correctly</string>
+    <string name="new_device">New Device</string>
+    <string name="brand">Brand</string>
 </resources>

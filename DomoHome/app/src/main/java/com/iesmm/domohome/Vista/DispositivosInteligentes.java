@@ -6,13 +6,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.iesmm.domohome.Controlador.AdaptadorDispositivos;
 import com.iesmm.domohome.Controlador.Controlador;
@@ -23,9 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class DispositivosInteligentes extends Fragment {
+public class DispositivosInteligentes extends Fragment implements View.OnClickListener {
 
     private RecyclerView rv;
+    private Button btnAnyadirDispositivo;
     private List<DispositivoModel> dispositivos = new ArrayList<DispositivoModel>();
     private Logger logger;
 
@@ -50,10 +53,28 @@ public class DispositivosInteligentes extends Fragment {
         // Inicializamos los componentes del layout
         rv = view.findViewById(R.id.rvDispositivos);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        btnAnyadirDispositivo = view.findViewById(R.id.btnAnyadeDispositivo);
 
         // Cargamos los dispositivos
         AsyncCargarDispositivos asyncCargarDispositivos = new AsyncCargarDispositivos();
         asyncCargarDispositivos.execute();
+
+        // Añadimos el listener al botón
+        btnAnyadirDispositivo.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        switch (id){
+            case R.id.btnAnyadeDispositivo:
+                // Cambiamos de fragment al de añadir dispositivo
+                Fragment fragment = new AnyadirDispositivo();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment).commit();
+                break;
+        }
     }
 
     private class AsyncCargarDispositivos extends AsyncTask<Void, Void, Void> {

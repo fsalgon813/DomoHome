@@ -7,14 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.iesmm.domohome.Modelo.DispositivoModel;
 import com.iesmm.domohome.R;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -49,21 +48,41 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DispositivoModel dispositivo = listaDispositivos.get(position);
+
         holder.txtNombreDispositivo.setText(dispositivo.getNombre());
-        switch (dispositivo.getTipo().toUpperCase()){
-            case "TV":
-                holder.imgDispositivo.setImageResource(R.drawable.tv);
-                break;
-            case "BOMBILLA":
-                AsyncEstadoBombilla asyncEstadoBombilla = new AsyncEstadoBombilla();
-                asyncEstadoBombilla.execute(position);
-                if (dispositivo.getEstado()){
-                    holder.imgDispositivo.setImageResource(R.drawable.bombilla_encendida);
-                } else {
-                    holder.imgDispositivo.setImageResource(R.drawable.bombilla_apagada);
-                }
-                break;
+        if (dispositivo.getTipo().equals(DispositivoModel.Tipo.TV)) {
+            holder.imgDispositivo.setImageResource(R.drawable.tv);
         }
+        else if (dispositivo.getTipo().equals(DispositivoModel.Tipo.BOMBILLA)) {
+            if (dispositivo.getMarca().equals(DispositivoModel.Marca.TP_LINK)){
+                AsyncEstadoBombillaTpLink asyncEstadoBombillaTpLink = new AsyncEstadoBombillaTpLink();
+                asyncEstadoBombillaTpLink.execute(position);
+            }
+            if (dispositivo.getEstado()){
+                holder.imgDispositivo.setImageResource(R.drawable.bombilla_encendida);
+            } else {
+                holder.imgDispositivo.setImageResource(R.drawable.bombilla_apagada);
+            }
+        }
+
+        // El onclick lo ponemos en una clase anonima para que se pueda acceder a la posicion
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dispositivo.getTipo().equals(DispositivoModel.Tipo.TV)) {
+                    if (dispositivo.getMarca().equals(DispositivoModel.Marca.SAMSUNG)){
+                        AsyncOnOffTvSamsung asyncOnOffTvSamsung = new AsyncOnOffTvSamsung();
+                        asyncOnOffTvSamsung.execute(position);
+                    }
+                }
+                else if (dispositivo.getTipo().equals(DispositivoModel.Tipo.BOMBILLA)) {
+                    if (dispositivo.getMarca().equals(DispositivoModel.Marca.TP_LINK)){
+                        AsyncOnOffBombillaTpLink asyncOnOffBombillaTpLink = new AsyncOnOffBombillaTpLink();
+                        asyncOnOffBombillaTpLink.execute(position);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -71,7 +90,7 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
         return listaDispositivos.size();
     }
 
-    private class AsyncEstadoBombilla extends AsyncTask<Integer, Boolean, Void> {
+    private class AsyncEstadoBombillaTpLink extends AsyncTask<Integer, Boolean, Void> {
 
         @Override
         protected Void doInBackground(Integer... integers) {
@@ -89,6 +108,38 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
             if (values[0]){
                 notifyDataSetChanged();
             }
+        }
+    }
+
+    private class AsyncOnOffTvSamsung extends AsyncTask<Integer, Void, Void> {
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            Controlador controlador = new Controlador();
+            controlador.onoffTvSamsung(listaDispositivos.get(integers[0]));
+            return null;
+        }
+    }
+
+    private class AsyncOnOffBombillaTpLink extends AsyncTask<Integer, Integer, Void> {
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            Controlador controlador = new Controlador();
+            controlador.onoffBombillaTpLink(listaDispositivos.get(integers[0]));
+            publishProgress(integers[0]);
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            if(listaDispositivos.get(values[0]).getEstado()) {
+                Toast.makeText(context, context.getText(R.string.bulb_off), Toast.LENGTH_SHORT).show();
+                listaDispositivos.get(values[0]).setEstado(false);
+            }
+            else {
+                Toast.makeText(context, context.getText(R.string.bulb_on), Toast.LENGTH_SHORT).show();
+                listaDispositivos.get(values[0]).setEstado(true);
+            }
+            notifyDataSetChanged();
         }
     }
 }

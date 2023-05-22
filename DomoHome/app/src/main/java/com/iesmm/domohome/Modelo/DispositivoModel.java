@@ -1,13 +1,49 @@
 package com.iesmm.domohome.Modelo;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class DispositivoModel implements Serializable {
+
+    public enum Marca {
+        SAMSUNG, TP_LINK;
+
+
+        @NonNull
+        @Override
+        public String toString() {
+            switch (this) {
+                case SAMSUNG:
+                    return "SAMSUNG";
+                case TP_LINK:
+                    return "TP_LINK";
+            }
+            return super.toString();
+        }
+    }
+    public enum Tipo {
+        TV, BOMBILLA;
+
+
+        @NonNull
+        @Override
+        public String toString() {
+            switch (this) {
+                case TV:
+                    return "TV";
+                case BOMBILLA:
+                    return "BOMBILLA";
+            }
+            return super.toString();
+        }
+    }
+
     int idDispositivo;
     String nombre;
     String ip;
-    String tipo;
-    String marca;
+    Tipo tipo;
+    Marca marca;
     String usuarioServicio;
     String passwdServicio;
     int idUsuario;
@@ -20,8 +56,8 @@ public class DispositivoModel implements Serializable {
         this.idDispositivo = idDispositivo;
         this.nombre = nombre;
         this.ip = ip;
-        this.tipo = tipo;
-        this.marca = marca;
+        this.tipo = StringToTipo(tipo);
+        this.marca = StringToMarca(marca);
         this.usuarioServicio = usuarioServicio;
         this.passwdServicio = passwdServicio;
         this.idUsuario = idUsuario;
@@ -51,20 +87,20 @@ public class DispositivoModel implements Serializable {
         this.ip = ip;
     }
 
-    public String getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        this.tipo = StringToTipo(tipo);
     }
 
-    public String getMarca() {
+    public Marca getMarca() {
         return marca;
     }
 
     public void setMarca(String marca) {
-        this.marca = marca;
+        this.marca = StringToMarca(marca);
     }
 
     public String getUsuarioServicio() {
@@ -98,4 +134,27 @@ public class DispositivoModel implements Serializable {
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
+
+    public Tipo StringToTipo(String tipo){
+        switch (tipo.toUpperCase()){
+            case "TV":
+                return Tipo.TV;
+            case "BOMBILLA":
+                return Tipo.BOMBILLA;
+            default:
+                return null;
+        }
+    }
+
+    public Marca StringToMarca(String marca){
+        switch (marca.toUpperCase()){
+            case "SAMSUNG":
+                return Marca.SAMSUNG;
+            case "TP_LINK":
+                return Marca.TP_LINK;
+            default:
+                return null;
+        }
+    }
+
 }

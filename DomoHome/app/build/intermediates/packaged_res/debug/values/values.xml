@@ -11,6 +11,9 @@
     <string name="accept">Accept</string>
     <string name="add_device">Add Device</string>
     <string name="app_name">DomoHome</string>
+    <string name="brand">Brand</string>
+    <string name="bulb_off">Light bulb turned off correctly</string>
+    <string name="bulb_on">Light bulb turned on correctly</string>
     <string name="close_nav">Close menu</string>
     <string name="code">Invite code</string>
     <string name="code_house">Do you have an invitation code or do you want to create a new home?</string>
@@ -23,12 +26,14 @@
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="name">Name</string>
+    <string name="new_device">New Device</string>
     <string name="new_house">New House</string>
     <string name="open_nav">Open menu</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="select_option">Select an option</string>
     <string name="starting_measurement">Starting Measurement</string>
+    <string name="type">Type</string>
     <string name="username">Username</string>
     <style name="Theme.DomoHome" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         

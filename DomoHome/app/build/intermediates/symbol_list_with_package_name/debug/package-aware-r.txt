@@ -3238,6 +3238,8 @@ id snackbar_text
 id snap
 id snapMargins
 id south
+id spMarca
+id spType
 id spacer
 id special_effects_controller_view_tag
 id spline
@@ -3313,6 +3315,7 @@ id tvDispositivosInteligentes
 id tvHumedad
 id tvInvitacion
 id tvLogin
+id tvNuevoDispositivo
 id tvRegister
 id tvTemperatura
 id txtNombreDispositivo
@@ -3462,6 +3465,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fragment_anyadir_dispositivo
 layout fragment_configuracion
 layout fragment_dispositivos_inteligentes
 layout fragment_home
@@ -3573,6 +3577,9 @@ string bottomsheet_action_expand
 string bottomsheet_action_expand_halfway
 string bottomsheet_drag_handle_clicked
 string bottomsheet_drag_handle_content_description
+string brand
+string bulb_off
+string bulb_on
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
@@ -3692,6 +3699,7 @@ string mtrl_switch_track_path
 string mtrl_timepicker_cancel
 string mtrl_timepicker_confirm
 string name
+string new_device
 string new_house
 string open_nav
 string password
@@ -3710,6 +3718,7 @@ string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string starting_measurement
 string status_bar_notification_info_overflow
+string type
 string username
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
