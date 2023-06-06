@@ -6,6 +6,7 @@ import com.iesmm.domohome.Modelo.CasaModel;
 import com.iesmm.domohome.Modelo.DispositivoModel;
 import com.iesmm.domohome.Modelo.RegisterParams;
 import com.iesmm.domohome.Modelo.RutinaModel;
+import com.iesmm.domohome.Modelo.SensorModel;
 import com.iesmm.domohome.Modelo.TempHumedadModel;
 import com.iesmm.domohome.Modelo.UsuarioModel;
 
@@ -660,5 +661,74 @@ public class DAOImpl implements DAO {
             e.printStackTrace();
         }
         return lista;
+    }
+
+    @Override
+    public Boolean insertarMedida(TempHumedadModel thModel) {
+        Boolean correcto = false;
+        String url = URL_BASE + "/temp_humedad/insertarMedida";
+        MediaType tipo = MediaType.parse("application/json; charset=utf-8");
+
+        // Convertimos el objeto TempHumedadModel a JSON usando GSON
+        Gson gson = new GsonBuilder().create();
+        String thModelJSON = gson.toJson(thModel);
+        RequestBody cuerpo = RequestBody.create(thModelJSON, tipo);
+        Request request = new Request.Builder().url(url).post(cuerpo).build();
+
+        try {
+            // Ejecutamos la peticion y obtenemos la respuesta
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()){
+                if (response.body().string().equalsIgnoreCase("true")){
+                    correcto = true;
+                }
+            }
+        }
+        catch (IOException e) {
+            logger.severe("Error en la E/S al hacer la peticion HTTP");
+        }
+        catch (Exception e) {
+            logger.severe("Error: " + e.getMessage());
+        }
+
+        return correcto;
+    }
+
+    @Override
+    public SensorModel getSensorUsuario(UsuarioModel usuario) {
+        SensorModel sensor = null;
+        // Preparamos la peticion
+        String url = URL_BASE + "/sensores/getSensorUsuario";
+        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+
+        // Convertimos el objeto UsuarioModel a JSON usando GSON
+        Gson gson = new GsonBuilder().create();
+        String usuarioJSON = gson.toJson(usuario);
+        RequestBody cuerpo = RequestBody.create(usuarioJSON, mediaType);
+        Request request = new Request.Builder().url(url).post(cuerpo).build();
+
+        // Ejecutamos la peticion y obtenemos la respuesta
+        try {
+            Response response = client.newCall(request).execute();
+            // Si la respuesta es correcta, comprobamos la contraseña
+            if (response.isSuccessful()) {
+                String respuesta = response.body().string();
+                if (respuesta != null && !respuesta.equals("")) {
+                    JSONObject sensorJSON = new JSONObject(respuesta);
+                     sensor = new SensorModel();
+                     sensor.setIdSensor(sensorJSON.getInt("idSensor"));
+                     sensor.setPin(sensorJSON.getInt("pin"));
+                     sensor.setTipo(sensorJSON.getString("tipo"));
+                     sensor.setIdCasa(sensorJSON.getInt("idCasa"));
+                }
+            }
+        } catch (IOException e) {
+            logger.severe("Error en la E/S al hacer la peticion HTTP");
+        } catch (Exception e) {
+            logger.severe("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return sensor;
     }
 }

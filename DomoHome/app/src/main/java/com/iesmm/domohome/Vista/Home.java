@@ -1,6 +1,7 @@
 package com.iesmm.domohome.Vista;
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,23 +11,30 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.iesmm.domohome.DAO.DAO;
 import com.iesmm.domohome.DAO.DAOImpl;
 import com.iesmm.domohome.Modelo.CasaModel;
+import com.iesmm.domohome.Modelo.SensorModel;
+import com.iesmm.domohome.Modelo.TempHumedadModel;
 import com.iesmm.domohome.Modelo.UsuarioModel;
 import com.iesmm.domohome.R;
 
+import java.text.ParseException;
+import java.time.Instant;
+import java.util.Date;
 import java.util.logging.Logger;
 
-public class Home extends Fragment {
+public class Home extends Fragment implements View.OnClickListener {
 
     private TextView temp, humedad, nombreCasa, codInvitacion;
     private Logger logger;
     private UsuarioModel usuario;
     AsyncTempHumedad asyncTempHumedad;
     AsyncCargaCasa asyncCargaCasa;
+    private Button btnGuardaMedida;
 
     private DAO dao;
 
@@ -61,13 +69,15 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Inicializamos los TextView(se ponen en el onviewcreated porque en el oncreate todavia no se ha inicializado la vista y el metodo getview devuelve null
-        temp = (TextView) view.findViewById(R.id.tvTemperatura);
-        humedad = (TextView) view.findViewById(R.id.tvHumedad);
-        nombreCasa = (TextView) view.findViewById(R.id.tvCasa);
-        codInvitacion = (TextView) view.findViewById(R.id.tvInvitacion);
+        // Inicializamos componentes del layout(se ponen en el onviewcreated porque en el oncreate todavia no se ha inicializado la vista y el metodo getview devuelve null
+        temp = view.findViewById(R.id.tvTemperatura);
+        humedad = view.findViewById(R.id.tvHumedad);
+        nombreCasa = view.findViewById(R.id.tvCasa);
+        codInvitacion = view.findViewById(R.id.tvInvitacion);
+        btnGuardaMedida = view.findViewById(R.id.btnGuardaMedida);
 
-
+        // Agregamos el listener al boton
+        btnGuardaMedida.setOnClickListener(this);
     }
 
     @Override
@@ -114,6 +124,17 @@ public class Home extends Fragment {
         }
         if (asyncTempHumedad != null || asyncTempHumedad.getStatus() == AsyncTask.Status.RUNNING){
             asyncTempHumedad.cancel(true);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        switch (id) {
+            case R.id.btnGuardaMedida:
+                AsyncGuardaMedida asyncGuardaMedida = new AsyncGuardaMedida();
+                asyncGuardaMedida.execute();
+                break;
         }
     }
 
@@ -164,6 +185,31 @@ public class Home extends Fragment {
                 logger.severe("Error al obtener la temperatura y la humedad");
             }
         }
+    }
 
+    private class AsyncGuardaMedida extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                DAO dao = new DAOImpl();
+                SensorModel sensor = dao.getSensorUsuario(usuario);
+                TempHumedadModel thModel = new TempHumedadModel();
+                thModel.setIdSensor(1);
+                thModel.setTemp(Double.parseDouble(temp.getText().toString()));
+                thModel.setHumedad(Double.parseDouble(humedad.getText().toString()));
+                thModel.setFecha_hora(String.valueOf(new Date().getTime()));
+                thModel.setIdSensor(sensor.getIdSensor());
+
+                dao.insertarMedida(thModel);
+            }
+            catch (NumberFormatException e) {
+                logger.severe("Error al parsear la temperatura y humedad");
+            }
+            catch (Exception e) {
+                logger.severe("Error: " + e.getMessage());
+            }
+            return null;
+        }
     }
 }

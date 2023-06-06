@@ -1820,6 +1820,7 @@
     <string name="code">Invite code</string>
     <string name="code_house">Do you have an invitation code or do you want to create a new home?</string>
     <string name="date">Date*</string>
+    <string name="date_title">Date:</string>
     <string name="delete_device">Delete Device</string>
     <string name="delete_routine">Delete Routine</string>
     <string name="delete_user">Delete User</string>
@@ -1842,6 +1843,7 @@
     <string name="fab_transformation_sheet_behavior" translatable="false">com.google.android.material.transformation.FabTransformationSheetBehavior</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">com.google.android.material.behavior.HideBottomViewOnScrollBehavior</string>
     <string name="home">Home</string>
+    <string name="humidity">Humidity:</string>
     <string description="Content description for an icon that appears in the title area of a dialog" name="icon_content_description">Dialog Icon</string>
     <string name="input_code">Enter the invitation code</string>
     <string name="input_name">Enter the house name</string>
@@ -1883,6 +1885,7 @@
     <string description="Suffix for time in 12-hour standard, after noon. [CHAR_LIMIT=2]" name="material_timepicker_pm">PM</string>
     <string description="Title for the dialog with a time picker. [CHAR_LIMIT=32]" name="material_timepicker_select_time">Select time</string>
     <string name="material_timepicker_text_input_mode_description">Switch to text input mode for the time input.</string>
+    <string name="measures">Measures</string>
     <string name="message_delete_2">The action you are about to take is irreversible</string>
     <string name="message_delete_device">Are you sure you want to delete the device?</string>
     <string name="message_delete_routine">Are you sure you want to delete the routine?</string>
@@ -1977,6 +1980,7 @@
     <string name="routine_registered">Routine registered Successfully</string>
     <string name="routine_successfully_delete">The routine has been deleted successfully</string>
     <string name="routines">Routines</string>
+    <string name="save_measure">Save Measure</string>
     <string name="search_menu_title">Search</string>
     <string name="searchbar_scrolling_view_behavior" translatable="false">
     com.google.android.material.search.SearchBar$ScrollingViewBehavior
@@ -1989,6 +1993,7 @@
     <string name="side_sheet_behavior" translatable="false">com.google.android.material.sidesheet.SideSheetBehavior</string>
     <string name="starting_measurement">Starting Measurement</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="temp">Temp:</string>
     <string name="temp_humidity_sensor">Temp-Humidity Sensor</string>
     <string name="time">Time*</string>
     <string name="type">Type*</string>

@@ -8,6 +8,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -827,6 +828,11 @@ public class DAOImpl implements DAO {
             // Insertamos la medida
             String sql = "INSERT INTO medidas_temperatura_humedad(id_medida, temperatura, humedad, fecha_hora, id_sensor) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement statement = conexion.prepareStatement(sql);
+            statement.setInt(1, thModel.getIdMedida());
+            statement.setDouble(2, thModel.getTemp());
+            statement.setDouble(3, thModel.getHumedad());
+            statement.setTimestamp(4, new Timestamp(Long.parseLong(thModel.getFecha_hora())));
+            statement.setInt(5, thModel.getIdSensor());
 
             statement.executeUpdate();
 

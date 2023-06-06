@@ -69,5 +69,6 @@
     <string name="measures">Measures</string>
     <string name="temp">Temp:</string>
     <string name="humidity">Humidity:</string>
-    <string name="date">Date:</string>
+    <string name="date_title">Date:</string>
+    <string name="save_measure">Save Measure</string>
 </resources>

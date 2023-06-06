@@ -2760,6 +2760,7 @@ drawable material_ic_keyboard_arrow_previous_black_24dp
 drawable material_ic_keyboard_arrow_right_black_24dp
 drawable material_ic_menu_arrow_down_black_24dp
 drawable material_ic_menu_arrow_up_black_24dp
+drawable medidas
 drawable menu
 drawable mtrl_bottomsheet_drag_handle
 drawable mtrl_checkbox_button
@@ -2923,6 +2924,7 @@ id bounceStart
 id btnActualiza
 id btnAnyadeDispositivo
 id btnAnyadeRutina
+id btnGuardaMedida
 id btnLogin
 id btnRegister
 id buttonPanel
@@ -3106,6 +3108,7 @@ id material_timepicker_ok_button
 id material_timepicker_view
 id material_value_index
 id matrix
+id medidas
 id message
 id middle
 id mini
@@ -3145,6 +3148,7 @@ id nav_edit_user
 id nav_home
 id nav_logout
 id nav_manage_users
+id nav_medidas
 id nav_routines
 id nav_view
 id navigation_bar_item_active_indicator_view
@@ -3201,6 +3205,7 @@ id rounded
 id routines
 id row_index_key
 id rvDispositivos
+id rvMedidas
 id rvRoutines
 id save_non_transition_alpha
 id save_overlay_view
@@ -3333,13 +3338,16 @@ id tvActualizaUsuarios
 id tvCasa
 id tvDispositivosInteligentes
 id tvEditarUsuario
+id tvFechaHora
 id tvHumedad
 id tvInvitacion
 id tvLogin
+id tvMedidas
 id tvNuevaRutina
 id tvNuevoDispositivo
 id tvRegister
 id tvRoutines
+id tvTemp
 id tvTemperatura
 id tvUsuarios
 id txtFecha_Hora
@@ -3500,9 +3508,11 @@ layout fragment_dispositivos_inteligentes
 layout fragment_editar_usuario
 layout fragment_home
 layout fragment_manage_users
+layout fragment_medidas
 layout fragment_rutinas
 layout fragment_update_user
 layout item_dispositivo
+layout item_medida
 layout item_rutina
 layout item_spinner
 layout item_usuario
@@ -3627,6 +3637,7 @@ string close_nav
 string code
 string code_house
 string date
+string date_title
 string delete_device
 string delete_routine
 string delete_user
@@ -3647,6 +3658,7 @@ string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string hide_bottom_view_on_scroll_behavior
 string home
+string humidity
 string icon_content_description
 string input_code
 string input_name
@@ -3688,6 +3700,7 @@ string material_timepicker_minute
 string material_timepicker_pm
 string material_timepicker_select_time
 string material_timepicker_text_input_mode_description
+string measures
 string message_delete_2
 string message_delete_device
 string message_delete_routine
@@ -3776,6 +3789,7 @@ string routine_not_registered
 string routine_registered
 string routine_successfully_delete
 string routines
+string save_measure
 string search_menu_title
 string searchbar_scrolling_view_behavior
 string searchview_clear_text_content_description
@@ -3786,6 +3800,7 @@ string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string starting_measurement
 string status_bar_notification_info_overflow
+string temp
 string temp_humidity_sensor
 string time
 string type

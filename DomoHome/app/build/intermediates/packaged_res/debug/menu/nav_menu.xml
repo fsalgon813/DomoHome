@@ -25,6 +25,12 @@
             android:iconTint="@null"/>
 
         <item
+            android:id="@+id/nav_medidas"
+            android:icon="@drawable/medidas"
+            android:title="@string/measures"
+            android:iconTint="@null"/>
+
+        <item
             android:title="@string/settings">
             <menu>
                 <item
