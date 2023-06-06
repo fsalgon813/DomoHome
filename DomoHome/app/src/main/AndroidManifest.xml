@@ -18,6 +18,9 @@
             android:name=".Vista.MainActivity"
             android:exported="false" />
         <activity
+            android:name=".Vista.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".Vista.Login"
             android:exported="true">
             <intent-filter>
@@ -27,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Vista.Register"
+            android:name=".Vista.Registro"
             android:exported="true" />
         <activity
             android:name=".Vista.Configuracion"

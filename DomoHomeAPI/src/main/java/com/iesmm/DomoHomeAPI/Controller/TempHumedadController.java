@@ -1,14 +1,19 @@
 package com.iesmm.DomoHomeAPI.Controller;
 
+import com.iesmm.DomoHomeAPI.DAO.DAO;
+import com.iesmm.DomoHomeAPI.DAO.DAOImpl;
 import com.iesmm.DomoHomeAPI.Model.TempHumedadModel;
+import com.iesmm.DomoHomeAPI.Model.UsuarioModel;
 import com.iesmm.DomoHomeAPI.Utils.ThreadTempHumedad;
 import jakarta.annotation.PostConstruct;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -16,6 +21,7 @@ import java.util.logging.Logger;
 public class TempHumedadController {
 
     private TempHumedadModel thModel = new TempHumedadModel();
+    private DAO dao = new DAOImpl();
 
     private Logger logger = Logger.getLogger("temp_humedad_controller");
 
@@ -42,4 +48,15 @@ public class TempHumedadController {
         return String.valueOf(thModel.getHumedad());
     }
 
+    @PostMapping(value = "/getMedidasUsuario", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<TempHumedadModel> getMedidasUsuario(@RequestBody UsuarioModel usuario) {
+        return dao.listarMedidasUsuario(usuario.getId());
+    }
+
+    @PostMapping(value = "/insertarMedida", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Boolean insertarMedida(@RequestBody TempHumedadModel th) {
+        return dao.insertarMedida(th);
+    }
 }

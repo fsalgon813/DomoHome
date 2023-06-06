@@ -12,30 +12,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.iesmm.domohome.Controlador.Controlador;
+import com.iesmm.domohome.DAO.DAO;
+import com.iesmm.domohome.DAO.DAOImpl;
 import com.iesmm.domohome.Modelo.CasaModel;
+import com.iesmm.domohome.Modelo.UsuarioModel;
 import com.iesmm.domohome.R;
 
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.logging.Logger;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class Home extends Fragment {
 
     private TextView temp, humedad, nombreCasa, codInvitacion;
     private Logger logger;
-    private String username = "";
+    private UsuarioModel usuario;
     AsyncTempHumedad asyncTempHumedad;
     AsyncCargaCasa asyncCargaCasa;
 
-    private Controlador controlador;
+    private DAO dao;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,11 +37,11 @@ public class Home extends Fragment {
         logger = Logger.getLogger("Home");;
 
         // Inicializamos el controlador
-        controlador = new Controlador();
+        dao = new DAOImpl();
 
         // Cargamos el usuario que se ha logueado
-        username = cargaUsuario();
-        logger.info("Usuario logueado: " + username);
+        usuario = cargaUsuario();
+        logger.info("Usuario logueado: " + usuario.getUsername());
 
         // Se inicializan las AsyncTask
         asyncCargaCasa = new AsyncCargaCasa();
@@ -91,13 +84,13 @@ public class Home extends Fragment {
 
 
 
-    public String cargaUsuario() {
-        String username = "";
+    public UsuarioModel cargaUsuario() {
+        UsuarioModel userTemp = null;
         Bundle b = this.getActivity().getIntent().getExtras();
         if (b != null){
-            username = b.getString("username");
+            userTemp = (UsuarioModel) b.getSerializable("user");
         }
-        return username;
+        return userTemp;
     }
 
     private void cargaAsyncTasks() {
@@ -128,7 +121,7 @@ public class Home extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            publishProgress(controlador.getCasa(username));
+            publishProgress(dao.getCasa(usuario.getUsername()));
             return null;
         }
 
@@ -148,9 +141,10 @@ public class Home extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
+
             // Mientras no se cancele la tarea asincrona, coge la temperatura y la humedad
             while (!isCancelled()) {
-                publishProgress( controlador.getTemp(), controlador.getHumedad());
+                publishProgress( dao.getTemp(), dao.getHumedad());
                 try {
                     Thread.sleep(DELAY);
                 } catch (InterruptedException e) {

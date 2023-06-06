@@ -1,11 +1,43 @@
 package com.iesmm.DomoHomeAPI.Model;
 
-public class DispositivosModel {
+import java.io.Serializable;
+
+public class DispositivosModel implements Serializable {
+
+    public enum Marca {
+        SAMSUNG, TP_LINK;
+
+        @Override
+        public String toString() {
+            switch (this) {
+                case SAMSUNG:
+                    return "SAMSUNG";
+                case TP_LINK:
+                    return "TP_LINK";
+            }
+            return super.toString();
+        }
+    }
+    public enum Tipo {
+        TV, BOMBILLA;
+
+        @Override
+        public String toString() {
+            switch (this) {
+                case TV:
+                    return "TV";
+                case BOMBILLA:
+                    return "BOMBILLA";
+            }
+            return super.toString();
+        }
+    }
+
     int idDispositivo;
     String nombre;
     String ip;
-    String tipo;
-    String marca;
+    Tipo tipo;
+    Marca marca;
     String usuarioServicio;
     String passwdServicio;
     int idUsuario;
@@ -18,22 +50,11 @@ public class DispositivosModel {
         this.idDispositivo = idDispositivo;
         this.nombre = nombre;
         this.ip = ip;
-        this.tipo = tipo;
-        this.marca = marca;
+        this.tipo = StringToTipo(tipo);
+        this.marca = StringToMarca(marca);
         this.usuarioServicio = usuarioServicio;
         this.passwdServicio = passwdServicio;
         this.idUsuario = idUsuario;
-    }
-
-    public DispositivosModel(DispositivosModel dispositivo){
-        this.idDispositivo = dispositivo.getIdDispositivo();
-        this.nombre = dispositivo.getNombre();
-        this.ip = dispositivo.getIp();
-        this.tipo = dispositivo.getTipo();
-        this.marca = dispositivo.getMarca();
-        this.usuarioServicio = dispositivo.getUsuarioServicio();
-        this.passwdServicio = dispositivo.getPasswdServicio();
-        this.idUsuario = dispositivo.getIdUsuario();
     }
 
     public int getIdDispositivo() {
@@ -60,20 +81,20 @@ public class DispositivosModel {
         this.ip = ip;
     }
 
-    public String getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        this.tipo = StringToTipo(tipo);
     }
 
-    public String getMarca() {
+    public Marca getMarca() {
         return marca;
     }
 
     public void setMarca(String marca) {
-        this.marca = marca;
+        this.marca = StringToMarca(marca);
     }
 
     public String getUsuarioServicio() {
@@ -107,4 +128,27 @@ public class DispositivosModel {
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
+
+    public Tipo StringToTipo(String tipo){
+        switch (tipo.toUpperCase()){
+            case "TV":
+                return Tipo.TV;
+            case "BOMBILLA":
+                return Tipo.BOMBILLA;
+            default:
+                return null;
+        }
+    }
+
+    public Marca StringToMarca(String marca){
+        switch (marca.toUpperCase()){
+            case "SAMSUNG":
+                return Marca.SAMSUNG;
+            case "TP_LINK":
+                return Marca.TP_LINK;
+            default:
+                return null;
+        }
+    }
+
 }

@@ -6,23 +6,20 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 public class ThreadOnOffTV implements Runnable {
-    public enum Marca {SAMSUNG}
-    private Marca marca;
     private Logger logger;
-    String ip;
+    DispositivosModel dispositivo;
 
-    public ThreadOnOffTV(Marca marca, DispositivosModel dispositivo) {
-        this.marca = marca;
+    public ThreadOnOffTV(DispositivosModel dispositivo) {
         logger = Logger.getLogger("on_off_tv_thread");
-        this.ip = dispositivo.getIp();
+        this.dispositivo = dispositivo;
     }
 
     @Override
     public void run() {
-        if (marca.equals(Marca.SAMSUNG)){
+        if (dispositivo.getTipo().equals(DispositivosModel.Tipo.TV) && dispositivo.getMarca().equals(DispositivosModel.Marca.SAMSUNG)){
             try {
                 // Ejecutamos el script de python que enciende/apaga la tv
-                Process p = Runtime.getRuntime().exec("python3 ./scripts/on_off_samsungtv.py " + ip);
+                Process p = Runtime.getRuntime().exec("python3 ./scripts/on_off_samsungtv.py " + dispositivo.getIp());
             }
             catch(IOException e){
             logger.severe("Error en la E/S al ejecutar el script de lectura de temperatura y humedad");

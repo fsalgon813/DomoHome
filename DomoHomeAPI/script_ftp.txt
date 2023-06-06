@@ -1,0 +1,9 @@
+open
+192.168.0.89
+user
+pi
+pi
+prompt
+mdelete DomoHomeAPI-0.0.1-SNAPSHOT.jar
+send ./target/DomoHomeAPI-0.0.1-SNAPSHOT.jar DomoHomeAPI-0.0.1-SNAPSHOT.jar
+quit

@@ -46,12 +46,14 @@ CREATE TABLE dispositivos_inteligentes(
     passwd_servicio VARCHAR(50),
     id_usuario INT NOT NULL,
     CONSTRAINT FK_dispositivos_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
-    CONSTRAINT CHK_tipo CHECK (tipo LIKE 'Bombilla' OR tipo LIKE 'tv'),
-    CONSTRAINT CHK_marca CHECK (marca LIKE 'tp_link' OR marca LIKE 'samsung')
+    CONSTRAINT CHK_tipo_dispositivo CHECK (tipo LIKE 'bombilla' OR tipo LIKE 'tv'),
+    CONSTRAINT CHK_marca_dispositivo CHECK (marca LIKE 'tp_link' OR marca LIKE 'samsung')
 );
 CREATE TABLE rutinas(
     id_rutina INT PRIMARY KEY,
     fecha_hora TIMESTAMP NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
     id_dispositivo INT NOT NULL,
-    CONSTRAINT FK_rutinas_dispositivo FOREIGN KEY (id_dispositivo) REFERENCES dispositivos_inteligentes(id_dispositivo)
+    CONSTRAINT FK_rutinas_dispositivo FOREIGN KEY (id_dispositivo) REFERENCES dispositivos_inteligentes(id_dispositivo),
+    CONSTRAINT CHK_tipo_rutina CHECK (tipo LIKE 'encender' OR tipo LIKE 'apagar' OR tipo LIKE 'guardar_medida')
 );

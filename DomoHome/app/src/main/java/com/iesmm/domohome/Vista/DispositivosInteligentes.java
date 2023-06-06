@@ -17,8 +17,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.iesmm.domohome.Controlador.AdaptadorDispositivos;
-import com.iesmm.domohome.Controlador.Controlador;
+import com.iesmm.domohome.DAO.DAOImpl;
 import com.iesmm.domohome.Modelo.DispositivoModel;
+import com.iesmm.domohome.Modelo.UsuarioModel;
 import com.iesmm.domohome.R;
 
 import java.util.ArrayList;
@@ -26,11 +27,11 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class DispositivosInteligentes extends Fragment implements View.OnClickListener {
-
     private RecyclerView rv;
     private Button btnAnyadirDispositivo;
-    private List<DispositivoModel> dispositivos = new ArrayList<DispositivoModel>();
+    private List<DispositivoModel> dispositivos = new ArrayList<>();
     private Logger logger;
+    UsuarioModel usuario = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,9 @@ public class DispositivosInteligentes extends Fragment implements View.OnClickLi
 
         // Inicializamos el logger
         logger = Logger.getLogger("DispositivosInteligentes");
+
+        // Cargamos el usuario
+        usuario = cargaUsuario();
     }
 
     @Override
@@ -69,19 +73,25 @@ public class DispositivosInteligentes extends Fragment implements View.OnClickLi
         switch (id){
             case R.id.btnAnyadeDispositivo:
                 // Cambiamos de fragment al de añadir dispositivo
-                Fragment fragment = new AnyadirDispositivo();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AnyadirDispositivo()).commit();
                 break;
         }
+    }
+
+    public UsuarioModel cargaUsuario() {
+        UsuarioModel userTemp = null;
+        Bundle b = this.getActivity().getIntent().getExtras();
+        if (b != null){
+            userTemp = (UsuarioModel) b.getSerializable("user");
+        }
+        return userTemp;
     }
 
     private class AsyncCargarDispositivos extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
-            Controlador controlador = new Controlador();
-            dispositivos = controlador.getDispositivos();
+            DAOImpl dao = new DAOImpl();
+            dispositivos = dao.getDispositivosUsuario(usuario);
             publishProgress();
             return null;
         }

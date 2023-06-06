@@ -3,20 +3,38 @@ package com.iesmm.domohome.Modelo;
 import java.io.Serializable;
 
 public class UsuarioModel implements Serializable {
+
+    public enum Rol {
+        USUARIO, ADMIN;
+
+        @Override
+        public String toString() {
+            switch (this) {
+                case USUARIO:
+                    return "USUARIO";
+                case ADMIN:
+                    return "ADMIN";
+            }
+            return super.toString();
+        }
+    }
+
     private int id;
     private String nombre;
     private String username;
     private String password;
+    private Rol rol;
     private int id_casa;
 
     public UsuarioModel() {
     }
 
-    public UsuarioModel(int id, String nombre, String username, String password, int id_casa) {
+    public UsuarioModel(int id, String nombre, String username, String password, String rol, int id_casa) {
         this.id = id;
         this.nombre = nombre;
         this.username = username;
         this.password = password;
+        this.rol = StringToRol(rol);
         this.id_casa = id_casa;
     }
 
@@ -59,5 +77,23 @@ public class UsuarioModel implements Serializable {
     public void setId_casa(int id_casa) {
         this.id_casa = id_casa;
     }
-}
 
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = StringToRol(rol);
+    }
+
+    public Rol StringToRol(String rol){
+        switch (rol.toUpperCase()){
+            case "USUARIO":
+                return Rol.USUARIO;
+            case "ADMIN":
+                return Rol.ADMIN;
+            default:
+                return null;
+        }
+    }
+}

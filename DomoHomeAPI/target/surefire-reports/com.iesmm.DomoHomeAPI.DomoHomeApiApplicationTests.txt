@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.iesmm.DomoHomeAPI.DomoHomeApiApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.553 s - in com.iesmm.DomoHomeAPI.DomoHomeApiApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.141 s - in com.iesmm.DomoHomeAPI.DomoHomeApiApplicationTests

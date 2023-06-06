@@ -33,6 +33,9 @@
             android:name="com.iesmm.domohome.Vista.MainActivity"
             android:exported="false" />
         <activity
+            android:name="com.iesmm.domohome.Vista.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name="com.iesmm.domohome.Vista.Login"
             android:exported="true" >
             <intent-filter>
@@ -42,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.iesmm.domohome.Vista.Register"
+            android:name="com.iesmm.domohome.Vista.Registro"
             android:exported="true" />
         <activity
             android:name="com.iesmm.domohome.Vista.Configuracion"

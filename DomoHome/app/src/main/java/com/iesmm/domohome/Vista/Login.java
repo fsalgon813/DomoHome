@@ -11,19 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.iesmm.domohome.Controlador.Controlador;
+import com.iesmm.domohome.DAO.DAOImpl;
+import com.iesmm.domohome.Modelo.UsuarioModel;
 import com.iesmm.domohome.R;
 
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.logging.Logger;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,7 +23,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private TextView tvRegister;
     private Button btnLogin;
     private Logger logger;
-    private Controlador controlador;
+    private UsuarioModel usuario = null;
 
 
     @Override
@@ -51,9 +43,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         // Inicializamos el logger
         logger = Logger.getLogger("Login");
-
-        // Inicializamos el controlador
-        controlador = new Controlador();
     }
 
     @Override
@@ -61,12 +50,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         int id = view.getId();
         switch (id){
             case R.id.tvRegister:
-                Intent i = new Intent(getApplicationContext(), Register.class);
+                Intent i = new Intent(getApplicationContext(), Registro.class);
                 startActivity(i);
                 break;
             case R.id.btnLogin:
-                comprobarUsernameAsync comprobarUsernameAsync = new comprobarUsernameAsync();
-                comprobarUsernameAsync.execute(etUsername.getText().toString(), etPasswd.getText().toString());
+                // Comprobamos que no esten vacios los campos de usuario y contraseña
+                if (!etUsername.getText().toString().isEmpty() && !etPasswd.getText().toString().isEmpty()) {
+                    comprobarUsernameAsync comprobarUsernameAsync = new comprobarUsernameAsync();
+                    comprobarUsernameAsync.execute(etUsername.getText().toString(), etPasswd.getText().toString());
+                }
+                else {
+                    Snackbar.make(findViewById(R.id.login), getString(R.string.required_fields), Snackbar.LENGTH_LONG).show();
+                }
                 break;
         }
     }
@@ -75,10 +70,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         @Override
         protected Void doInBackground(String... strings) {
             Boolean correcto = false;
-            if (controlador.verificaUsuario(strings[0], strings[1])){
-                correcto = true;
-            } else {
-                Snackbar.make(findViewById(R.id.login), getString(R.string.error_login), Snackbar.LENGTH_LONG).show();
+            DAOImpl dao = new DAOImpl();
+            // Comprobamos el usuario(le quitamos los espacios del principio y del final)
+            usuario = dao.getUsuarioUsername(strings[0].trim());
+            // Si el usuario no es null quiere decir que el username es correcto
+            if (usuario != null){
+                // Comprobamos que la contraseña es igual
+                if (usuario.getPassword().equals(strings[1])){
+                    correcto = true;
+                }
             }
             publishProgress(correcto);
             return null;
@@ -88,10 +88,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         protected void onProgressUpdate(Boolean... values) {
             if (values[0] == true){
                 Bundle b = new Bundle();
-                b.putString("username", etUsername.getText().toString());
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                i.putExtras(b);
-                startActivity(i);
+                b.putSerializable("user", usuario);
+                if (usuario.getRol().equals(UsuarioModel.Rol.ADMIN)) {
+                    Intent i = new Intent(getApplicationContext(), AdminActivity.class);
+                    i.putExtras(b);
+                    startActivity(i);
+                }
+                else {
+                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    i.putExtras(b);
+                    startActivity(i);
+                }
+            }
+            else {
+                Snackbar.make(findViewById(R.id.login), getString(R.string.error_login), Snackbar.LENGTH_LONG).show();
             }
         }
     }

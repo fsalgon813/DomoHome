@@ -1,17 +1,21 @@
 package com.iesmm.domohome.Controlador;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.iesmm.domohome.DAO.DAO;
+import com.iesmm.domohome.DAO.DAOImpl;
 import com.iesmm.domohome.Modelo.DispositivoModel;
 import com.iesmm.domohome.R;
 
@@ -65,7 +69,7 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
             }
         }
 
-        // El onclick lo ponemos en una clase anonima para que se pueda acceder a la posicion
+        // Los listener los ponemos en clases anonima para que se pueda acceder a la posicion del dispositivo pulsado
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +87,36 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
                 }
             }
         });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                builder1.setTitle(context.getText(R.string.delete_device));
+                builder1.setMessage(context.getText(R.string.message_delete_device));
+                builder1.setPositiveButton(context.getText(R.string.accept), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
+                        builder2.setTitle(context.getText(R.string.delete_device));
+                        builder2.setMessage(context.getText(R.string.message_delete_2));
+                        builder2.setPositiveButton(context.getText(R.string.accept), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // Ejecutamos la tarea asincrona que elimina el dispositivo
+                                AsyncEliminarDispositivo asyncEliminarDispositivo = new AsyncEliminarDispositivo(view);
+                                asyncEliminarDispositivo.execute(position);
+                            }
+                        });
+                        builder2.setNegativeButton(context.getText(R.string.deny), null);
+                        builder2.show();
+                    }
+                });
+                builder1.setNegativeButton(context.getText(R.string.deny), null);
+                builder1.show();
+                return false;
+            }
+        });
     }
 
     @Override
@@ -94,8 +128,8 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
 
         @Override
         protected Void doInBackground(Integer... integers) {
-            Controlador controlador = new Controlador();
-            Boolean estado = controlador.getEstadoBombillaTpLink(listaDispositivos.get(integers[0]));
+            DAOImpl dao = new DAOImpl();
+            Boolean estado = dao.getEstadoBombillaTpLink(listaDispositivos.get(integers[0]));
             listaDispositivos.get(integers[0]).setEstado(estado);
             publishProgress(estado);
             return null;
@@ -105,17 +139,22 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
         protected void onProgressUpdate(Boolean... values) {
             // Si el estado es true, se llama al metodo notifyDataSetChanged() para que se
             // actualice el adaptador y asi se ponen los iconos encendidos o apagados
-            if (values[0]){
-                notifyDataSetChanged();
-            }
+            notifyDataSetChanged();
         }
     }
 
-    private class AsyncOnOffTvSamsung extends AsyncTask<Integer, Void, Void> {
+    private class AsyncOnOffTvSamsung extends AsyncTask<Integer, Boolean, Void> {
         @Override
         protected Void doInBackground(Integer... integers) {
-            Controlador controlador = new Controlador();
-            controlador.onoffTvSamsung(listaDispositivos.get(integers[0]));
+            try{
+                Thread.sleep(1500);
+            }
+            catch (InterruptedException e) {
+                System.out.println("asd");
+            }
+            DAOImpl dao = new DAOImpl();
+            Boolean correcto = dao.onoffTvSamsung(listaDispositivos.get(integers[0]));
+            publishProgress(correcto);
             return null;
         }
     }
@@ -123,23 +162,46 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
     private class AsyncOnOffBombillaTpLink extends AsyncTask<Integer, Integer, Void> {
         @Override
         protected Void doInBackground(Integer... integers) {
-            Controlador controlador = new Controlador();
-            controlador.onoffBombillaTpLink(listaDispositivos.get(integers[0]));
+            DAO dao = new DAOImpl();
+            dao.onoffBombillaTpLink(listaDispositivos.get(integers[0]));
             publishProgress(integers[0]);
+            return null;
+        }
+    }
+
+    private class AsyncEliminarDispositivo extends AsyncTask<Integer, Boolean, Void> {
+
+        View view;
+
+        public AsyncEliminarDispositivo(View view) {
+            this.view = view;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            DAO dao = new DAOImpl();
+            Boolean correcto = dao.eliminarDispositivo(listaDispositivos.get(integers[0]));
+            // Si se ha borrado correctamente, tambien lo quitamos de la lista
+            if (correcto) {
+                listaDispositivos.remove(listaDispositivos.get(integers[0]));
+            }
+            publishProgress(correcto);
             return null;
         }
 
         @Override
-        protected void onProgressUpdate(Integer... values) {
-            if(listaDispositivos.get(values[0]).getEstado()) {
-                Toast.makeText(context, context.getText(R.string.bulb_off), Toast.LENGTH_SHORT).show();
-                listaDispositivos.get(values[0]).setEstado(false);
+        protected void onProgressUpdate(Boolean... values) {
+            if (values[0]) {
+                // Actualizamos la lista
+                notifyDataSetChanged();
+
+                // Mostramos un mensaje indicando que se ha elimiando correctamente
+                Snackbar.make(view, context.getString(R.string.device_successfully_delete), Snackbar.LENGTH_LONG).show();
             }
             else {
-                Toast.makeText(context, context.getText(R.string.bulb_on), Toast.LENGTH_SHORT).show();
-                listaDispositivos.get(values[0]).setEstado(true);
+                // Mostramos un mensaje indicando que ha ocurrido un error al eliminar el dispositivo
+                Snackbar.make(view, context.getString(R.string.device_error_delete), Snackbar.LENGTH_LONG).show();
             }
-            notifyDataSetChanged();
         }
     }
 }

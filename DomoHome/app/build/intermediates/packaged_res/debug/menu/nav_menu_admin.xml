@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/casa"
+            android:title="@string/home"
+            android:iconTint="@null"/>
+
+        <item
+            android:id="@+id/nav_dispositivos"
+            android:icon="@drawable/dispositivos"
+            android:title="@string/devices"
+            android:iconTint="@null"/>
+
+        <item
+            android:id="@+id/nav_routines"
+            android:icon="@drawable/rutina"
+            android:title="@string/routines"
+            android:iconTint="@null"/>
+
+        <item
+            android:title="@string/settings">
+            <menu>
+                <item
+                    android:id="@+id/nav_edit_user"
+                    android:icon="@drawable/usuario"
+                    android:title="@string/edit_user"
+                    android:checkable="true"
+                    android:iconTint="@null"/>
+            </menu>
+        </item>
+
+        <item
+            android:title="@string/admin_options">
+            <menu>
+                <item
+                    android:id="@+id/nav_manage_users"
+                    android:icon="@drawable/usuario"
+                    android:title="@string/manage_users"
+                    android:checkable="true"
+                    android:iconTint="@null"/>
+            </menu>
+        </item>
+
+    </group>
+
+
+
+    <item
+        android:title="">
+        <menu
+            android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/cerrar_sesion"
+                android:title="@string/logout"
+                android:iconTint="@null"/>
+        </menu>
+    </item>
+
+</menu>

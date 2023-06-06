@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 
 import com.google.android.material.navigation.NavigationView;
+import com.iesmm.domohome.Modelo.UsuarioModel;
 import com.iesmm.domohome.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,6 +51,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_dispositivos:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DispositivosInteligentes()).commit();
+                break;
+            case R.id.nav_routines:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Rutinas()).commit();
+                break;
+            case R.id.nav_medidas:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Medidas()).commit();
+                break;
+            case R.id.nav_edit_user:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EditarUsuario()).commit();
                 break;
             case R.id.nav_logout:
                 Intent i = new Intent(this, Login.class);

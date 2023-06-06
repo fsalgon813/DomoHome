@@ -5,6 +5,8 @@ E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\
 E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Controller\CasaController.java
 E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\DAO\DAOImpl.java
 E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Model\CasaModel.java
+E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Controller\RutinasController.java
+E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Controller\SensoresController.java
 E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Model\TempHumedadModel.java
 E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Controller\UsuariosController.java
 E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Utils\Conexion.java
@@ -14,5 +16,6 @@ E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\
 E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Model\DispositivosModel.java
 E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Utils\ThreadOnOffBombilla.java
 E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Model\RegisterParams.java
+E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Model\RutinaModel.java
 E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Controller\TempHumedadController.java
 E:\Documentos\RepositorioGithub\DomoHomeAPI\src\main\java\com\iesmm\DomoHomeAPI\Model\UsuarioModel.java

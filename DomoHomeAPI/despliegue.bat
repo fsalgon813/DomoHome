@@ -1,0 +1,1 @@
+.\mvnw clean && .\mvnw dependency:tree && .\mvnw package && ftp -s:script_ftp.txt -n
