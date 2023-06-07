@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -52,6 +53,7 @@ public class Medidas extends Fragment {
 
         // Inicializamos los componentes del layout
         rv = view.findViewById(R.id.rvMedidas);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Cargamos las medidas del usuario
         AsyncCargarMedidas asyncCargarMedidas = new AsyncCargarMedidas();
@@ -72,7 +74,7 @@ public class Medidas extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             DAO dao = new DAOImpl();
-            medidas = dao.listarMedidasUsuario(usuario);
+            medidas = dao.listarMedidasUsuario(usuario, getContext());
             publishProgress();
             return null;
         }

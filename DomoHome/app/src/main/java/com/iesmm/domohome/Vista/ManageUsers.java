@@ -110,7 +110,7 @@ public class ManageUsers extends Fragment implements AdapterView.OnItemClickList
         @Override
         protected Void doInBackground(Void... voids) {
             DAO dao = new DAOImpl();
-            usuarios = dao.listarUsuarios();
+            usuarios = dao.listarUsuarios(getContext());
 
             // Si el id es el de el usuario logueado, lo eliminamos, para que no salga el en la lista
             for (int n = 0; n < usuarios.size(); n++) {
@@ -135,7 +135,7 @@ public class ManageUsers extends Fragment implements AdapterView.OnItemClickList
         @Override
         protected Void doInBackground(Integer... integers) {
             DAO dao = new DAOImpl();
-            Boolean correcto = dao.eliminarUsuario(usuarios.get(integers[0]));
+            Boolean correcto = dao.eliminarUsuario(usuarios.get(integers[0]), getContext());
             usuarios.remove(integers[0]);
             publishProgress(correcto);
             return null;

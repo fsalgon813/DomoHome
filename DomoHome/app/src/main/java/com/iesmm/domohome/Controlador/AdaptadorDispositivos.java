@@ -129,7 +129,7 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
         @Override
         protected Void doInBackground(Integer... integers) {
             DAOImpl dao = new DAOImpl();
-            Boolean estado = dao.getEstadoBombillaTpLink(listaDispositivos.get(integers[0]));
+            Boolean estado = dao.getEstadoBombillaTpLink(listaDispositivos.get(integers[0]), context);
             listaDispositivos.get(integers[0]).setEstado(estado);
             publishProgress(estado);
             return null;
@@ -153,7 +153,7 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
                 System.out.println("asd");
             }
             DAOImpl dao = new DAOImpl();
-            Boolean correcto = dao.onoffTvSamsung(listaDispositivos.get(integers[0]));
+            Boolean correcto = dao.onoffTvSamsung(listaDispositivos.get(integers[0]), context);
             publishProgress(correcto);
             return null;
         }
@@ -163,7 +163,7 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
         @Override
         protected Void doInBackground(Integer... integers) {
             DAO dao = new DAOImpl();
-            dao.onoffBombillaTpLink(listaDispositivos.get(integers[0]));
+            dao.onoffBombillaTpLink(listaDispositivos.get(integers[0]), context);
             publishProgress(integers[0]);
             return null;
         }
@@ -180,7 +180,7 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
         @Override
         protected Void doInBackground(Integer... integers) {
             DAO dao = new DAOImpl();
-            Boolean correcto = dao.eliminarDispositivo(listaDispositivos.get(integers[0]));
+            Boolean correcto = dao.eliminarDispositivo(listaDispositivos.get(integers[0]), context);
             // Si se ha borrado correctamente, tambien lo quitamos de la lista
             if (correcto) {
                 listaDispositivos.remove(listaDispositivos.get(integers[0]));

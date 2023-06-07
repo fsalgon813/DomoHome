@@ -1885,6 +1885,8 @@
     <string description="Suffix for time in 12-hour standard, after noon. [CHAR_LIMIT=2]" name="material_timepicker_pm">PM</string>
     <string description="Title for the dialog with a time picker. [CHAR_LIMIT=32]" name="material_timepicker_select_time">Select time</string>
     <string name="material_timepicker_text_input_mode_description">Switch to text input mode for the time input.</string>
+    <string name="measure_error_save">An error occurred while saving the measure</string>
+    <string name="measure_successfully_saved">The measure has been saved successfully</string>
     <string name="measures">Measures</string>
     <string name="message_delete_2">The action you are about to take is irreversible</string>
     <string name="message_delete_device">Are you sure you want to delete the device?</string>
@@ -1964,6 +1966,7 @@
     <string name="new_device">New Device</string>
     <string name="new_house">New House</string>
     <string name="new_routine">New Routine</string>
+    <string name="no_connection">There is no connection to the server</string>
     <string name="not_user_passwd">If it is a tp_link bulb, you need to fill in the username and password fields</string>
     <string name="open_nav">Open menu</string>
     <string name="password">Password*</string>

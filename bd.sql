@@ -53,7 +53,9 @@ CREATE TABLE rutinas(
     id_rutina INT PRIMARY KEY,
     fecha_hora TIMESTAMP NOT NULL,
     tipo VARCHAR(50) NOT NULL,
-    id_dispositivo INT NOT NULL,
+    id_dispositivo INT,
+    id_sensor INT,
     CONSTRAINT FK_rutinas_dispositivo FOREIGN KEY (id_dispositivo) REFERENCES dispositivos_inteligentes(id_dispositivo),
+    CONSTRAINT FK_rutinas_sensor FOREIGN KEY (id_sensor) REFERENCES sensores(id_sensor),
     CONSTRAINT CHK_tipo_rutina CHECK (tipo LIKE 'encender' OR tipo LIKE 'apagar' OR tipo LIKE 'guardar_medida')
 );

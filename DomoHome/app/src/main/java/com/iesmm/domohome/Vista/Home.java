@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.iesmm.domohome.DAO.DAO;
 import com.iesmm.domohome.DAO.DAOImpl;
 import com.iesmm.domohome.Modelo.CasaModel;
@@ -132,6 +133,10 @@ public class Home extends Fragment implements View.OnClickListener {
         int id = view.getId();
         switch (id) {
             case R.id.btnGuardaMedida:
+                // Paramos el hilo de la temperatura y la humedad para que se pueda iniciar el que guarda la medida
+                if (asyncTempHumedad != null || asyncTempHumedad.getStatus() == AsyncTask.Status.RUNNING){
+                    asyncTempHumedad.cancel(true);
+                }
                 AsyncGuardaMedida asyncGuardaMedida = new AsyncGuardaMedida();
                 asyncGuardaMedida.execute();
                 break;
@@ -142,7 +147,7 @@ public class Home extends Fragment implements View.OnClickListener {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            publishProgress(dao.getCasa(usuario.getUsername()));
+            publishProgress(dao.getCasa(usuario.getUsername(), getContext()));
             return null;
         }
 
@@ -165,7 +170,7 @@ public class Home extends Fragment implements View.OnClickListener {
 
             // Mientras no se cancele la tarea asincrona, coge la temperatura y la humedad
             while (!isCancelled()) {
-                publishProgress( dao.getTemp(), dao.getHumedad());
+                publishProgress(dao.getTemp(getContext()), dao.getHumedad(getContext()));
                 try {
                     Thread.sleep(DELAY);
                 } catch (InterruptedException e) {
@@ -187,21 +192,23 @@ public class Home extends Fragment implements View.OnClickListener {
         }
     }
 
-    private class AsyncGuardaMedida extends AsyncTask<Void, Void, Void> {
+    private class AsyncGuardaMedida extends AsyncTask<Void, Boolean, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
             try {
                 DAO dao = new DAOImpl();
-                SensorModel sensor = dao.getSensorUsuario(usuario);
+                SensorModel sensor = dao.getSensorUsuario(usuario, getContext());
                 TempHumedadModel thModel = new TempHumedadModel();
                 thModel.setIdSensor(1);
-                thModel.setTemp(Double.parseDouble(temp.getText().toString()));
-                thModel.setHumedad(Double.parseDouble(humedad.getText().toString()));
+                thModel.setTemp(Double.parseDouble(temp.getText().toString().split("º")[0]));
+                thModel.setHumedad(Double.parseDouble(humedad.getText().toString().split("%")[0]));
                 thModel.setFecha_hora(String.valueOf(new Date().getTime()));
                 thModel.setIdSensor(sensor.getIdSensor());
 
-                dao.insertarMedida(thModel);
+                Boolean correcto = dao.insertarMedida(thModel, getContext());
+
+                publishProgress(correcto);
             }
             catch (NumberFormatException e) {
                 logger.severe("Error al parsear la temperatura y humedad");
@@ -210,6 +217,21 @@ public class Home extends Fragment implements View.OnClickListener {
                 logger.severe("Error: " + e.getMessage());
             }
             return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Boolean... values) {
+            // Volvemos a iniciar el hilo de la temperatura y la humedad
+            if (asyncTempHumedad == null || asyncTempHumedad.getStatus() == AsyncTask.Status.FINISHED || asyncTempHumedad.getStatus() == AsyncTask.Status.PENDING) {
+                asyncTempHumedad = new AsyncTempHumedad();
+                asyncTempHumedad.execute();
+            }
+            if (values[0]) {
+                Snackbar.make(getView().findViewById(R.id.home), getString(R.string.measure_successfully_saved), Snackbar.LENGTH_LONG).show();
+            }
+            else {
+                Snackbar.make(getView().findViewById(R.id.home), getString(R.string.measure_error_save), Snackbar.LENGTH_LONG).show();
+            }
         }
     }
 }

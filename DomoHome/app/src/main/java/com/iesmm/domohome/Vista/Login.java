@@ -72,7 +72,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             Boolean correcto = false;
             DAOImpl dao = new DAOImpl();
             // Comprobamos el usuario(le quitamos los espacios del principio y del final)
-            usuario = dao.getUsuarioUsername(strings[0].trim());
+            usuario = dao.getUsuarioUsername(strings[0].trim(), Login.this.getApplicationContext());
             // Si el usuario no es null quiere decir que el username es correcto
             if (usuario != null){
                 // Comprobamos que la contraseña es igual

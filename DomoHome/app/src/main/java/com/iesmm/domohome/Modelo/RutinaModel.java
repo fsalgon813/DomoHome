@@ -23,15 +23,17 @@ public class RutinaModel {
     private String fecha_hora;
     private Tipo tipo;
     private int idDispositivo;
+    private int idSensor;
 
     public RutinaModel() {
     }
 
-    public RutinaModel(int idRutina, String fecha_hora, String tipo, int idDispositivo) {
+    public RutinaModel(int idRutina, String fecha_hora, String tipo, int idDispositivo, int idSensor) {
         this.idRutina = idRutina;
         this.fecha_hora = fecha_hora;
         this.tipo = StringToTipo(tipo);
         this.idDispositivo = idDispositivo;
+        this.idSensor = idSensor;
     }
 
     public int getIdRutina() {
@@ -64,6 +66,14 @@ public class RutinaModel {
 
     public void setIdDispositivo(int idDispositivo) {
         this.idDispositivo = idDispositivo;
+    }
+
+    public int getIdSensor() {
+        return idSensor;
+    }
+
+    public void setIdSensor(int idSensor) {
+        this.idSensor = idSensor;
     }
 
     public Tipo StringToTipo(String tipo) {

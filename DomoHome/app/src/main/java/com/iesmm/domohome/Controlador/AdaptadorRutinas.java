@@ -114,7 +114,7 @@ public class AdaptadorRutinas extends RecyclerView.Adapter<AdaptadorRutinas.View
             DAO dao = new DAOImpl();
 
             rutina = listaRutinas.get(integers[0]);
-            dispositivo = dao.getDispositivoId(rutina.getIdDispositivo());
+            dispositivo = dao.getDispositivoId(rutina.getIdDispositivo(), context);
             publishProgress();
             return null;
         }
@@ -122,17 +122,22 @@ public class AdaptadorRutinas extends RecyclerView.Adapter<AdaptadorRutinas.View
         @Override
         protected void onProgressUpdate(Void... values) {
             holder.txtFecha_Hora.setText(rutina.getFecha_hora());
-            holder.txtTitulo.setText(rutina.getTipo().toString() + " " + dispositivo.getNombre());
-            if (dispositivo.getTipo().equals(DispositivoModel.Tipo.TV)) {
-                holder.imgDispositivo.setImageResource(R.drawable.tv);
+            if (dispositivo != null) {
+                holder.txtTitulo.setText(rutina.getTipo().toString() + " " + dispositivo.getNombre());
+                if (dispositivo.getTipo().equals(DispositivoModel.Tipo.TV)) {
+                    holder.imgDispositivo.setImageResource(R.drawable.tv);
+                }
+                else if (dispositivo.getTipo().equals(DispositivoModel.Tipo.BOMBILLA)) {
+                    if (rutina.getTipo().equals(RutinaModel.Tipo.ENCENDER)) {
+                        holder.imgDispositivo.setImageResource(R.drawable.bombilla_encendida);
+                    }
+                    else {
+                        holder.imgDispositivo.setImageResource(R.drawable.bombilla_apagada);
+                    }
+                }
             }
-            else if (dispositivo.getTipo().equals(DispositivoModel.Tipo.BOMBILLA)) {
-                if (rutina.getTipo().equals(RutinaModel.Tipo.ENCENDER)) {
-                    holder.imgDispositivo.setImageResource(R.drawable.bombilla_encendida);
-                }
-                else {
-                    holder.imgDispositivo.setImageResource(R.drawable.bombilla_apagada);
-                }
+            else {
+                holder.txtTitulo.setText(rutina.getTipo().toString());
             }
         }
     }
@@ -148,7 +153,7 @@ public class AdaptadorRutinas extends RecyclerView.Adapter<AdaptadorRutinas.View
         @Override
         protected Void doInBackground(Integer... integers) {
             DAO dao = new DAOImpl();
-            Boolean correcto = dao.eliminarRutina(listaRutinas.get(integers[0]));
+            Boolean correcto = dao.eliminarRutina(listaRutinas.get(integers[0]), context);
             // Si se ha borrado correctamente, tambien lo quitamos de la lista
             if (correcto) {
                 listaRutinas.remove(listaRutinas.get(integers[0]));

@@ -1,22 +1,14 @@
 package com.iesmm.domohome.Controlador;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.iesmm.domohome.DAO.DAO;
-import com.iesmm.domohome.DAO.DAOImpl;
-import com.iesmm.domohome.Modelo.DispositivoModel;
 import com.iesmm.domohome.Modelo.TempHumedadModel;
 import com.iesmm.domohome.R;
 
@@ -54,8 +46,8 @@ public class AdaptadorMedidas extends RecyclerView.Adapter<AdaptadorMedidas.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TempHumedadModel thModel = medidas.get(position);
 
-        holder.tvTemp.setText(thModel.getTemp().toString());
-        holder.tvHumedad.setText(thModel.getHumedad().toString());
+        holder.tvTemp.setText(thModel.getTemp().toString() + "ºC");
+        holder.tvHumedad.setText(thModel.getHumedad().toString() + "%");
         holder.tvFechaHora.setText(thModel.getFecha_hora());
 
     }

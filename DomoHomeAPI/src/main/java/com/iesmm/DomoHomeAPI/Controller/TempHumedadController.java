@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 @RequestMapping("/temp_humedad")
 public class TempHumedadController {
 
-    private TempHumedadModel thModel = new TempHumedadModel();
+    private static TempHumedadModel thModel = new TempHumedadModel();
     private DAO dao = new DAOImpl();
 
     private Logger logger = Logger.getLogger("temp_humedad_controller");
@@ -37,14 +37,14 @@ public class TempHumedadController {
     // Devuelve un json con el valor de la temperatura
     @PostMapping(value = "/temp", produces= MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String getTemp() {
+    public static String getTemp() {
         return String.valueOf(thModel.getTemp());
     }
 
     // Devuelve un json con el valor de la humedad
     @PostMapping(value = "/humedad", produces = "application/json")
     @ResponseBody
-    public String getHumedad() {
+    public static String getHumedad() {
         return String.valueOf(thModel.getHumedad());
     }
 

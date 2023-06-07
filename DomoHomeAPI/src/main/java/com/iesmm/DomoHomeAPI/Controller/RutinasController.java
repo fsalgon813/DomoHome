@@ -5,6 +5,7 @@ import com.iesmm.DomoHomeAPI.DAO.DAOImpl;
 import com.iesmm.DomoHomeAPI.Model.DispositivosModel;
 import com.iesmm.DomoHomeAPI.Model.RutinaModel;
 import com.iesmm.DomoHomeAPI.Model.UsuarioModel;
+import com.iesmm.DomoHomeAPI.Utils.ThreadGuardaMedida;
 import com.iesmm.DomoHomeAPI.Utils.ThreadOnOffBombilla;
 import com.iesmm.DomoHomeAPI.Utils.ThreadOnOffTV;
 import jakarta.annotation.PostConstruct;
@@ -84,7 +85,8 @@ public class RutinasController {
                         }
                     }
                     else if (rutina.getTipo().equals(RutinaModel.Tipo.GUARDAR_MEDIDA)) {
-
+                        Thread thread = new Thread(new ThreadGuardaMedida(rutina.getIdSensor()));
+                        thread.start();
                     }
 
                     Boolean correcto = dao.eliminarRutina(rutina.getIdRutina());

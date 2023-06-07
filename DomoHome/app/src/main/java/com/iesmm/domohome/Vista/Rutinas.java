@@ -94,7 +94,7 @@ public class Rutinas extends Fragment implements View.OnClickListener {
         @Override
         protected Void doInBackground(Void... voids) {
             DAO dao = new DAOImpl();
-            rutinas = dao.getRutinas(usuario);
+            rutinas = dao.getRutinas(usuario, getContext());
             publishProgress();
             return null;
         }

@@ -118,7 +118,7 @@ public class AnyadirDispositivo extends Fragment implements View.OnClickListener
         protected Void doInBackground(Void... voids) {
             DAO dao = new DAOImpl();
             Boolean correcto = false;
-            correcto = dao.registraDispositivo(new DispositivoModel(0, etNombre.getText().toString(), etIp.getText().toString(), spTipo.getSelectedItem().toString(), spMarca.getSelectedItem().toString(), etUsuarioServicio.getText().toString().trim(), etPasswdServicio.getText().toString().trim(), usuario.getId()));
+            correcto = dao.registraDispositivo(new DispositivoModel(0, etNombre.getText().toString(), etIp.getText().toString(), spTipo.getSelectedItem().toString(), spMarca.getSelectedItem().toString(), etUsuarioServicio.getText().toString().trim(), etPasswdServicio.getText().toString().trim(), usuario.getId()), getContext());
             publishProgress(correcto);
             return null;
         }

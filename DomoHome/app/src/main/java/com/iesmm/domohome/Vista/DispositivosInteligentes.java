@@ -91,7 +91,7 @@ public class DispositivosInteligentes extends Fragment implements View.OnClickLi
         @Override
         protected Void doInBackground(Void... voids) {
             DAOImpl dao = new DAOImpl();
-            dispositivos = dao.getDispositivosUsuario(usuario);
+            dispositivos = dao.getDispositivosUsuario(usuario, getContext());
             publishProgress();
             return null;
         }

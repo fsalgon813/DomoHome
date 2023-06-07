@@ -351,7 +351,10 @@ public class DAOImpl implements DAO {
             conexion = Conexion.getConnection();
 
             // Generamos la consulta de los dispositivos inteligentes
-            String sql = "SELECT r.* FROM rutinas r JOIN dispositivos_inteligentes di ON r.id_dispositivo = di.id_dispositivo WHERE di.id_usuario = ?";
+            String sql = "SELECT r.* FROM rutinas r " +
+                    "LEFT JOIN dispositivos_inteligentes d ON r.id_dispositivo = d.id_dispositivo " +
+                    "LEFT JOIN sensores s ON r.id_sensor = s.id_sensor JOIN usuarios u ON u.id_usuario = d.id_usuario OR u.id_casa = s.id_casa " +
+                    "WHERE u.id_usuario = ?";
             PreparedStatement statement = conexion.prepareStatement(sql);
             statement.setInt(1, idUsuario);
 
@@ -440,13 +443,21 @@ public class DAOImpl implements DAO {
             // Creamos un simpedateformat para posteriormente parsear la fecha y hora a un timestamp
             SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-            String sql = "INSERT INTO rutinas (id_rutina, fecha_hora, tipo, id_dispositivo) VALUES(?, ?, ?, ?)";
+            String sql = "INSERT INTO rutinas (id_rutina, fecha_hora, tipo, id_dispositivo, id_sensor) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement statement = conexion.prepareStatement(sql);
 
             statement.setInt(1, generarIdRutina(conexion));
             statement.setTimestamp(2, new Timestamp(sdt.parse(rutina.getFecha_hora()).getTime()));
             statement.setString(3, rutina.getTipo().toString().toLowerCase());
-            statement.setInt(4, rutina.getIdDispositivo());
+            if (rutina.getIdDispositivo() < 0 && rutina.getIdRutina() >= 0) {
+                statement.setNull(4, Types.INTEGER);
+                statement.setInt(5, rutina.getIdSensor());
+                System.out.println(rutina.getIdSensor());
+            }
+            else if (rutina.getIdRutina() < 0 && rutina.getIdDispositivo() >= 0){
+                statement.setInt(4, rutina.getIdDispositivo());
+                statement.setNull(5, Types.INTEGER);
+            }
 
             statement.executeUpdate();
 
@@ -455,7 +466,7 @@ public class DAOImpl implements DAO {
 
         }
         catch(IOException e) {
-            logger.severe("Error en la E/S al insertar un nuevo dispositivo inteligente. Mensaje: " + e.getMessage());
+            logger.severe("Error en la E/S al . Mensaje: " + e.getMessage());
             rollback(conexion);
         }
         catch (SQLException e){
@@ -785,7 +796,7 @@ public class DAOImpl implements DAO {
             conexion = Conexion.getConnection();
 
             // Generamos la consulta de las medidas de la casa del usuario
-            String sql = "SELECT mth.* FROM medidas_temperatura_humedad mth JOIN sensores s ON mth.id_sensor = s.id_sensor JOIN usuarios u ON s.id_casa = u.id_casa";
+            String sql = "SELECT mth.* FROM medidas_temperatura_humedad mth JOIN sensores s ON mth.id_sensor = s.id_sensor JOIN usuarios u ON s.id_casa = u.id_casa WHERE u.id_usuario = ?";
             PreparedStatement statement = conexion.prepareStatement(sql);
             statement.setInt(1, idUsuario);
 
@@ -828,7 +839,7 @@ public class DAOImpl implements DAO {
             // Insertamos la medida
             String sql = "INSERT INTO medidas_temperatura_humedad(id_medida, temperatura, humedad, fecha_hora, id_sensor) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement statement = conexion.prepareStatement(sql);
-            statement.setInt(1, thModel.getIdMedida());
+            statement.setInt(1, generarIdMedida(conexion));
             statement.setDouble(2, thModel.getTemp());
             statement.setDouble(3, thModel.getHumedad());
             statement.setTimestamp(4, new Timestamp(Long.parseLong(thModel.getFecha_hora())));
@@ -872,7 +883,7 @@ public class DAOImpl implements DAO {
             conexion = Conexion.getConnection();
 
             // Generamos la consulta de los dispositivos inteligentes
-            String sql = "SELECT * FROM sensores s JOIN usuarios u ON s.id_casa = u.id_casa";
+            String sql = "SELECT * FROM sensores s JOIN usuarios u ON s.id_casa = u.id_casa WHERE u.id_usuario = ?";
             PreparedStatement statement = conexion.prepareStatement(sql);
             statement.setInt(1, idUsuario);
 
@@ -1062,6 +1073,7 @@ public class DAOImpl implements DAO {
         rutina.setFecha_hora(rs.getTimestamp("fecha_hora").toString());
         rutina.setTipo(rs.getString("tipo"));
         rutina.setIdDispositivo(rs.getInt("id_dispositivo"));
+        rutina.setIdSensor(rs.getInt("id_sensor"));
         return rutina;
     }
 

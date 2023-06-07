@@ -1,5 +1,11 @@
 package com.iesmm.domohome.DAO;
 
+import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.iesmm.domohome.Modelo.CasaModel;
@@ -9,6 +15,7 @@ import com.iesmm.domohome.Modelo.RutinaModel;
 import com.iesmm.domohome.Modelo.SensorModel;
 import com.iesmm.domohome.Modelo.TempHumedadModel;
 import com.iesmm.domohome.Modelo.UsuarioModel;
+import com.iesmm.domohome.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,7 +45,7 @@ public class DAOImpl implements DAO {
         logger = Logger.getLogger("Controlador");
     }
 
-    public UsuarioModel getUsuarioUsername(String username) {
+    public UsuarioModel getUsuarioUsername(String username, Context c) {
         UsuarioModel usuario = null;
         // Preparamos la peticion
         String url = URL_BASE + "/usuario/filtrarUsername";
@@ -58,6 +65,14 @@ public class DAOImpl implements DAO {
                 }
             }
         } catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         } catch (Exception e) {
             logger.severe("Error: " + e.getMessage());
@@ -67,7 +82,7 @@ public class DAOImpl implements DAO {
         return usuario;
     }
 
-    public Boolean registraUsuario(RegisterParams params) {
+    public Boolean registraUsuario(RegisterParams params, Context c) {
         Boolean correcto = false;
         String url = URL_BASE + "/usuario/registrarUsuario";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -88,6 +103,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -97,7 +120,7 @@ public class DAOImpl implements DAO {
         return correcto;
     }
 
-    public CasaModel getCasa(String user) {
+    public CasaModel getCasa(String user, Context c) {
         CasaModel casa = null;
         try {
             // Preparamos la peticion para obtener el nombre de la casa a partir del username
@@ -118,6 +141,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -128,7 +159,7 @@ public class DAOImpl implements DAO {
         return casa;
     }
 
-    public String getTemp(){
+    public String getTemp(Context c){
         String temp = null;
         try {
             RequestBody requestBody = RequestBody.create("", null);
@@ -146,6 +177,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -155,7 +194,7 @@ public class DAOImpl implements DAO {
         return temp;
     }
 
-    public String getHumedad() {
+    public String getHumedad(Context c) {
         String humedad = null;
         try {
             RequestBody requestBody = RequestBody.create("", null);
@@ -173,6 +212,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -182,7 +229,7 @@ public class DAOImpl implements DAO {
         return humedad;
     }
 
-    public List<DispositivoModel> getDispositivosUsuario(UsuarioModel usuario){
+    public List<DispositivoModel> getDispositivosUsuario(UsuarioModel usuario, Context c){
         List<DispositivoModel> lista = new ArrayList<>();
         try {
             MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
@@ -218,6 +265,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -227,7 +282,7 @@ public class DAOImpl implements DAO {
         return lista;
     }
 
-    public Boolean onoffTvSamsung(DispositivoModel dispositivo) {
+    public Boolean onoffTvSamsung(DispositivoModel dispositivo, Context c) {
         Boolean correcto = false;
         try {
             MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -249,6 +304,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -258,7 +321,7 @@ public class DAOImpl implements DAO {
         return correcto;
     }
 
-    public Boolean onoffBombillaTpLink(DispositivoModel dispositivo) {
+    public Boolean onoffBombillaTpLink(DispositivoModel dispositivo, Context c) {
         Boolean correcto = false;
         try {
             MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -280,6 +343,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -289,7 +360,7 @@ public class DAOImpl implements DAO {
         return correcto;
     }
 
-    public Boolean getEstadoBombillaTpLink(DispositivoModel dispositivo) {
+    public Boolean getEstadoBombillaTpLink(DispositivoModel dispositivo, Context c) {
         Boolean encendido = false;
         try {
             MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -313,6 +384,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -322,7 +401,7 @@ public class DAOImpl implements DAO {
         return encendido;
     }
 
-    public Boolean registraDispositivo(DispositivoModel dispositivo) {
+    public Boolean registraDispositivo(DispositivoModel dispositivo, Context c) {
         Boolean correcto = false;
         String url = URL_BASE + "/dispositivos/registrarDispositivo";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -343,6 +422,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -352,7 +439,7 @@ public class DAOImpl implements DAO {
         return correcto;
     }
 
-    public List<RutinaModel> getRutinas(UsuarioModel usuario){
+    public List<RutinaModel> getRutinas(UsuarioModel usuario, Context c){
         List<RutinaModel> lista = new ArrayList<>();
         try {
             MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -386,6 +473,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -395,7 +490,7 @@ public class DAOImpl implements DAO {
         return lista;
     }
 
-    public DispositivoModel getDispositivoId(Integer idDispositivo) {
+    public DispositivoModel getDispositivoId(Integer idDispositivo, Context c) {
         DispositivoModel dispositivo = null;
         // Preparamos la peticion
         String url = URL_BASE + "/dispositivos/getDispositivoId";
@@ -423,6 +518,14 @@ public class DAOImpl implements DAO {
                 }
             }
         } catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         } catch (Exception e) {
             logger.severe("Error: " + e.getMessage());
@@ -433,7 +536,7 @@ public class DAOImpl implements DAO {
     }
 
     @Override
-    public Boolean registraRutina(RutinaModel rutina) {
+    public Boolean registraRutina(RutinaModel rutina, Context c) {
         Boolean correcto = false;
         String url = URL_BASE + "/rutinas/registraRutina";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -454,6 +557,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -463,7 +574,7 @@ public class DAOImpl implements DAO {
         return correcto;
     }
 
-    public List<UsuarioModel> listarUsuarios() {
+    public List<UsuarioModel> listarUsuarios(Context c) {
         List<UsuarioModel> usuarios = new ArrayList<>();
 
         String url = URL_BASE + "/usuario/listarUsuarios";
@@ -487,6 +598,14 @@ public class DAOImpl implements DAO {
                 }
             }
         } catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         } catch (Exception e) {
             logger.severe("Error: " + e.getMessage());
@@ -497,7 +616,7 @@ public class DAOImpl implements DAO {
     }
 
     @Override
-    public Boolean eliminarUsuario(UsuarioModel usuario) {
+    public Boolean eliminarUsuario(UsuarioModel usuario, Context c) {
         Boolean correcto = false;
         String url = URL_BASE + "/usuario/eliminaUsuario";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -518,6 +637,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -527,7 +654,7 @@ public class DAOImpl implements DAO {
         return correcto;
     }
 
-    public Boolean actualizaUsuario(UsuarioModel usuario) {
+    public Boolean actualizaUsuario(UsuarioModel usuario, Context c) {
         Boolean correcto = false;
         String url = URL_BASE + "/usuario/actualizaUsuario";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -548,6 +675,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -558,7 +693,7 @@ public class DAOImpl implements DAO {
     }
 
     @Override
-    public Boolean eliminarDispositivo(DispositivoModel dispositivo) {
+    public Boolean eliminarDispositivo(DispositivoModel dispositivo, Context c) {
         Boolean correcto = false;
         String url = URL_BASE + "/dispositivos/eliminarDispositivo";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -579,6 +714,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -589,7 +732,7 @@ public class DAOImpl implements DAO {
     }
 
     @Override
-    public Boolean eliminarRutina(RutinaModel rutina) {
+    public Boolean eliminarRutina(RutinaModel rutina, Context c) {
         Boolean correcto = false;
         String url = URL_BASE + "/rutinas/eliminarRutina";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -610,6 +753,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -619,7 +770,7 @@ public class DAOImpl implements DAO {
         return correcto;
     }
 
-    public List<TempHumedadModel> listarMedidasUsuario(UsuarioModel usuario){
+    public List<TempHumedadModel> listarMedidasUsuario(UsuarioModel usuario, Context c){
         List<TempHumedadModel> lista = new ArrayList<>();
         try {
             MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -654,6 +805,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -664,7 +823,7 @@ public class DAOImpl implements DAO {
     }
 
     @Override
-    public Boolean insertarMedida(TempHumedadModel thModel) {
+    public Boolean insertarMedida(TempHumedadModel thModel, Context c) {
         Boolean correcto = false;
         String url = URL_BASE + "/temp_humedad/insertarMedida";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
@@ -685,6 +844,14 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -695,7 +862,7 @@ public class DAOImpl implements DAO {
     }
 
     @Override
-    public SensorModel getSensorUsuario(UsuarioModel usuario) {
+    public SensorModel getSensorUsuario(UsuarioModel usuario, Context c) {
         SensorModel sensor = null;
         // Preparamos la peticion
         String url = URL_BASE + "/sensores/getSensorUsuario";
@@ -723,6 +890,14 @@ public class DAOImpl implements DAO {
                 }
             }
         } catch (IOException e) {
+            Handler handler = new Handler(Looper.getMainLooper());
+            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                }
+            });
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         } catch (Exception e) {
             logger.severe("Error: " + e.getMessage());

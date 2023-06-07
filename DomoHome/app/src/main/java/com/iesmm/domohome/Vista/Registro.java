@@ -142,7 +142,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
             Boolean correcto = false;
 
             if (registerParams != null) {
-                if (dao.registraUsuario(registerParams)){
+                if (dao.registraUsuario(registerParams, Registro.this.getApplicationContext())){
                     correcto = true;
                 }
 

@@ -151,6 +151,8 @@ string ip
 string login
 string logout
 string manage_users
+string measure_error_save
+string measure_successfully_saved
 string measures
 string message_delete_2
 string message_delete_device
@@ -162,6 +164,7 @@ string name
 string new_device
 string new_house
 string new_routine
+string no_connection
 string not_user_passwd
 string open_nav
 string password

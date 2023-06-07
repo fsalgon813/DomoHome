@@ -125,7 +125,7 @@ public class UpdateUser extends Fragment implements View.OnClickListener {
             UsuarioModel usuarioActualiza = new UsuarioModel(usuario.getId(), etNombre.getText().toString(), etUsername.getText().toString(), etPasswd.getText().toString(), spRol.getSelectedItem().toString(), usuario.getId_casa());
 
             DAO dao = new DAOImpl();
-            Boolean correcto = dao.actualizaUsuario(usuarioActualiza);
+            Boolean correcto = dao.actualizaUsuario(usuarioActualiza, getContext());
 
             publishProgress(correcto);
             return null;

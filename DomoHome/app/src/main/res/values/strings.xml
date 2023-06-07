@@ -71,4 +71,7 @@
     <string name="humidity">Humidity:</string>
     <string name="date_title">Date:</string>
     <string name="save_measure">Save Measure</string>
+    <string name="measure_successfully_saved">The measure has been saved successfully</string>
+    <string name="measure_error_save">An error occurred while saving the measure</string>
+    <string name="no_connection">There is no connection to the server</string>
 </resources>

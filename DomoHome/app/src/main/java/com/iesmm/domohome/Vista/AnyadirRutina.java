@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -27,6 +28,7 @@ import com.iesmm.domohome.DAO.DAO;
 import com.iesmm.domohome.DAO.DAOImpl;
 import com.iesmm.domohome.Modelo.DispositivoModel;
 import com.iesmm.domohome.Modelo.RutinaModel;
+import com.iesmm.domohome.Modelo.SensorModel;
 import com.iesmm.domohome.Modelo.UsuarioModel;
 import com.iesmm.domohome.R;
 
@@ -40,7 +42,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class AnyadirRutina extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class AnyadirRutina extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener {
     private Spinner spDispositivo, spType;
     private EditText etFecha, etHora;
     private Button btnAnyadeRutina;
@@ -84,6 +86,7 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
         etFecha.setOnClickListener(this);
         etHora.setOnClickListener(this);
         btnAnyadeRutina.setOnClickListener(this);
+        spType.setOnItemSelectedListener(this);
 
         // Deshabilitamos el teclado para que no se abra en los edittext de fecha y hora
         // Hacemos esto debido a que la fecha y hora la seleccionaremos con el DatePicker y el TimePicker
@@ -170,11 +173,28 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
         etHora.setText(horaSeleccionada);
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        if (spType.getSelectedItem().equals(RutinaModel.Tipo.GUARDAR_MEDIDA)) {
+            spDispositivo.setVisibility(View.INVISIBLE);
+        }
+        else {
+            spDispositivo.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        if (spDispositivo.getVisibility() == View.INVISIBLE) {
+            spDispositivo.setVisibility(View.VISIBLE);
+        }
+    }
+
     private class AsyncCargarDispositivos extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
             DAOImpl dao = new DAOImpl();
-            dispositivos = dao.getDispositivosUsuario(usuario);
+            dispositivos = dao.getDispositivosUsuario(usuario, getContext());
             publishProgress();
             return null;
         }
@@ -193,6 +213,7 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
         protected Void doInBackground(Void... voids) {
             Boolean correcto = false;
             try {
+                DAO dao = new DAOImpl();
                 // Creamos los SimpleDateFormat para posteriormente parsear la fecha
                 SimpleDateFormat sdtFecha = new SimpleDateFormat("dd/MM/yyyy");
                 SimpleDateFormat sdtHora = new SimpleDateFormat("HH:mm");
@@ -201,13 +222,21 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
                 Date fecha_hora = new Date(sdtFecha.parse(etFecha.getText().toString()).getTime() + sdtHora.parse(etHora.getText().toString()).getTime());
                 Timestamp timestamp = new Timestamp(fecha_hora.getTime());
 
-                // Sacamos el dispositivo seleccionado y creamos una nueva rutina
-                DispositivoModel dispositivo = (DispositivoModel) spDispositivo.getSelectedItem();
-                RutinaModel rutina = new RutinaModel(0, timestamp.toString(), spType.getSelectedItem().toString(), dispositivo.getIdDispositivo());
+                RutinaModel rutina = null;
+                if (spType.getSelectedItem().equals(RutinaModel.Tipo.GUARDAR_MEDIDA)) {
+                    // Si el tipo es guardar medida, enviamos -1 para no guardar id del dispositivo en la bd debido a que la medida la guarda el sensor
+                    // Sacamos el sensor del usuario y creamos una nueva rutina
+                    SensorModel sensor = dao.getSensorUsuario(usuario, getContext());
+                    rutina = new RutinaModel(0, timestamp.toString(), spType.getSelectedItem().toString(), -1, sensor.getIdSensor());
+                }
+                else {
+                    // Sacamos el dispositivo seleccionado y creamos una nueva rutina
+                    DispositivoModel dispositivo = (DispositivoModel) spDispositivo.getSelectedItem();
+                    rutina = new RutinaModel(0, timestamp.toString(), spType.getSelectedItem().toString(), dispositivo.getIdDispositivo(), -1);
+                }
 
                 // Registramos la rutina
-                DAO dao = new DAOImpl();
-                correcto = dao.registraRutina(rutina);
+                correcto = dao.registraRutina(rutina, getContext());
             }
             catch (ParseException e) {
                 logger.severe("Error al parsear la fecha/hora");

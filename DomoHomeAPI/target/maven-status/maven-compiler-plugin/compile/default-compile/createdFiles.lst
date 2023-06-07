@@ -26,4 +26,5 @@ com\iesmm\DomoHomeAPI\Model\RutinaModel.class
 com\iesmm\DomoHomeAPI\Model\RegisterParams.class
 com\iesmm\DomoHomeAPI\Utils\ThreadTempHumedad.class
 com\iesmm\DomoHomeAPI\Controller\TempHumedadController.class
+com\iesmm\DomoHomeAPI\Utils\ThreadGuardaMedida.class
 com\iesmm\DomoHomeAPI\DomoHomeApiApplication.class
