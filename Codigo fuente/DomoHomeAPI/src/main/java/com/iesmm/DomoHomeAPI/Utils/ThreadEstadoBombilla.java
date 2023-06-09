@@ -27,8 +27,10 @@ public class ThreadEstadoBombilla extends Thread {
                 BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 // Guardamos la salida en un String
                 String salida = br.readLine();
-                if (salida.equalsIgnoreCase("True")){
-                    estado = true;
+                if (salida != null) {
+                    if (salida.equalsIgnoreCase("True")){
+                        estado = true;
+                    }
                 }
             }
             catch(IOException e){

@@ -81,7 +81,7 @@ public class RutinasController {
                         }
                         else if (dispositivo.getTipo().equals(DispositivosModel.Tipo.TV)) {
                             Thread thread = new Thread(new ThreadOnOffTV(dispositivo));
-                            thread.run();
+                            thread.start();
                         }
                     }
                     else if (rutina.getTipo().equals(RutinaModel.Tipo.GUARDAR_MEDIDA)) {
@@ -90,9 +90,8 @@ public class RutinasController {
                     }
 
                     Boolean correcto = dao.eliminarRutina(rutina.getIdRutina());
-                    if (correcto) {
-                        logger.info("Rutina eliminada");
-                    }
+                    // Cuando se ha terminado de ejecutar, cancelamos la rutina
+                    this.cancel();
                 }
             };
 
