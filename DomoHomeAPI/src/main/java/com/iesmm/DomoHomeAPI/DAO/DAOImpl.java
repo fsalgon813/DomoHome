@@ -220,8 +220,10 @@ public class DAOImpl implements DAO {
             PreparedStatement statement = conexion.prepareStatement(sql);
             statement.setInt(1, idUsuario);
 
+            // Ejecutamos la query
             ResultSet rs = statement.executeQuery();
 
+            // Cargamos los dispositivos en la lista
             while (rs.next()){
                 lista.add(generaDispositivo(rs));
             }
@@ -247,6 +249,12 @@ public class DAOImpl implements DAO {
         return lista;
     }
 
+    /**
+     * Obtiene un dispositivo por su id
+     *
+     * @param id_dispositivo Id del dispositivo
+     * @return dispositivo Dispositivo con el id especificado
+     */
     public DispositivosModel getDispositivoId(int id_dispositivo) {
         Connection conexion = null;
         DispositivosModel dispositivo = null;
@@ -299,6 +307,7 @@ public class DAOImpl implements DAO {
             conexion = Conexion.getConnection();
             conexion.setAutoCommit(false);
 
+            // Creamos la consulta y le cargamos los datos
             String sql = "INSERT INTO dispositivos_inteligentes (id_dispositivo, nombre, ip, tipo, marca, usuario_servicio, passwd_servicio, id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = conexion.prepareStatement(sql);
             statement.setInt(1, generarIdDispositivo(conexion));
@@ -310,6 +319,7 @@ public class DAOImpl implements DAO {
             statement.setString(7, dispositivo.getPasswdServicio());
             statement.setInt(8, dispositivo.getIdUsuario());
 
+            // Ejecutamos el insert
             statement.executeUpdate();
 
             conexion.commit();
@@ -358,8 +368,10 @@ public class DAOImpl implements DAO {
             PreparedStatement statement = conexion.prepareStatement(sql);
             statement.setInt(1, idUsuario);
 
+            // Ejecutamos la query
             ResultSet rs = statement.executeQuery();
 
+            // Cargamos las rutinas en la lista
             while (rs.next()){
                 lista.add(generaRutina(rs));
             }
@@ -387,6 +399,7 @@ public class DAOImpl implements DAO {
 
     /**
      * Saca una lista de todas las rutinas de la base de datos
+     *
      * @return lista Lista de rutinas
      */
     public List<RutinaModel> listaRutinas() {
@@ -400,8 +413,10 @@ public class DAOImpl implements DAO {
             String sql = "SELECT * FROM rutinas";
             PreparedStatement statement = conexion.prepareStatement(sql);
 
+            // Ejecutamos la query
             ResultSet rs = statement.executeQuery();
 
+            // Cargamos las rutinas en la query
             while (rs.next()){
                 lista.add(generaRutina(rs));
             }
@@ -443,22 +458,25 @@ public class DAOImpl implements DAO {
             // Creamos un simpedateformat para posteriormente parsear la fecha y hora a un timestamp
             SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+            // Creamos el insert y cargamos los datos
             String sql = "INSERT INTO rutinas (id_rutina, fecha_hora, tipo, id_dispositivo, id_sensor) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement statement = conexion.prepareStatement(sql);
-
             statement.setInt(1, generarIdRutina(conexion));
             statement.setTimestamp(2, new Timestamp(sdt.parse(rutina.getFecha_hora()).getTime()));
             statement.setString(3, rutina.getTipo().toString().toLowerCase());
+            // si el id del dispositivo es menor a 0 y el id del sensor es 0 o mas ponemos null el id del dispositivo y al id del sensor le ponemos su id
             if (rutina.getIdDispositivo() < 0 && rutina.getIdRutina() >= 0) {
                 statement.setNull(4, Types.INTEGER);
                 statement.setInt(5, rutina.getIdSensor());
                 System.out.println(rutina.getIdSensor());
             }
+            // si el id del sensor es menor a 0 y el id del dispositivo es 0 o mas ponemos null el id del dispositivo y al id del sensor le ponemos su id
             else if (rutina.getIdRutina() < 0 && rutina.getIdDispositivo() >= 0){
                 statement.setInt(4, rutina.getIdDispositivo());
                 statement.setNull(5, Types.INTEGER);
             }
 
+            // Ejecutamos el insert
             statement.executeUpdate();
 
             conexion.commit();
@@ -499,8 +517,10 @@ public class DAOImpl implements DAO {
             String sql = "SELECT * FROM usuarios";
             PreparedStatement statement = conexion.prepareStatement(sql);
 
+            // Ejecutamos la query
             ResultSet rs = statement.executeQuery();
 
+            // Cargamos los usuarios en la lista
             while (rs.next()){
                 usuarios.add(generaUsuario(rs));
             }
@@ -527,7 +547,7 @@ public class DAOImpl implements DAO {
     }
 
     /**
-     * Elimina un usuario de la Base de Datos
+     * Elimina un usuario(con sus dispositivos y rutinas) de la Base de Datos
      *
      * @return correcto True si se ha eliminado correctamente, False si no se ha eliminado
      */
@@ -641,9 +661,10 @@ public class DAOImpl implements DAO {
     }
 
     /**
+     * Actualizamos un usuario de la base de datos
      *
-     * @param usuario
-     * @return
+     * @param usuario Usuario a actualizar
+     * @return correcto True si se ha actualizado correctamente y False si no se ha actualizado
      */
     public Boolean actualizarUsuario(UsuarioModel usuario) {
         Connection conexion = null;
@@ -654,7 +675,7 @@ public class DAOImpl implements DAO {
             conexion = Conexion.getConnection();
             conexion.setAutoCommit(false);
 
-            // Generamos la consulta de los usuarios
+            // Generamos la consulta de los usuarios y cargamos los datos
             String sql = "UPDATE usuarios SET username = ?, passwd = ?, nombre = ?, rol = ? WHERE id_usuario = ?";
             PreparedStatement statement = conexion.prepareStatement(sql);
 
@@ -664,6 +685,7 @@ public class DAOImpl implements DAO {
             statement.setString(4, usuario.getRol().toString().toLowerCase());
             statement.setInt(5, usuario.getId());
 
+            // Ejecutamos el update
             statement.executeUpdate();
 
             conexion.commit();
@@ -690,6 +712,12 @@ public class DAOImpl implements DAO {
         return correcto;
     }
 
+    /**
+     * Eliminamos una rutina de la base de datos
+     *
+     * @param idRutina Id de la rutina a eliminar
+     * @return correcto True si se ha eliminado correctamente, False si no se ha eliminado
+     */
     public Boolean eliminarRutina(int idRutina) {
         Connection conexion = null;
         Boolean correcto = false;
@@ -732,7 +760,7 @@ public class DAOImpl implements DAO {
     }
 
     /**
-     * Elimina un dispositivo de la Base de Datos
+     * Elimina un dispositivo(con sus rutinas) de la Base de Datos
      *
      * @return correcto True si se ha eliminado correctamente, False si no se ha eliminado
      */
@@ -787,6 +815,12 @@ public class DAOImpl implements DAO {
         return correcto;
     }
 
+    /**
+     * Listamos las medidas de un usuario
+     *
+     * @param idUsuario Id del usuario del que queremos ver sus medidas
+     * @return lista Lista de medidas
+     */
     @Override
     public List<TempHumedadModel> listarMedidasUsuario(int idUsuario) {
         Connection conexion = null;
@@ -800,8 +834,10 @@ public class DAOImpl implements DAO {
             PreparedStatement statement = conexion.prepareStatement(sql);
             statement.setInt(1, idUsuario);
 
+            // Ejecutamos la query
             ResultSet rs = statement.executeQuery();
 
+            // Cargamos las medidas en la lista
             while (rs.next()){
                 lista.add(generaTempHumedad(rs));
             }
@@ -827,6 +863,12 @@ public class DAOImpl implements DAO {
         return lista;
     }
 
+    /**
+     * Insertamos una nueva medida en la base de datos
+     *
+     * @param thModel Medida que queremos insertar
+     * @return correcto True si se ha insertado correctamente, False si no se ha insertado
+     */
     @Override
     public Boolean insertarMedida(TempHumedadModel thModel) {
         Connection conexion = null;
@@ -836,7 +878,7 @@ public class DAOImpl implements DAO {
             conexion = Conexion.getConnection();
             conexion.setAutoCommit(false);
 
-            // Insertamos la medida
+            // Creamos el insert y cargamos los datos
             String sql = "INSERT INTO medidas_temperatura_humedad(id_medida, temperatura, humedad, fecha_hora, id_sensor) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement statement = conexion.prepareStatement(sql);
             statement.setInt(1, generarIdMedida(conexion));
@@ -845,6 +887,7 @@ public class DAOImpl implements DAO {
             statement.setTimestamp(4, new Timestamp(Long.parseLong(thModel.getFecha_hora())));
             statement.setInt(5, thModel.getIdSensor());
 
+            // Ejecutamos el insert
             statement.executeUpdate();
 
             conexion.commit();
@@ -874,6 +917,12 @@ public class DAOImpl implements DAO {
         return correcto;
     }
 
+    /**
+     *  Devuelve el sensor de un usuario
+     *
+     * @param idUsuario Id del usuario del que queremos devolver el sensor
+     * @return sensor Sensor del usuario
+     */
     @Override
     public SensorModel sensorUsuario(int idUsuario) {
         Connection conexion = null;
@@ -887,8 +936,10 @@ public class DAOImpl implements DAO {
             PreparedStatement statement = conexion.prepareStatement(sql);
             statement.setInt(1, idUsuario);
 
+            // Ejecutamos la query
             ResultSet rs = statement.executeQuery();
 
+            // Cargamos el sensor
             if (rs.next()) {
                 sensor = generaSensor(rs);
             }
@@ -1112,6 +1163,7 @@ public class DAOImpl implements DAO {
         sensor.setIdCasa(rs.getInt("id_casa"));
         return sensor;
     }
+
 
     private void rollback(Connection c){
         try{

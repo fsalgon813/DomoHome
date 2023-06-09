@@ -66,7 +66,7 @@ public class DAOImpl implements DAO {
             }
         } catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -104,7 +104,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -178,7 +178,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -249,9 +249,12 @@ public class DAOImpl implements DAO {
             if (response.isSuccessful()) {
                 String respuesta = response.body().string();
                 if (respuesta != null && !respuesta.equals("")){
+                    // Sacamos el array de dispositivos de json
                     JSONArray jsonArray = new JSONArray(respuesta);
                     for (int n = 0; n < jsonArray.length(); n++) {
+                        // Cojemos el elemento de json
                         JSONObject dispositivoJSON = jsonArray.getJSONObject(n);
+
                         int idDispositivo = dispositivoJSON.getInt("idDispositivo");
                         String nombre = dispositivoJSON.getString("nombre");
                         String ip = dispositivoJSON.getString("ip");
@@ -259,6 +262,8 @@ public class DAOImpl implements DAO {
                         String marca = dispositivoJSON.getString("marca");
                         String usuarioServicio = dispositivoJSON.getString("usuarioServicio");
                         String passwdServicio = dispositivoJSON.getString("passwdServicio");
+
+                        // Añadimos a la lista el dispositivo
                         lista.add(new DispositivoModel(idDispositivo, nombre, ip, tipo, marca, usuarioServicio, passwdServicio, usuario.getId()));
                     }
                 }
@@ -266,7 +271,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -287,13 +292,13 @@ public class DAOImpl implements DAO {
         try {
             MediaType tipo = MediaType.parse("application/json; charset=utf-8");
 
-            // Preparamos la peticion de los dispositivos inteligentes
+            // Preparamos la peticion para encender/apagar el dispositivo samsung
             String url = URL_BASE + "/dispositivos/OnOffSamsungTv";
 
             // Convertimos el objeto DispositivoModel a JSON usando GSON
             Gson gson = new GsonBuilder().create();
-            String registerParamsJSON = gson.toJson(dispositivo);
-            RequestBody cuerpo = RequestBody.create(registerParamsJSON, tipo);
+            String dispositivoJSON = gson.toJson(dispositivo);
+            RequestBody cuerpo = RequestBody.create(dispositivoJSON, tipo);
             Request request = new Request.Builder().url(url).post(cuerpo).build();
 
             // Ejecutamos la peticion y obtenemos la respuesta
@@ -305,7 +310,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -326,13 +331,13 @@ public class DAOImpl implements DAO {
         try {
             MediaType tipo = MediaType.parse("application/json; charset=utf-8");
 
-            // Preparamos la peticion de los dispositivos inteligentes
+            // Preparamos la peticion para encender/apagar la bombilla tplink
             String url = URL_BASE + "/dispositivos/OnOffBombillaTpLink";
 
             // Convertimos el objeto DispositivoModel a JSON usando GSON
             Gson gson = new GsonBuilder().create();
-            String registerParamsJSON = gson.toJson(dispositivo);
-            RequestBody cuerpo = RequestBody.create(registerParamsJSON, tipo);
+            String dispositivoJSON = gson.toJson(dispositivo);
+            RequestBody cuerpo = RequestBody.create(dispositivoJSON, tipo);
             Request request = new Request.Builder().url(url).post(cuerpo).build();
 
             // Ejecutamos la peticion y obtenemos la respuesta
@@ -344,7 +349,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -365,7 +370,7 @@ public class DAOImpl implements DAO {
         try {
             MediaType tipo = MediaType.parse("application/json; charset=utf-8");
 
-            // Preparamos la peticion de los dispositivos inteligentes
+            // Preparamos la peticion para sacar el estado de la bombilla
             String url = URL_BASE + "/dispositivos/getEstadoBombillaTPLink";
 
             // Convertimos el objeto DispositivoModel a JSON usando GSON
@@ -403,6 +408,8 @@ public class DAOImpl implements DAO {
 
     public Boolean registraDispositivo(DispositivoModel dispositivo, Context c) {
         Boolean correcto = false;
+
+        // Preparamos la peticion que registra el dispositivo inteligente
         String url = URL_BASE + "/dispositivos/registrarDispositivo";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
 
@@ -423,7 +430,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -444,10 +451,10 @@ public class DAOImpl implements DAO {
         try {
             MediaType tipo = MediaType.parse("application/json; charset=utf-8");
 
-            // Preparamos la peticion de las rutinas
+            // Preparamos la peticion para obtener las rutinas
             String url = URL_BASE + "/rutinas/getRutinas";
 
-            // Convertimos el objeto DispositivoModel a JSON usando GSON
+            // Convertimos el objeto UsuarioModel a JSON usando GSON
             Gson gson = new GsonBuilder().create();
             String usuarioJSON = gson.toJson(usuario);
             RequestBody cuerpo = RequestBody.create(usuarioJSON, tipo);
@@ -457,16 +464,21 @@ public class DAOImpl implements DAO {
             Response response = client.newCall(request).execute();
 
             if (response.isSuccessful()) {
+                // Obtenemos la respuesta
                 String respuesta = response.body().string();
                 if (respuesta != null && !respuesta.equals("")){
+                    // Sacamos el array de rutinas de JSON
                     JSONArray jsonArray = new JSONArray(respuesta);
                     for (int n = 0; n < jsonArray.length(); n++) {
+                        // Sacamos la rutina
                         JSONObject rutinaJSON = jsonArray.getJSONObject(n);
                         RutinaModel rutina = new RutinaModel();
                         rutina.setIdRutina(rutinaJSON.getInt("idRutina"));
                         rutina.setFecha_hora(rutinaJSON.getString("fecha_hora"));
                         rutina.setTipo(rutinaJSON.getString("tipo"));
                         rutina.setIdDispositivo(rutinaJSON.getInt("idDispositivo"));
+
+                        // La añadimos a la lista
                         lista.add(rutina);
                     }
                 }
@@ -474,7 +486,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -492,6 +504,7 @@ public class DAOImpl implements DAO {
 
     public DispositivoModel getDispositivoId(Integer idDispositivo, Context c) {
         DispositivoModel dispositivo = null;
+
         // Preparamos la peticion
         String url = URL_BASE + "/dispositivos/getDispositivoId";
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
@@ -506,6 +519,7 @@ public class DAOImpl implements DAO {
             if (response.isSuccessful()) {
                 String respuesta = response.body().string();
                 if (respuesta != null && !respuesta.equals("")) {
+                    // Sacamos el dispositivo
                     JSONObject dispositivoJSON = new JSONObject(respuesta);
                     String nombre = dispositivoJSON.getString("nombre");
                     String ip = dispositivoJSON.getString("ip");
@@ -519,7 +533,7 @@ public class DAOImpl implements DAO {
             }
         } catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -538,6 +552,8 @@ public class DAOImpl implements DAO {
     @Override
     public Boolean registraRutina(RutinaModel rutina, Context c) {
         Boolean correcto = false;
+
+        // Preparamos la peticion para registrar la rutina
         String url = URL_BASE + "/rutinas/registraRutina";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
 
@@ -558,7 +574,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -577,6 +593,7 @@ public class DAOImpl implements DAO {
     public List<UsuarioModel> listarUsuarios(Context c) {
         List<UsuarioModel> usuarios = new ArrayList<>();
 
+        // Preparamos la peticion para listar los usuarios
         String url = URL_BASE + "/usuario/listarUsuarios";
         RequestBody requestBody = RequestBody.create("", null);
 
@@ -585,21 +602,25 @@ public class DAOImpl implements DAO {
         // Ejecutamos la peticion y obtenemos la respuesta
         try {
             Response response = client.newCall(request).execute();
-            // Si la respuesta es correcta, comprobamos la contraseña
             if (response.isSuccessful()) {
+                // Sacamos la respuesta
                 String respuesta = response.body().string();
                 if (respuesta != null && !respuesta.equals("")) {
+                    // Sacamos el array de usuarios de JSON
                     JSONArray jsonArray = new JSONArray(respuesta);
                     for (int n = 0; n < jsonArray.length(); n++) {
+                        // Obtenemos el usuario
                         JSONObject usuarioJSON = jsonArray.getJSONObject(n);
                         UsuarioModel usuario = new UsuarioModel(usuarioJSON.getInt("id"), usuarioJSON.getString("nombre"), usuarioJSON.getString("username"), usuarioJSON.getString("password"), usuarioJSON.getString("rol"), usuarioJSON.getInt("id_casa"));
+
+                        // Lo añadimos a la lista
                         usuarios.add(usuario);
                     }
                 }
             }
         } catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -618,6 +639,8 @@ public class DAOImpl implements DAO {
     @Override
     public Boolean eliminarUsuario(UsuarioModel usuario, Context c) {
         Boolean correcto = false;
+
+        // Preparamos la peticion para eliminar el usuario
         String url = URL_BASE + "/usuario/eliminaUsuario";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
 
@@ -638,7 +661,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -656,6 +679,8 @@ public class DAOImpl implements DAO {
 
     public Boolean actualizaUsuario(UsuarioModel usuario, Context c) {
         Boolean correcto = false;
+
+        // Preparamos la peticion para actualizar el usuario
         String url = URL_BASE + "/usuario/actualizaUsuario";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
 
@@ -676,7 +701,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -695,6 +720,8 @@ public class DAOImpl implements DAO {
     @Override
     public Boolean eliminarDispositivo(DispositivoModel dispositivo, Context c) {
         Boolean correcto = false;
+
+        // Preparamos la peticion para eliminar el dispositivo
         String url = URL_BASE + "/dispositivos/eliminarDispositivo";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
 
@@ -715,7 +742,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -734,6 +761,8 @@ public class DAOImpl implements DAO {
     @Override
     public Boolean eliminarRutina(RutinaModel rutina, Context c) {
         Boolean correcto = false;
+
+        // Preparamos la peticion para eliminar la rutina
         String url = URL_BASE + "/rutinas/eliminarRutina";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
 
@@ -754,7 +783,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -775,7 +804,7 @@ public class DAOImpl implements DAO {
         try {
             MediaType tipo = MediaType.parse("application/json; charset=utf-8");
 
-            // Preparamos la peticion de las rutinas
+            // Preparamos la peticion para obtener las medidas
             String url = URL_BASE + "/temp_humedad/getMedidasUsuario";
 
             // Convertimos el objeto UsuarioModel a JSON usando GSON
@@ -788,10 +817,13 @@ public class DAOImpl implements DAO {
             Response response = client.newCall(request).execute();
 
             if (response.isSuccessful()) {
+                // Obtenemos la respuesta
                 String respuesta = response.body().string();
                 if (respuesta != null && !respuesta.equals("")){
+                    // Sacamos el array de medidas de JSON
                     JSONArray jsonArray = new JSONArray(respuesta);
                     for (int n = 0; n < jsonArray.length(); n++) {
+                        // Obtenemos la medida
                         JSONObject thJSON = jsonArray.getJSONObject(n);
                         TempHumedadModel thModel = new TempHumedadModel();
                         thModel.setIdMedida(thJSON.getInt("idMedida"));
@@ -799,6 +831,8 @@ public class DAOImpl implements DAO {
                         thModel.setHumedad(thJSON.getDouble("humedad"));
                         thModel.setFecha_hora(thJSON.getString("fecha_hora"));
                         thModel.setIdSensor(thJSON.getInt("idSensor"));
+
+                        // La insertamos en la lista
                         lista.add(thModel);
                     }
                 }
@@ -825,6 +859,8 @@ public class DAOImpl implements DAO {
     @Override
     public Boolean insertarMedida(TempHumedadModel thModel, Context c) {
         Boolean correcto = false;
+
+        // Preparamos la peticion para insertar la medida
         String url = URL_BASE + "/temp_humedad/insertarMedida";
         MediaType tipo = MediaType.parse("application/json; charset=utf-8");
 
@@ -845,7 +881,7 @@ public class DAOImpl implements DAO {
         }
         catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -864,7 +900,8 @@ public class DAOImpl implements DAO {
     @Override
     public SensorModel getSensorUsuario(UsuarioModel usuario, Context c) {
         SensorModel sensor = null;
-        // Preparamos la peticion
+
+        // Preparamos la peticion para obtener el sensor
         String url = URL_BASE + "/sensores/getSensorUsuario";
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
 
@@ -877,10 +914,10 @@ public class DAOImpl implements DAO {
         // Ejecutamos la peticion y obtenemos la respuesta
         try {
             Response response = client.newCall(request).execute();
-            // Si la respuesta es correcta, comprobamos la contraseña
             if (response.isSuccessful()) {
                 String respuesta = response.body().string();
                 if (respuesta != null && !respuesta.equals("")) {
+                    // Obtenemos el sensor
                     JSONObject sensorJSON = new JSONObject(respuesta);
                      sensor = new SensorModel();
                      sensor.setIdSensor(sensorJSON.getInt("idSensor"));
@@ -891,7 +928,7 @@ public class DAOImpl implements DAO {
             }
         } catch (IOException e) {
             Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
+            // Utiliza el Handler para mostrar el toast en el hilo principal
             handler.post(new Runnable() {
                 @Override
                 public void run() {

@@ -60,6 +60,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         int id = view.getId();
         switch (id){
             case R.id.tvLogin:
+                // Si pulsamos en el textview de login, nos redirige a la actividad de login
                 Intent i = new Intent(getApplicationContext(), Login.class);
                 startActivity(i);
                 break;
@@ -67,6 +68,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
                 // Se vuelven a poner a null por si el usuario ha cancelado la operacion y ha vuelto a pulsar el boton
                 codInvitacion = null;
                 nombreCasa = null;
+                // Comprobamos que los datos esten rellenos
                 if (!etNombre.getText().toString().isEmpty() && !etUsername.getText().toString().isEmpty() && !etPasswd.getText().toString().isEmpty()){
                     // Preguntamos al usuario mediante AlertDialog si tiene un codigo de invitacion o quiere crear una casa nueva
                     AlertDialog.Builder builderOpcion = new AlertDialog.Builder(this);
@@ -77,6 +79,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
                     builderOpcion.show();
                 }
                 else {
+                    // Si algun dato no esta relleno, lo indicamos con un mensaje de error
                     Snackbar.make(findViewById(R.id.register), getString(R.string.required_fields), Snackbar.LENGTH_LONG).show();
                 }
                 break;
@@ -98,6 +101,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
             builderCodigo.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    // Sacamos el codigo de invitacion que ha puesto el usuario y ejecutamos la tarea asincrona que registra el usuario
                     codInvitacion = etCodigo.getText().toString();
                     AsyncRegister asyncRegister = new AsyncRegister();
                     asyncRegister.execute();
@@ -115,6 +119,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
             builderNombre.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    // Sacamos el nombre de la casa que ha puesto el usuario y ejecutamos la tarea asincrona que registra el usuario
                     nombreCasa = etNombre.getText().toString();
                     AsyncRegister asyncRegister = new AsyncRegister();
                     asyncRegister.execute();
@@ -129,6 +134,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         @Override
         protected Void doInBackground(Void... voids) {
             RegisterParams registerParams = null;
+            // Comprueba si el nombre de la casa es null, enviamos los parametros con el nombre de la casa en null, lo mismo para el codigo de invitacion.
             if (codInvitacion != null && !codInvitacion.isEmpty() && !etUsername.getText().toString().isEmpty() && !etPasswd.getText().toString().isEmpty() && !etNombre.getText().toString().isEmpty()){
                 registerParams = new RegisterParams(etUsername.getText().toString().trim(), etPasswd.getText().toString().trim(), etNombre.getText().toString(), null, codInvitacion);
             }
@@ -142,6 +148,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
             Boolean correcto = false;
 
             if (registerParams != null) {
+                // Registramos el usuario
                 if (dao.registraUsuario(registerParams, Registro.this.getApplicationContext())){
                     correcto = true;
                 }
@@ -155,6 +162,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         @Override
         protected void onProgressUpdate(Boolean... values) {
             // Si el registro ha sido correcto, se redirige a la pantalla principal
+            // Sino, muestra un mensaje de error
             if (values[0]){
                 Intent i = new Intent(getApplicationContext(), Login.class);
                 startActivity(i);

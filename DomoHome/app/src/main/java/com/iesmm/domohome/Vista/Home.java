@@ -81,12 +81,15 @@ public class Home extends Fragment implements View.OnClickListener {
         btnGuardaMedida.setOnClickListener(this);
     }
 
+    // Cuando iniciamos el fragment, volvemos a cargar las tareas asincronas
     @Override
     public void onResume() {
         cargaAsyncTasks();
         super.onResume();
     }
 
+    // Cuando salimos del fragment, paramos las tareas asincrona
+    // (Esto se debe a que la tarea asincrona que obtiene la temp y humedad, se ejecuta siempre)
     @Override
     public void onPause() {
         paraAsyncTasks();
@@ -96,6 +99,7 @@ public class Home extends Fragment implements View.OnClickListener {
 
 
     public UsuarioModel cargaUsuario() {
+        // Cargamos el usuario que ha iniciado sesion
         UsuarioModel userTemp = null;
         Bundle b = this.getActivity().getIntent().getExtras();
         if (b != null){
@@ -120,6 +124,7 @@ public class Home extends Fragment implements View.OnClickListener {
     }
 
     private void paraAsyncTasks() {
+        // Si las tareas asincronas se estan ejecutando, las paramos
         if (asyncCargaCasa != null || asyncCargaCasa.getStatus() == AsyncTask.Status.RUNNING){
             asyncCargaCasa.cancel(true);
         }
@@ -137,6 +142,7 @@ public class Home extends Fragment implements View.OnClickListener {
                 if (asyncTempHumedad != null || asyncTempHumedad.getStatus() == AsyncTask.Status.RUNNING){
                     asyncTempHumedad.cancel(true);
                 }
+                // Ejecutamos la tarea asincrona que guarda la medida
                 AsyncGuardaMedida asyncGuardaMedida = new AsyncGuardaMedida();
                 asyncGuardaMedida.execute();
                 break;
@@ -147,13 +153,16 @@ public class Home extends Fragment implements View.OnClickListener {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            publishProgress(dao.getCasa(usuario.getUsername(), getContext()));
+            // Obtenemos la casa del usuario
+            CasaModel casa = dao.getCasa(usuario.getUsername(), getContext());
+            publishProgress(casa);
             return null;
         }
 
         @Override
         protected void onProgressUpdate(CasaModel... values) {
             if (values[0] != null){
+                // Asignamos los datos de la casa a los elementos del layout
                 nombreCasa.setText(values[0].getNombre());
                 String codeString = getString(R.string.code);
                 codInvitacion.setText(codeString + ": " + values[0].getCodInvitacion());
@@ -170,6 +179,7 @@ public class Home extends Fragment implements View.OnClickListener {
 
             // Mientras no se cancele la tarea asincrona, coge la temperatura y la humedad
             while (!isCancelled()) {
+                // Obtenemos la temperatura y humedad
                 publishProgress(dao.getTemp(getContext()), dao.getHumedad(getContext()));
                 try {
                     Thread.sleep(DELAY);
@@ -183,6 +193,7 @@ public class Home extends Fragment implements View.OnClickListener {
         @Override
         protected void onProgressUpdate(String... values) {
             if (values[0] != null && values[1] != null && Double.valueOf(values[0]) > 0 && Double.valueOf(values[1]) > 0){
+                // Asignamos la temperatura y humedad a sus respectivos elementos del layout
                 temp.setText(values[0] + "ºC");
                 humedad.setText(values[1] + "%");
             }
@@ -198,7 +209,10 @@ public class Home extends Fragment implements View.OnClickListener {
         protected Void doInBackground(Void... voids) {
             try {
                 DAO dao = new DAOImpl();
+                // Obtenemos el sensor del usuario
                 SensorModel sensor = dao.getSensorUsuario(usuario, getContext());
+
+                // Creamos un objeto de medidas con los datos de la pantalla
                 TempHumedadModel thModel = new TempHumedadModel();
                 thModel.setIdSensor(1);
                 thModel.setTemp(Double.parseDouble(temp.getText().toString().split("º")[0]));
@@ -206,6 +220,7 @@ public class Home extends Fragment implements View.OnClickListener {
                 thModel.setFecha_hora(String.valueOf(new Date().getTime()));
                 thModel.setIdSensor(sensor.getIdSensor());
 
+                // Insertamos la medida
                 Boolean correcto = dao.insertarMedida(thModel, getContext());
 
                 publishProgress(correcto);
@@ -226,6 +241,8 @@ public class Home extends Fragment implements View.OnClickListener {
                 asyncTempHumedad = new AsyncTempHumedad();
                 asyncTempHumedad.execute();
             }
+            // Si la medida se ha insertado correctamente, mostramos un mensaje indicandolo
+            // Sino, mostramos un mensaje de error
             if (values[0]) {
                 Snackbar.make(getView().findViewById(R.id.home), getString(R.string.measure_successfully_saved), Snackbar.LENGTH_LONG).show();
             }

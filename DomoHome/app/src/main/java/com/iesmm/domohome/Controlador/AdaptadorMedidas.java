@@ -38,6 +38,7 @@ public class AdaptadorMedidas extends RecyclerView.Adapter<AdaptadorMedidas.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Asignamos el layout del item de medida
         View view = LayoutInflater.from(context).inflate(R.layout.item_medida, parent, false);
         return new ViewHolder(view);
     }
@@ -46,6 +47,7 @@ public class AdaptadorMedidas extends RecyclerView.Adapter<AdaptadorMedidas.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TempHumedadModel thModel = medidas.get(position);
 
+        // Asignamos los datos de la medida al item
         holder.tvTemp.setText(thModel.getTemp().toString() + "ºC");
         holder.tvHumedad.setText(thModel.getHumedad().toString() + "%");
         holder.tvFechaHora.setText(thModel.getFecha_hora());

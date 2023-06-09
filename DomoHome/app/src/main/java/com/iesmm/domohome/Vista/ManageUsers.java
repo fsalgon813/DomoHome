@@ -34,6 +34,7 @@ public class ManageUsers extends Fragment implements AdapterView.OnItemClickList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Cargamos el usuario
         usuario = cargaUsuario();
     }
 
@@ -60,6 +61,7 @@ public class ManageUsers extends Fragment implements AdapterView.OnItemClickList
     }
 
     public UsuarioModel cargaUsuario() {
+        // Cargamos el usuario que ha iniciado sesion
         UsuarioModel userTemp = null;
         Bundle b = this.getActivity().getIntent().getExtras();
         if (b != null){
@@ -70,6 +72,7 @@ public class ManageUsers extends Fragment implements AdapterView.OnItemClickList
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        // Si pulsamos sobre un usuario, lo guardamos en un bundle y redirige al apartado de UpdateUser
         Bundle b = new Bundle();
         b.putSerializable("usuarioActualizar", usuarios.get(i));
         UpdateUser updateUser = new UpdateUser();
@@ -79,6 +82,7 @@ public class ManageUsers extends Fragment implements AdapterView.OnItemClickList
 
     @Override
     public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+        // Si hacemos una pulsacion larga sobre un usuario, nos salen 2 alertdialog indicando que si quiere eliminar el usuario
         AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
         builder1.setTitle(getText(R.string.delete_user));
         builder1.setMessage(getText(R.string.message_delete_user));
@@ -110,6 +114,8 @@ public class ManageUsers extends Fragment implements AdapterView.OnItemClickList
         @Override
         protected Void doInBackground(Void... voids) {
             DAO dao = new DAOImpl();
+
+            // Cargamos todos los usuarios
             usuarios = dao.listarUsuarios(getContext());
 
             // Si el id es el de el usuario logueado, lo eliminamos, para que no salga el en la lista
@@ -125,6 +131,7 @@ public class ManageUsers extends Fragment implements AdapterView.OnItemClickList
 
         @Override
         protected void onProgressUpdate(Void... values) {
+            // Cargamos todos los usuarios en el recyclerview
             adaptador = new AdaptadorListaUsuarios(getContext(), usuarios);
             lv.setAdapter(adaptador);
         }
@@ -135,7 +142,10 @@ public class ManageUsers extends Fragment implements AdapterView.OnItemClickList
         @Override
         protected Void doInBackground(Integer... integers) {
             DAO dao = new DAOImpl();
+            // Eliminamos el usuario
             Boolean correcto = dao.eliminarUsuario(usuarios.get(integers[0]), getContext());
+
+            // Lo quitamos de la lista tambien
             usuarios.remove(integers[0]);
             publishProgress(correcto);
             return null;

@@ -61,6 +61,7 @@ public class Medidas extends Fragment {
     }
 
     public UsuarioModel cargaUsuario() {
+        // Cargamos el usuario que ha iniciado sesion
         UsuarioModel userTemp = null;
         Bundle b = this.getActivity().getIntent().getExtras();
         if (b != null){
@@ -74,6 +75,8 @@ public class Medidas extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             DAO dao = new DAOImpl();
+
+            // Cargamos las medidas del usuario
             medidas = dao.listarMedidasUsuario(usuario, getContext());
             publishProgress();
             return null;

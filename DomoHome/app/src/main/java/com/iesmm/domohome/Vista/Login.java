@@ -60,6 +60,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     comprobarUsernameAsync.execute(etUsername.getText().toString(), etPasswd.getText().toString());
                 }
                 else {
+                    // Si los campos estan vacios, muestra un mensaje indicando que tiene que rellenar todos los campos
                     Snackbar.make(findViewById(R.id.login), getString(R.string.required_fields), Snackbar.LENGTH_LONG).show();
                 }
                 break;
@@ -86,9 +87,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         @Override
         protected void onProgressUpdate(Boolean... values) {
+            // Si el usuario es correcto, lo guardamos en un bundle
             if (values[0] == true){
                 Bundle b = new Bundle();
                 b.putSerializable("user", usuario);
+                // Si el rol es admin nos manda a la actividad AdminActivity, sino, nos manda a MainActivity
                 if (usuario.getRol().equals(UsuarioModel.Rol.ADMIN)) {
                     Intent i = new Intent(getApplicationContext(), AdminActivity.class);
                     i.putExtras(b);
@@ -101,6 +104,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 }
             }
             else {
+                // Si el usuario no es correcto o la contraseña no coincide, mandamos un mensaje de error indicandolo
                 Snackbar.make(findViewById(R.id.login), getString(R.string.error_login), Snackbar.LENGTH_LONG).show();
             }
         }

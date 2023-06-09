@@ -58,19 +58,22 @@ public class AnyadirDispositivo extends Fragment implements View.OnClickListener
         etUsuarioServicio = view.findViewById(R.id.etUsername);
         etPasswdServicio = view.findViewById(R.id.etPasswd);
 
+        // Creamos una lista con los tipos de dispositivos
         ArrayList<String> tipos = new ArrayList<>();
         tipos.add(getContext().getString(R.string.type));
         for (DispositivoModel.Tipo t:DispositivoModel.Tipo.values()){
             tipos.add(t.toString());
         }
 
+
+        // Creamos una lista con las marcas de dispositivos
         ArrayList<String> marca = new ArrayList<>();
         marca.add(getContext().getString(R.string.brand));
         for (DispositivoModel.Marca m:DispositivoModel.Marca.values()){
             marca.add(m.toString());
         }
 
-        // Añadimos el adaptador al spinner
+        // Añadimos el adaptador a los spinner
         spTipo.setAdapter(new ArrayAdapter<>(getContext(), R.layout.item_spinner, tipos));
         spMarca.setAdapter(new ArrayAdapter<>(getContext(), R.layout.item_spinner, marca));
 
@@ -79,6 +82,7 @@ public class AnyadirDispositivo extends Fragment implements View.OnClickListener
     }
 
     public UsuarioModel cargaUsuario() {
+        // Sacamos el usuario logueado
         UsuarioModel userTemp = null;
         Bundle b = this.getActivity().getIntent().getExtras();
         if (b != null){
@@ -99,6 +103,7 @@ public class AnyadirDispositivo extends Fragment implements View.OnClickListener
                     if (((spTipo.getSelectedItem().toString().equalsIgnoreCase("bombilla") && spMarca.getSelectedItem().toString().equalsIgnoreCase("tp_link"))
                             && (!etUsuarioServicio.getText().toString().trim().isEmpty() && !etPasswdServicio.getText().toString().trim().isEmpty()))
                             || (!(spTipo.getSelectedItem().toString().equalsIgnoreCase("bombilla") && spMarca.getSelectedItem().toString().equalsIgnoreCase("tp_link")))) {
+                        // Ejecutamos la tarea asincrona que registra un dispositivo
                         AsyncRegistraDispositivo asyncRegistraDispositivo = new AsyncRegistraDispositivo();
                         asyncRegistraDispositivo.execute();
                     } else {
@@ -118,6 +123,7 @@ public class AnyadirDispositivo extends Fragment implements View.OnClickListener
         protected Void doInBackground(Void... voids) {
             DAO dao = new DAOImpl();
             Boolean correcto = false;
+            // Registramos el dispositivo
             correcto = dao.registraDispositivo(new DispositivoModel(0, etNombre.getText().toString(), etIp.getText().toString(), spTipo.getSelectedItem().toString(), spMarca.getSelectedItem().toString(), etUsuarioServicio.getText().toString().trim(), etPasswdServicio.getText().toString().trim(), usuario.getId()), getContext());
             publishProgress(correcto);
             return null;
@@ -125,6 +131,8 @@ public class AnyadirDispositivo extends Fragment implements View.OnClickListener
 
         @Override
         protected void onProgressUpdate(Boolean... values) {
+            // Si se ha registrado correctamente, sale un mensaje indicandolo y nos envia al apartado de dispositivos
+            // Si no se ha registrado, sale un mensaje de error
             if (values[0]) {
                 Snackbar.make(getView().findViewById(R.id.anyadirDispositivo), getText(R.string.device_registered), Snackbar.LENGTH_LONG).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DispositivosInteligentes()).commit();

@@ -79,6 +79,7 @@ public class DispositivosInteligentes extends Fragment implements View.OnClickLi
     }
 
     public UsuarioModel cargaUsuario() {
+        // Cargamos el usuario que ha iniciado sesion
         UsuarioModel userTemp = null;
         Bundle b = this.getActivity().getIntent().getExtras();
         if (b != null){
@@ -91,6 +92,7 @@ public class DispositivosInteligentes extends Fragment implements View.OnClickLi
         @Override
         protected Void doInBackground(Void... voids) {
             DAOImpl dao = new DAOImpl();
+            // Cargamos los dispositivos del usuario
             dispositivos = dao.getDispositivosUsuario(usuario, getContext());
             publishProgress();
             return null;

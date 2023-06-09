@@ -102,6 +102,7 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
     }
 
     public UsuarioModel cargaUsuario() {
+        // Cargamos el usuario logueado
         UsuarioModel userTemp = null;
         Bundle b = this.getActivity().getIntent().getExtras();
         if (b != null){
@@ -115,15 +116,22 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
         int id = view.getId();
         switch (id) {
             case R.id.etFecha:
+                // Si pulsamos en el edittext de fecha, creamos un dialogo para obtener la fecha
                 creaDialogoFecha();
                 break;
             case R.id.etHora:
+                // Si pulsamos en el edittext de hora, creamos un dialogo para obtener la hora
                 creaDialogoHora();
                 break;
             case R.id.btnAnyadeRutina:
+                // Si los campos no estan vacios, ejecutamos la tarea asincrona que registra la rutina
+                // Sino, muestra un mensaje de error indicando que tiene que rellenar todos los campos
                 if (!etFecha.getText().toString().isEmpty() && !etHora.getText().toString().isEmpty()) {
                     AsyncRegistraRutina asyncRegistraRutina = new AsyncRegistraRutina();
                     asyncRegistraRutina.execute();
+                }
+                else {
+                    Snackbar.make(getView().findViewById(R.id.anyadirRutina), getText(R.string.required_fields), Snackbar.LENGTH_LONG).show();
                 }
                 break;
         }
@@ -175,6 +183,7 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        // Si el tipo de rutina seleccionado es guardar medida, ponemos el spinner de dispositivo invisible, sino, lo ponemos visible
         if (spType.getSelectedItem().equals(RutinaModel.Tipo.GUARDAR_MEDIDA)) {
             spDispositivo.setVisibility(View.INVISIBLE);
         }
@@ -185,6 +194,7 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+        // Si no seleccionamos nada y esta invisible, lo ponemos visible
         if (spDispositivo.getVisibility() == View.INVISIBLE) {
             spDispositivo.setVisibility(View.VISIBLE);
         }
@@ -194,6 +204,7 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
         @Override
         protected Void doInBackground(Void... voids) {
             DAOImpl dao = new DAOImpl();
+            // Sacamos la lista de dispositivos del usuario
             dispositivos = dao.getDispositivosUsuario(usuario, getContext());
             publishProgress();
             return null;
@@ -212,6 +223,7 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
         @Override
         protected Void doInBackground(Void... voids) {
             Boolean correcto = false;
+            RutinaModel rutina = null;
             try {
                 DAO dao = new DAOImpl();
                 // Creamos los SimpleDateFormat para posteriormente parsear la fecha
@@ -222,7 +234,6 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
                 Date fecha_hora = new Date(sdtFecha.parse(etFecha.getText().toString()).getTime() + sdtHora.parse(etHora.getText().toString()).getTime());
                 Timestamp timestamp = new Timestamp(fecha_hora.getTime());
 
-                RutinaModel rutina = null;
                 if (spType.getSelectedItem().equals(RutinaModel.Tipo.GUARDAR_MEDIDA)) {
                     // Si el tipo es guardar medida, enviamos -1 para no guardar id del dispositivo en la bd debido a que la medida la guarda el sensor
                     // Sacamos el sensor del usuario y creamos una nueva rutina
@@ -232,7 +243,13 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
                 else {
                     // Sacamos el dispositivo seleccionado y creamos una nueva rutina
                     DispositivoModel dispositivo = (DispositivoModel) spDispositivo.getSelectedItem();
-                    rutina = new RutinaModel(0, timestamp.toString(), spType.getSelectedItem().toString(), dispositivo.getIdDispositivo(), -1);
+                    if(dispositivo != null) {
+                        // Si el tipo es otro que o sea guardar medida, en el id_sensor guardamos -1 debido a que no necesitamos guardar el sensor
+                        rutina = new RutinaModel(0, timestamp.toString(), spType.getSelectedItem().toString(), dispositivo.getIdDispositivo(), -1);
+                    }
+                    else {
+                        Snackbar.make(getView().findViewById(R.id.anyadirRutina), getText(R.string.required_fields), Snackbar.LENGTH_LONG).show();
+                    }
                 }
 
                 // Registramos la rutina
@@ -245,13 +262,17 @@ public class AnyadirRutina extends Fragment implements View.OnClickListener, Dat
                 logger.severe("Error: " + e);
             }
 
-            publishProgress(correcto);
+            if (rutina != null) {
+                publishProgress(correcto);
+            }
 
             return null;
         }
 
         @Override
         protected void onProgressUpdate(Boolean... values) {
+            // Si la rutina se ha añadido correctamente, lo mostramos en un mensaje y redirigimos al apartado de rutinas
+            // Sino, mostramos un mensaje de error
             if (values[0]) {
                 Snackbar.make(getView().findViewById(R.id.anyadirRutina), getText(R.string.routine_registered), Snackbar.LENGTH_LONG).show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Rutinas()).commit();

@@ -69,6 +69,7 @@ public class Rutinas extends Fragment implements View.OnClickListener {
     }
 
     public UsuarioModel cargaUsuario() {
+        // Cargamos el usuario que ha iniciado sesion
         UsuarioModel userTemp = null;
         Bundle b = this.getActivity().getIntent().getExtras();
         if (b != null){
@@ -94,6 +95,7 @@ public class Rutinas extends Fragment implements View.OnClickListener {
         @Override
         protected Void doInBackground(Void... voids) {
             DAO dao = new DAOImpl();
+            // Obtenemos las rutinas del usuario
             rutinas = dao.getRutinas(usuario, getContext());
             publishProgress();
             return null;
@@ -101,6 +103,7 @@ public class Rutinas extends Fragment implements View.OnClickListener {
 
         @Override
         protected void onProgressUpdate(Void... values) {
+            // Cargamos las rutinas en el recyclerview
             rv.setAdapter(new AdaptadorRutinas(rutinas, getContext()));
         }
     }

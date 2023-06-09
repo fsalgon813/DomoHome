@@ -20,10 +20,12 @@ import com.iesmm.domohome.Modelo.DispositivoModel;
 import com.iesmm.domohome.R;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDispositivos.ViewHolder> {
     private List<DispositivoModel> listaDispositivos;
     private Context context;
+    private Logger logger;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView txtNombreDispositivo;
@@ -40,11 +42,13 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
     public AdaptadorDispositivos(List<DispositivoModel> listaDispositivos, Context context) {
         this.listaDispositivos = listaDispositivos;
         this.context = context;
+        logger = Logger.getLogger("adaptador_dispositivos");
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Asignamos el layout del item de dispositivo
         View view = LayoutInflater.from(context).inflate(R.layout.item_dispositivo, parent, false);
         return new ViewHolder(view);
     }
@@ -53,15 +57,18 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DispositivoModel dispositivo = listaDispositivos.get(position);
 
+        // Le asignamos los datos del dispositivos a los componentes del layout
         holder.txtNombreDispositivo.setText(dispositivo.getNombre());
         if (dispositivo.getTipo().equals(DispositivoModel.Tipo.TV)) {
             holder.imgDispositivo.setImageResource(R.drawable.tv);
         }
         else if (dispositivo.getTipo().equals(DispositivoModel.Tipo.BOMBILLA)) {
             if (dispositivo.getMarca().equals(DispositivoModel.Marca.TP_LINK)){
+                // En el caso de que sea una bombilla TP_Link, sacamos el estado
                 AsyncEstadoBombillaTpLink asyncEstadoBombillaTpLink = new AsyncEstadoBombillaTpLink();
                 asyncEstadoBombillaTpLink.execute(position);
             }
+            // Segun el estado que haya devuelto, le ponemos la imagen de bombilla encendida o apagada
             if (dispositivo.getEstado()){
                 holder.imgDispositivo.setImageResource(R.drawable.bombilla_encendida);
             } else {
@@ -91,6 +98,7 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                // Si hacemos una pulsacion larga sobre un dispositivo, nos salen 2 alertdialog indicando que si quiere eliminar el dispositivo
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
                 builder1.setTitle(context.getText(R.string.delete_device));
                 builder1.setMessage(context.getText(R.string.message_delete_device));
@@ -129,6 +137,7 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
         @Override
         protected Void doInBackground(Integer... integers) {
             DAOImpl dao = new DAOImpl();
+            // Sacamos el estado de la bombilla. True si esta encendida y False si esta apagada
             Boolean estado = dao.getEstadoBombillaTpLink(listaDispositivos.get(integers[0]), context);
             listaDispositivos.get(integers[0]).setEstado(estado);
             publishProgress(estado);
@@ -146,13 +155,8 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
     private class AsyncOnOffTvSamsung extends AsyncTask<Integer, Boolean, Void> {
         @Override
         protected Void doInBackground(Integer... integers) {
-            try{
-                Thread.sleep(1500);
-            }
-            catch (InterruptedException e) {
-                System.out.println("asd");
-            }
             DAOImpl dao = new DAOImpl();
+            // Encendemos la tv, devuelve True si se ha encendido correctamente, false si ha ocurrido algun error
             Boolean correcto = dao.onoffTvSamsung(listaDispositivos.get(integers[0]), context);
             publishProgress(correcto);
             return null;
@@ -163,6 +167,7 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
         @Override
         protected Void doInBackground(Integer... integers) {
             DAO dao = new DAOImpl();
+            // encendemos la bombilla
             dao.onoffBombillaTpLink(listaDispositivos.get(integers[0]), context);
             publishProgress(integers[0]);
             return null;
@@ -180,6 +185,7 @@ public class AdaptadorDispositivos extends RecyclerView.Adapter<AdaptadorDisposi
         @Override
         protected Void doInBackground(Integer... integers) {
             DAO dao = new DAOImpl();
+            // Eliminamos el dispositivo
             Boolean correcto = dao.eliminarDispositivo(listaDispositivos.get(integers[0]), context);
             // Si se ha borrado correctamente, tambien lo quitamos de la lista
             if (correcto) {

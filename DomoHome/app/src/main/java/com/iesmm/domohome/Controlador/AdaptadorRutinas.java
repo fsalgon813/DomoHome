@@ -55,18 +55,22 @@ public class AdaptadorRutinas extends RecyclerView.Adapter<AdaptadorRutinas.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Asignamos el layout del item de rutina
         View view = LayoutInflater.from(context).inflate(R.layout.item_rutina, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        // Cargamos los datos de la rutina
         AsyncCargaDatosRutina asyncCargaDatosRutina = new AsyncCargaDatosRutina(holder);
         asyncCargaDatosRutina.execute(position);
 
+        // Los listener los ponemos en clases anonima para que se pueda acceder a la posicion de la rutina pulsada
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                // Si hacemos una pulsacion larga sobre una rutina, nos salen 2 alertdialog indicando que si quiere eliminar la rutina
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
                 builder1.setTitle(context.getText(R.string.delete_routine));
                 builder1.setMessage(context.getText(R.string.message_delete_routine));
@@ -112,8 +116,9 @@ public class AdaptadorRutinas extends RecyclerView.Adapter<AdaptadorRutinas.View
         @Override
         protected Void doInBackground(Integer... integers) {
             DAO dao = new DAOImpl();
-
+            // Sacamos la lista de rutinas del usuario
             rutina = listaRutinas.get(integers[0]);
+            // Sacamos el dispositivo para obtener su nombre
             dispositivo = dao.getDispositivoId(rutina.getIdDispositivo(), context);
             publishProgress();
             return null;
@@ -121,6 +126,7 @@ public class AdaptadorRutinas extends RecyclerView.Adapter<AdaptadorRutinas.View
 
         @Override
         protected void onProgressUpdate(Void... values) {
+            // Asignamos los datos de la rutina a los elementos del layout
             holder.txtFecha_Hora.setText(rutina.getFecha_hora());
             if (dispositivo != null) {
                 holder.txtTitulo.setText(rutina.getTipo().toString() + " " + dispositivo.getNombre());
@@ -153,7 +159,9 @@ public class AdaptadorRutinas extends RecyclerView.Adapter<AdaptadorRutinas.View
         @Override
         protected Void doInBackground(Integer... integers) {
             DAO dao = new DAOImpl();
+            // Eliminamos la rutina
             Boolean correcto = dao.eliminarRutina(listaRutinas.get(integers[0]), context);
+
             // Si se ha borrado correctamente, tambien lo quitamos de la lista
             if (correcto) {
                 listaRutinas.remove(listaRutinas.get(integers[0]));

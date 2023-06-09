@@ -26,6 +26,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
+        // Inicializamos los elementos del layout
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -37,6 +38,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        // Si el bundle es null, nos manda al apartado de Home y lo marcamos como seleccionado
         if (savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
@@ -45,6 +47,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Segun el item seleccionado, nos envia a su apartado correspondiente
         switch (item.getItemId()){
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Home()).commit();
@@ -75,6 +78,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public void onBackPressed() {
+        // Si pulsamos la tecla back y el menu esta abierto, lo cierra, sino hace su funcion normal
         if (drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawers();
         }else{

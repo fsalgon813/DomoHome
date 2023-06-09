@@ -55,6 +55,7 @@ public class EditarUsuario extends Fragment implements View.OnClickListener {
         etNombre = view.findViewById(R.id.etName);
         btnUpdate = view.findViewById(R.id.btnActualiza);
 
+        // Cargamos los datos del usuario en los edittext
         etUsername.setText(usuario.getUsername());
         etPasswd.setText(usuario.getPassword());
         etNombre.setText(usuario.getNombre());
@@ -64,6 +65,7 @@ public class EditarUsuario extends Fragment implements View.OnClickListener {
     }
 
     public UsuarioModel cargaUsuario() {
+        // Cargamos el usuario que ha iniciado sesion
         UsuarioModel userTemp = null;
         Bundle b = this.getActivity().getIntent().getExtras();
         if (b != null){
@@ -77,7 +79,7 @@ public class EditarUsuario extends Fragment implements View.OnClickListener {
         Bundle b = this.getActivity().getIntent().getExtras();
         b.putSerializable("user", usuarioActualizado);
 
-        // Guardamos el bundle con el nuevo usuario en nuestro intent actual(para no viajar a otra clase)
+        // Guardamos el bundle con el nuevo usuario en nuestro intent actual(para no cambiar a otra clase)
         this.getActivity().getIntent().putExtras(b);
     }
 
@@ -86,6 +88,7 @@ public class EditarUsuario extends Fragment implements View.OnClickListener {
         int id = view.getId();
         switch (id) {
             case R.id.btnActualiza:
+                // Si los campos no estan vacios, creamos un alertdialog preguntando al usuario que si quiere modificar el usuario
                 if (!etUsername.getText().toString().isEmpty() && !etNombre.getText().toString().isEmpty() && !etPasswd.getText().toString().isEmpty()) {
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
                     builder1.setTitle(getText(R.string.edit_user));
@@ -93,6 +96,7 @@ public class EditarUsuario extends Fragment implements View.OnClickListener {
                     builder1.setPositiveButton(getText(R.string.accept), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            // Ejecutamos la tarea asincrona que actualiza el usuario
                             AsyncActualizaUsuario asyncActualizaUsuario = new AsyncActualizaUsuario();
                             asyncActualizaUsuario.execute();
                         }
@@ -101,7 +105,7 @@ public class EditarUsuario extends Fragment implements View.OnClickListener {
                     builder1.show();
                 }
                 else {
-                    // Mostramos un mensaje indicando que deben estar rellenos todos los campos
+                    // Si hay algun campo vacio, mostramos un mensaje indicando que deben estar rellenos todos los campos
                     Snackbar.make(getActivity().findViewById(R.id.editarUsuario), getString(R.string.required_fields), Snackbar.LENGTH_LONG).show();
                 }
                 break;
@@ -116,6 +120,7 @@ public class EditarUsuario extends Fragment implements View.OnClickListener {
             UsuarioModel usuarioActualiza = new UsuarioModel(usuario.getId(), etNombre.getText().toString(), etUsername.getText().toString(), etPasswd.getText().toString(), usuario.getRol().toString(), usuario.getId_casa());
 
             DAO dao = new DAOImpl();
+            // Actualizamos el usuario
             Boolean correcto = dao.actualizaUsuario(usuarioActualiza, getContext());
 
             // Si se ha actualizado correctamente, guardamos el nuevo usuario

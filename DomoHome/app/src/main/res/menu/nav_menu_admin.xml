@@ -10,7 +10,7 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/casa"
             android:title="@string/home"
-            android:iconTint="@null"/>
+            android:iconTint="@null" />
 
         <item
             android:id="@+id/nav_dispositivos"

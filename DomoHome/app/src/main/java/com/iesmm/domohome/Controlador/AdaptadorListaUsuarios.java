@@ -28,8 +28,10 @@ public class AdaptadorListaUsuarios extends ArrayAdapter<UsuarioModel> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         UsuarioModel usuario = usuarios.get(position);
 
+        // Asignamos al layout del adaptador el layout de item de usuario
         convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_usuario, parent, false);
 
+        // Asignaos al textview, el username del usuario
         TextView txtUsername = convertView.findViewById(R.id.txtUsername);
         txtUsername.setText(usuario.getUsername());
 
