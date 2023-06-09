@@ -33,9 +33,6 @@
             android:name=".Vista.Registro"
             android:exported="true" />
         <activity
-            android:name=".Vista.Configuracion"
-            android:exported="false" />
-        <activity
             android:name=".Vista.Home"
             android:exported="false" />
         <activity
