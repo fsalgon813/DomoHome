@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DomoHome</string>
-    <string name="username">Nombre de usuario*</string>
+    <string name="username">Usuario*</string>
     <string name="password">Contraseña*</string>
     <string name="name">Nombre*</string>
     <string name="type">Tipo*</string>

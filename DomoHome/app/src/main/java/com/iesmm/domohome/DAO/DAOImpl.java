@@ -65,14 +65,17 @@ public class DAOImpl implements DAO {
                 }
             }
         } catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         } catch (Exception e) {
             logger.severe("Error: " + e.getMessage());
@@ -103,14 +106,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -141,14 +147,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -177,14 +186,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -212,14 +224,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -270,14 +285,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -309,14 +327,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -348,14 +369,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -389,14 +413,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -429,14 +456,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -485,14 +515,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -532,14 +565,17 @@ public class DAOImpl implements DAO {
                 }
             }
         } catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         } catch (Exception e) {
             logger.severe("Error: " + e.getMessage());
@@ -573,14 +609,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -619,14 +658,17 @@ public class DAOImpl implements DAO {
                 }
             }
         } catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         } catch (Exception e) {
             logger.severe("Error: " + e.getMessage());
@@ -660,14 +702,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -700,14 +745,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -741,14 +789,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -782,14 +833,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -839,14 +893,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el "toast" en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -880,14 +937,17 @@ public class DAOImpl implements DAO {
             }
         }
         catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         }
         catch (Exception e) {
@@ -927,14 +987,17 @@ public class DAOImpl implements DAO {
                 }
             }
         } catch (IOException e) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            // Utiliza el Handler para mostrar el toast en el hilo principal
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
-                }
-            });
+            // Comprueba que el contexto no sea nulo
+            if (c != null) {
+                Handler handler = new Handler(Looper.getMainLooper());
+                // Utiliza el Handler para mostrar el toast en el hilo principal
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(c, c.getText(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
             logger.severe("Error en la E/S al hacer la peticion HTTP");
         } catch (Exception e) {
             logger.severe("Error: " + e.getMessage());

@@ -74,5 +74,5 @@
     <string name="user_error_update">Se produjo un error al actualizar el usuario</string>
     <string name="user_successfully_delete">El usuario se ha eliminado correctamente</string>
     <string name="user_successfully_update">El usuario se ha actualizado correctamente</string>
-    <string name="username">Nombre de usuario*</string>
+    <string name="username">Usuario*</string>
 </resources>

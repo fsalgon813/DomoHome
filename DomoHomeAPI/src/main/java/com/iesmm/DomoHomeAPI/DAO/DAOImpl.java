@@ -465,13 +465,12 @@ public class DAOImpl implements DAO {
             statement.setTimestamp(2, new Timestamp(sdt.parse(rutina.getFecha_hora()).getTime()));
             statement.setString(3, rutina.getTipo().toString().toLowerCase());
             // si el id del dispositivo es menor a 0 y el id del sensor es 0 o mas ponemos null el id del dispositivo y al id del sensor le ponemos su id
-            if (rutina.getIdDispositivo() < 0 && rutina.getIdRutina() >= 0) {
+            if (rutina.getIdDispositivo() < 0 && rutina.getIdSensor() >= 0) {
                 statement.setNull(4, Types.INTEGER);
                 statement.setInt(5, rutina.getIdSensor());
-                System.out.println(rutina.getIdSensor());
             }
             // si el id del sensor es menor a 0 y el id del dispositivo es 0 o mas ponemos null el id del dispositivo y al id del sensor le ponemos su id
-            else if (rutina.getIdRutina() < 0 && rutina.getIdDispositivo() >= 0){
+            else if (rutina.getIdSensor() < 0 && rutina.getIdDispositivo() >= 0){
                 statement.setInt(4, rutina.getIdDispositivo());
                 statement.setNull(5, Types.INTEGER);
             }

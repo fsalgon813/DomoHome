@@ -177,11 +177,11 @@ public class AdaptadorRutinas extends RecyclerView.Adapter<AdaptadorRutinas.View
                 notifyDataSetChanged();
 
                 // Mostramos un mensaje indicando que se ha elimiando correctamente
-                Snackbar.make(view, context.getString(R.string.routine_registered), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, context.getString(R.string.routine_successfully_delete), Snackbar.LENGTH_LONG).show();
             }
             else {
                 // Mostramos un mensaje indicando que ha ocurrido un error al eliminar la rutina
-                Snackbar.make(view, context.getString(R.string.routine_not_registered), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(view, context.getString(R.string.routine_error_delete), Snackbar.LENGTH_LONG).show();
             }
         }
     }

@@ -146,7 +146,7 @@ public class ManageUsers extends Fragment implements AdapterView.OnItemClickList
             Boolean correcto = dao.eliminarUsuario(usuarios.get(integers[0]), getContext());
 
             // Lo quitamos de la lista tambien
-            usuarios.remove(integers[0]);
+            usuarios.remove(usuarios.get(integers[0]));
             publishProgress(correcto);
             return null;
         }
@@ -155,8 +155,6 @@ public class ManageUsers extends Fragment implements AdapterView.OnItemClickList
         protected void onProgressUpdate(Boolean... values) {
             if (values[0]) {
                 // Actualizamos la lista
-                adaptador.clear();
-                adaptador.addAll(usuarios);
                 adaptador.notifyDataSetChanged();
 
                 // Mostramos un mensaje indicando que se ha elimiando correctamente
