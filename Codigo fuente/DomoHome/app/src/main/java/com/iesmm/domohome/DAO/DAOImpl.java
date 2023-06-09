@@ -35,7 +35,7 @@ public class DAOImpl implements DAO {
     private OkHttpClient client;
     private Logger logger;
 
-    private final String URL_BASE = "http://192.168.0.89:8081";
+    private final String URL_BASE = "http://raspberrypi:8081";
 
     public DAOImpl(){
         // Inicializamos el cliente HTTP

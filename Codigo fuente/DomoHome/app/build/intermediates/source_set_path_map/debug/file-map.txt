@@ -22,11 +22,11 @@ com.iesmm.domohome.app-appcompat-resources-1.6.1-20 C:\Users\franl\.gradle\cache
 com.iesmm.domohome.app-startup-runtime-1.1.1-21 C:\Users\franl\.gradle\caches\transforms-3\e6dc352309f6d773a89fb4d56f13b49d\transformed\startup-runtime-1.1.1\res
 com.iesmm.domohome.app-core-1.9.0-22 C:\Users\franl\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\res
 com.iesmm.domohome.app-core-ktx-1.9.0-23 C:\Users\franl\.gradle\caches\transforms-3\f6c47861666c723a6e14604b0a167eca\transformed\core-ktx-1.9.0\res
-com.iesmm.domohome.app-pngs-24 E:\Documentos\RepositorioGithub\DomoHome\app\build\generated\res\pngs\debug
-com.iesmm.domohome.app-resValues-25 E:\Documentos\RepositorioGithub\DomoHome\app\build\generated\res\resValues\debug
-com.iesmm.domohome.app-rs-26 E:\Documentos\RepositorioGithub\DomoHome\app\build\generated\res\rs\debug
-com.iesmm.domohome.app-packageDebugResources-27 E:\Documentos\RepositorioGithub\DomoHome\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.iesmm.domohome.app-packageDebugResources-28 E:\Documentos\RepositorioGithub\DomoHome\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.iesmm.domohome.app-merged_res-29 E:\Documentos\RepositorioGithub\DomoHome\app\build\intermediates\merged_res\debug
-com.iesmm.domohome.app-debug-30 E:\Documentos\RepositorioGithub\DomoHome\app\src\debug\res
-com.iesmm.domohome.app-main-31 E:\Documentos\RepositorioGithub\DomoHome\app\src\main\res
+com.iesmm.domohome.app-pngs-24 E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\build\generated\res\pngs\debug
+com.iesmm.domohome.app-resValues-25 E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\build\generated\res\resValues\debug
+com.iesmm.domohome.app-rs-26 E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\build\generated\res\rs\debug
+com.iesmm.domohome.app-packageDebugResources-27 E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.iesmm.domohome.app-packageDebugResources-28 E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.iesmm.domohome.app-merged_res-29 E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\build\intermediates\merged_res\debug
+com.iesmm.domohome.app-debug-30 E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\debug\res
+com.iesmm.domohome.app-main-31 E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\res

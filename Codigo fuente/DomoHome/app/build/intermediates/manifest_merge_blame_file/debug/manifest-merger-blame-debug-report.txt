@@ -6,13 +6,13 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="24"
-8-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml
+8-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="33" />
-9-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml
+9-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:5:5-67
-11-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:5:22-64
+11-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:5:5-67
+11-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:5:22-64
 12
 13    <permission
 13-->[androidx.core:core:1.9.0] C:\Users\franl\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
@@ -26,81 +26,81 @@
 17-->[androidx.core:core:1.9.0] C:\Users\franl\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 18
 19    <application
-19-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:7:5-44:19
+19-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:7:5-44:19
 20        android:allowBackup="true"
-20-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:8:9-35
+20-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:8:9-35
 21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 21-->[androidx.core:core:1.9.0] C:\Users\franl\.gradle\caches\transforms-3\ec4f76f6c0c02de8ba18086e7bd9baf5\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
 22        android:dataExtractionRules="@xml/data_extraction_rules"
-22-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:9:9-65
+22-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:9:9-65
 23        android:debuggable="true"
 24        android:extractNativeLibs="false"
 25        android:fullBackupContent="@xml/backup_rules"
-25-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:10:9-54
+25-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:10:9-54
 26        android:icon="@mipmap/ic_launcher"
-26-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:11:9-43
+26-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:11:9-43
 27        android:label="@string/app_name"
-27-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:12:9-41
+27-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:12:9-41
 28        android:supportsRtl="true"
-28-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:13:9-35
+28-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:13:9-35
 29        android:testOnly="true"
 30        android:theme="@style/Theme.AppCompat.NoActionBar"
-30-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:14:9-59
+30-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:14:9-59
 31        android:usesCleartextTraffic="true" >
-31-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:15:9-44
+31-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:15:9-44
 32        <activity
-32-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:17:9-19:40
+32-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:17:9-19:40
 33            android:name="com.iesmm.domohome.Vista.MainActivity"
-33-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:18:13-47
+33-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:18:13-47
 34            android:exported="false" />
-34-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:19:13-37
+34-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:19:13-37
 35        <activity
-35-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:20:9-22:40
+35-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:20:9-22:40
 36            android:name="com.iesmm.domohome.Vista.AdminActivity"
-36-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:21:13-48
+36-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:21:13-48
 37            android:exported="false" />
-37-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:22:13-37
+37-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:22:13-37
 38        <activity
-38-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:23:9-31:20
+38-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:23:9-31:20
 39            android:name="com.iesmm.domohome.Vista.Login"
-39-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:24:13-40
+39-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:24:13-40
 40            android:exported="true" >
-40-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:25:13-36
+40-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:25:13-36
 41            <intent-filter>
-41-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:26:13-30:29
+41-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:26:13-30:29
 42                <action android:name="android.intent.action.MAIN" />
-42-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:27:17-69
-42-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:27:25-66
+42-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:27:17-69
+42-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:27:25-66
 43
 44                <category android:name="android.intent.category.LAUNCHER" />
-44-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:29:17-77
-44-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:29:27-74
+44-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:29:17-77
+44-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:29:27-74
 45            </intent-filter>
 46        </activity>
 47        <activity
-47-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:32:9-34:39
+47-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:32:9-34:39
 48            android:name="com.iesmm.domohome.Vista.Registro"
-48-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:33:13-43
+48-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:33:13-43
 49            android:exported="true" />
-49-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:34:13-36
+49-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:34:13-36
 50        <activity
-50-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:35:9-37:40
+50-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:35:9-37:40
 51            android:name="com.iesmm.domohome.Vista.Configuracion"
-51-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:36:13-48
+51-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:36:13-48
 52            android:exported="false" />
-52-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:37:13-37
+52-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:37:13-37
 53        <activity
-53-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:38:9-40:40
+53-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:38:9-40:40
 54            android:name="com.iesmm.domohome.Vista.Home"
-54-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:39:13-39
+54-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:39:13-39
 55            android:exported="false" />
-55-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:40:13-37
+55-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:40:13-37
 56        <activity
-56-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:41:9-43:40
+56-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:41:9-43:40
 57            android:name="com.iesmm.domohome.Vista.DispositivosInteligentes"
-57-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:42:13-59
+57-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:42:13-59
 58            android:exported="false" />
-58-->E:\Documentos\RepositorioGithub\DomoHome\app\src\main\AndroidManifest.xml:43:13-37
+58-->E:\Documentos\RepositorioGithub\Codigo fuente\DomoHome\app\src\main\AndroidManifest.xml:43:13-37
 59
 60        <provider
 60-->[androidx.emoji2:emoji2:1.2.0] C:\Users\franl\.gradle\caches\transforms-3\791b39fe68826e8543c46f2d7f8b152e\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
